@@ -1,0 +1,554 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3D3634B31DF71965001E3A6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3634B21DF71965001E3A6E /* main.m */; };
+		3D3634B61DF71965001E3A6E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3634B51DF71965001E3A6E /* AppDelegate.m */; };
+		3D3634B91DF71965001E3A6E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3634B81DF71965001E3A6E /* ViewController.m */; };
+		3D3634BC1DF71965001E3A6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D3634BA1DF71965001E3A6E /* Main.storyboard */; };
+		3D3634BF1DF71965001E3A6E /* UniqDay.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D3634BD1DF71965001E3A6E /* UniqDay.xcdatamodeld */; };
+		3D3634C11DF71965001E3A6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D3634C01DF71965001E3A6E /* Assets.xcassets */; };
+		3D3634C41DF71965001E3A6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D3634C21DF71965001E3A6E /* LaunchScreen.storyboard */; };
+		3D3634CF1DF71966001E3A6E /* UniqDayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3634CE1DF71966001E3A6E /* UniqDayTests.m */; };
+		3D3634DA1DF71966001E3A6E /* UniqDayUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3634D91DF71966001E3A6E /* UniqDayUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3D3634CB1DF71966001E3A6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3D3634A61DF71965001E3A6E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D3634AD1DF71965001E3A6E;
+			remoteInfo = UniqDay;
+		};
+		3D3634D61DF71966001E3A6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3D3634A61DF71965001E3A6E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D3634AD1DF71965001E3A6E;
+			remoteInfo = UniqDay;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3D3634AE1DF71965001E3A6E /* UniqDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniqDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D3634B21DF71965001E3A6E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3D3634B41DF71965001E3A6E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3D3634B51DF71965001E3A6E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3D3634B71DF71965001E3A6E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		3D3634B81DF71965001E3A6E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3D3634BB1DF71965001E3A6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3D3634BE1DF71965001E3A6E /* UniqDay.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UniqDay.xcdatamodel; sourceTree = "<group>"; };
+		3D3634C01DF71965001E3A6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3D3634C31DF71965001E3A6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3D3634C51DF71965001E3A6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D3634CA1DF71966001E3A6E /* UniqDayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UniqDayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D3634CE1DF71966001E3A6E /* UniqDayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UniqDayTests.m; sourceTree = "<group>"; };
+		3D3634D01DF71966001E3A6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D3634D51DF71966001E3A6E /* UniqDayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UniqDayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D3634D91DF71966001E3A6E /* UniqDayUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UniqDayUITests.m; sourceTree = "<group>"; };
+		3D3634DB1DF71966001E3A6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3D3634AB1DF71965001E3A6E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D3634C71DF71966001E3A6E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D3634D21DF71966001E3A6E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3D3634A51DF71965001E3A6E = {
+			isa = PBXGroup;
+			children = (
+				3D3634B01DF71965001E3A6E /* UniqDay */,
+				3D3634CD1DF71966001E3A6E /* UniqDayTests */,
+				3D3634D81DF71966001E3A6E /* UniqDayUITests */,
+				3D3634AF1DF71965001E3A6E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3D3634AF1DF71965001E3A6E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3D3634AE1DF71965001E3A6E /* UniqDay.app */,
+				3D3634CA1DF71966001E3A6E /* UniqDayTests.xctest */,
+				3D3634D51DF71966001E3A6E /* UniqDayUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3D3634B01DF71965001E3A6E /* UniqDay */ = {
+			isa = PBXGroup;
+			children = (
+				3D3634B41DF71965001E3A6E /* AppDelegate.h */,
+				3D3634B51DF71965001E3A6E /* AppDelegate.m */,
+				3D3634B71DF71965001E3A6E /* ViewController.h */,
+				3D3634B81DF71965001E3A6E /* ViewController.m */,
+				3D3634BA1DF71965001E3A6E /* Main.storyboard */,
+				3D3634C01DF71965001E3A6E /* Assets.xcassets */,
+				3D3634C21DF71965001E3A6E /* LaunchScreen.storyboard */,
+				3D3634C51DF71965001E3A6E /* Info.plist */,
+				3D3634BD1DF71965001E3A6E /* UniqDay.xcdatamodeld */,
+				3D3634B11DF71965001E3A6E /* Supporting Files */,
+			);
+			path = UniqDay;
+			sourceTree = "<group>";
+		};
+		3D3634B11DF71965001E3A6E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3D3634B21DF71965001E3A6E /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3D3634CD1DF71966001E3A6E /* UniqDayTests */ = {
+			isa = PBXGroup;
+			children = (
+				3D3634CE1DF71966001E3A6E /* UniqDayTests.m */,
+				3D3634D01DF71966001E3A6E /* Info.plist */,
+			);
+			path = UniqDayTests;
+			sourceTree = "<group>";
+		};
+		3D3634D81DF71966001E3A6E /* UniqDayUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3D3634D91DF71966001E3A6E /* UniqDayUITests.m */,
+				3D3634DB1DF71966001E3A6E /* Info.plist */,
+			);
+			path = UniqDayUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3D3634AD1DF71965001E3A6E /* UniqDay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D3634DE1DF71966001E3A6E /* Build configuration list for PBXNativeTarget "UniqDay" */;
+			buildPhases = (
+				3D3634AA1DF71965001E3A6E /* Sources */,
+				3D3634AB1DF71965001E3A6E /* Frameworks */,
+				3D3634AC1DF71965001E3A6E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UniqDay;
+			productName = UniqDay;
+			productReference = 3D3634AE1DF71965001E3A6E /* UniqDay.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3D3634C91DF71966001E3A6E /* UniqDayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D3634E11DF71966001E3A6E /* Build configuration list for PBXNativeTarget "UniqDayTests" */;
+			buildPhases = (
+				3D3634C61DF71966001E3A6E /* Sources */,
+				3D3634C71DF71966001E3A6E /* Frameworks */,
+				3D3634C81DF71966001E3A6E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3D3634CC1DF71966001E3A6E /* PBXTargetDependency */,
+			);
+			name = UniqDayTests;
+			productName = UniqDayTests;
+			productReference = 3D3634CA1DF71966001E3A6E /* UniqDayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3D3634D41DF71966001E3A6E /* UniqDayUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D3634E41DF71966001E3A6E /* Build configuration list for PBXNativeTarget "UniqDayUITests" */;
+			buildPhases = (
+				3D3634D11DF71966001E3A6E /* Sources */,
+				3D3634D21DF71966001E3A6E /* Frameworks */,
+				3D3634D31DF71966001E3A6E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3D3634D71DF71966001E3A6E /* PBXTargetDependency */,
+			);
+			name = UniqDayUITests;
+			productName = UniqDayUITests;
+			productReference = 3D3634D51DF71966001E3A6E /* UniqDayUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3D3634A61DF71965001E3A6E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = ChanLiang;
+				TargetAttributes = {
+					3D3634AD1DF71965001E3A6E = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = W2LJR8SM8M;
+						ProvisioningStyle = Automatic;
+					};
+					3D3634C91DF71966001E3A6E = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = W2LJR8SM8M;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 3D3634AD1DF71965001E3A6E;
+					};
+					3D3634D41DF71966001E3A6E = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = W2LJR8SM8M;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 3D3634AD1DF71965001E3A6E;
+					};
+				};
+			};
+			buildConfigurationList = 3D3634A91DF71965001E3A6E /* Build configuration list for PBXProject "UniqDay" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3D3634A51DF71965001E3A6E;
+			productRefGroup = 3D3634AF1DF71965001E3A6E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3D3634AD1DF71965001E3A6E /* UniqDay */,
+				3D3634C91DF71966001E3A6E /* UniqDayTests */,
+				3D3634D41DF71966001E3A6E /* UniqDayUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3D3634AC1DF71965001E3A6E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D3634C41DF71965001E3A6E /* LaunchScreen.storyboard in Resources */,
+				3D3634C11DF71965001E3A6E /* Assets.xcassets in Resources */,
+				3D3634BC1DF71965001E3A6E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D3634C81DF71966001E3A6E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D3634D31DF71966001E3A6E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3D3634AA1DF71965001E3A6E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D3634B91DF71965001E3A6E /* ViewController.m in Sources */,
+				3D3634B61DF71965001E3A6E /* AppDelegate.m in Sources */,
+				3D3634B31DF71965001E3A6E /* main.m in Sources */,
+				3D3634BF1DF71965001E3A6E /* UniqDay.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D3634C61DF71966001E3A6E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D3634CF1DF71966001E3A6E /* UniqDayTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D3634D11DF71966001E3A6E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D3634DA1DF71966001E3A6E /* UniqDayUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3D3634CC1DF71966001E3A6E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3D3634AD1DF71965001E3A6E /* UniqDay */;
+			targetProxy = 3D3634CB1DF71966001E3A6E /* PBXContainerItemProxy */;
+		};
+		3D3634D71DF71966001E3A6E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3D3634AD1DF71965001E3A6E /* UniqDay */;
+			targetProxy = 3D3634D61DF71966001E3A6E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3D3634BA1DF71965001E3A6E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D3634BB1DF71965001E3A6E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3D3634C21DF71965001E3A6E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D3634C31DF71965001E3A6E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3D3634DC1DF71966001E3A6E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3D3634DD1DF71966001E3A6E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3D3634DF1DF71966001E3A6E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = W2LJR8SM8M;
+				INFOPLIST_FILE = UniqDay/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ChanStudio.UniqDay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3D3634E01DF71966001E3A6E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = W2LJR8SM8M;
+				INFOPLIST_FILE = UniqDay/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ChanStudio.UniqDay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		3D3634E21DF71966001E3A6E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = W2LJR8SM8M;
+				INFOPLIST_FILE = UniqDayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ChanStudio.UniqDayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UniqDay.app/UniqDay";
+			};
+			name = Debug;
+		};
+		3D3634E31DF71966001E3A6E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = W2LJR8SM8M;
+				INFOPLIST_FILE = UniqDayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ChanStudio.UniqDayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UniqDay.app/UniqDay";
+			};
+			name = Release;
+		};
+		3D3634E51DF71966001E3A6E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = W2LJR8SM8M;
+				INFOPLIST_FILE = UniqDayUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ChanStudio.UniqDayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = UniqDay;
+			};
+			name = Debug;
+		};
+		3D3634E61DF71966001E3A6E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = W2LJR8SM8M;
+				INFOPLIST_FILE = UniqDayUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ChanStudio.UniqDayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = UniqDay;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3D3634A91DF71965001E3A6E /* Build configuration list for PBXProject "UniqDay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D3634DC1DF71966001E3A6E /* Debug */,
+				3D3634DD1DF71966001E3A6E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3D3634DE1DF71966001E3A6E /* Build configuration list for PBXNativeTarget "UniqDay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D3634DF1DF71966001E3A6E /* Debug */,
+				3D3634E01DF71966001E3A6E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		3D3634E11DF71966001E3A6E /* Build configuration list for PBXNativeTarget "UniqDayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D3634E21DF71966001E3A6E /* Debug */,
+				3D3634E31DF71966001E3A6E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		3D3634E41DF71966001E3A6E /* Build configuration list for PBXNativeTarget "UniqDayUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D3634E51DF71966001E3A6E /* Debug */,
+				3D3634E61DF71966001E3A6E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3D3634BD1DF71965001E3A6E /* UniqDay.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3D3634BE1DF71965001E3A6E /* UniqDay.xcdatamodel */,
+			);
+			currentVersion = 3D3634BE1DF71965001E3A6E /* UniqDay.xcdatamodel */;
+			path = UniqDay.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 3D3634A61DF71965001E3A6E /* Project object */;
+}
