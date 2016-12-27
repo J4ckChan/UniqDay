@@ -1,9 +1,9 @@
 //
-//  Card+CoreDataClass.h
-//  UniqDay
+//  UNDCard+CoreDataClass.h
+//  
 //
-//  Created by ChanLiang on 07/12/2016.
-//  Copyright © 2016 ChanLiang. All rights reserved.
+//  Created by ChanLiang on 28/12/2016.
+//
 //  This file was automatically generated and should not be edited.
 //
 
@@ -14,10 +14,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Card : NSManagedObject
+@interface UNDCard : NSManagedObject
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#import "Card+CoreDataProperties.h"
+#import "UNDCard+CoreDataProperties.h"
