@@ -1,14 +1,14 @@
 //
-//  AddCardView.m
+//  UNDMainView.m
 //  UniqDay
 //
-//  Created by ChanLiang on 08/12/2016.
-//  Copyright © 2016 ChanLiang. All rights reserved.
+//  Created by ChanLiang on 07/01/2017.
+//  Copyright © 2017 ChanLiang. All rights reserved.
 //
 
-#import "AddCardView.h"
+#import "UNDMainView.h"
 
-@implementation AddCardView
+@implementation UNDMainView
 
 /*
 // Only override drawRect: if you perform custom drawing.

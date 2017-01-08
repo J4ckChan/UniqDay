@@ -8,6 +8,8 @@
 
 #import "UNDViewController.h"
 
+#import "UNDCardView.h"
+
 @interface UNDViewController ()
 
 @end
@@ -17,6 +19,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
+    //test CardView
+    CGFloat viewWidth        = [UIScreen mainScreen].bounds.size.width;
+    CGFloat viewHeight       = [UIScreen mainScreen].bounds.size.height;
+    UNDCardView *cardView    = [[UNDCardView alloc]initWithFrame:CGRectMake(16, 70, viewWidth - 32, viewHeight - 140)];
+    
+    cardView.backgroundColor = [UIColor whiteColor];
+    cardView.clipsToBounds   = YES;
+    cardView.layer.cornerRadius = 5;
+    
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    [self.view addSubview:cardView];
 }
 
 - (void)didReceiveMemoryWarning {
