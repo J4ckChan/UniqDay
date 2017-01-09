@@ -2,7 +2,7 @@
 //  UNDCard+CoreDataProperties.h
 //  
 //
-//  Created by ChanLiang on 28/12/2016.
+//  Created by ChanLiang on 09/01/2017.
 //
 //  This file was automatically generated and should not be edited.
 //
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSFetchRequest<UNDCard *> *)fetchRequest;
 
 @property (nullable, nonatomic, copy) NSDate *date;
-@property (nullable, nonatomic, retain) NSObject *image;
+@property (nullable, nonatomic, retain) NSData *image;
 @property (nullable, nonatomic, copy) NSString *title;
 
 @end

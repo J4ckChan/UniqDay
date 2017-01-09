@@ -2,15 +2,13 @@
 //  UNDCard+CoreDataClass.h
 //  
 //
-//  Created by ChanLiang on 28/12/2016.
+//  Created by ChanLiang on 09/01/2017.
 //
 //  This file was automatically generated and should not be edited.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-
-@class NSObject;
 
 NS_ASSUME_NONNULL_BEGIN
 
