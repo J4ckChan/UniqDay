@@ -23,6 +23,7 @@
 		3DEB7B231E23C5C40067311D /* UNDCard+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB7B201E23C5C40067311D /* UNDCard+CoreDataClass.m */; };
 		3DEB7B241E23C5C40067311D /* UNDCard+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB7B221E23C5C40067311D /* UNDCard+CoreDataProperties.m */; };
 		3DEB7B281E23C6740067311D /* UNDCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB7B271E23C6740067311D /* UNDCardViewModel.m */; };
+		3DEB7B2B1E2538F00067311D /* UNDAddCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB7B2A1E2538F00067311D /* UNDAddCardView.m */; };
 		7F3E4D70C662C13BC6AF4BB2 /* Pods_UniqDay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5507201A3042CBA9B69E53D /* Pods_UniqDay.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,8 @@
 		3DEB7B221E23C5C40067311D /* UNDCard+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UNDCard+CoreDataProperties.m"; path = "Model/UNDCard+CoreDataProperties.m"; sourceTree = "<group>"; };
 		3DEB7B261E23C6740067311D /* UNDCardViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDCardViewModel.h; path = ViewModel/UNDCardViewModel.h; sourceTree = "<group>"; };
 		3DEB7B271E23C6740067311D /* UNDCardViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDCardViewModel.m; path = ViewModel/UNDCardViewModel.m; sourceTree = "<group>"; };
+		3DEB7B291E2538EF0067311D /* UNDAddCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDAddCardView.h; path = View/UNDAddCardView.h; sourceTree = "<group>"; };
+		3DEB7B2A1E2538F00067311D /* UNDAddCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDAddCardView.m; path = View/UNDAddCardView.m; sourceTree = "<group>"; };
 		82FDDE00B5F00A49773E5A8D /* Pods-UniqDay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniqDay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniqDay/Pods-UniqDay.debug.xcconfig"; sourceTree = "<group>"; };
 		B5507201A3042CBA9B69E53D /* Pods_UniqDay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniqDay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -203,6 +206,8 @@
 				3D8559F11E20CABE0044B818 /* UNDMainView.m */,
 				3D8559F61E20D0B80044B818 /* UNDCardView.h */,
 				3D8559F71E20D0B80044B818 /* UNDCardView.m */,
+				3DEB7B291E2538EF0067311D /* UNDAddCardView.h */,
+				3DEB7B2A1E2538F00067311D /* UNDAddCardView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -419,6 +424,7 @@
 				3DEB7B231E23C5C40067311D /* UNDCard+CoreDataClass.m in Sources */,
 				3DEB7B281E23C6740067311D /* UNDCardViewModel.m in Sources */,
 				3D8559F21E20CABE0044B818 /* UNDMainView.m in Sources */,
+				3DEB7B2B1E2538F00067311D /* UNDAddCardView.m in Sources */,
 				3D201C591E12D6580067BFF5 /* UNDViewController.m in Sources */,
 				3D3634B31DF71965001E3A6E /* main.m in Sources */,
 				3DEB7B241E23C5C40067311D /* UNDCard+CoreDataProperties.m in Sources */,

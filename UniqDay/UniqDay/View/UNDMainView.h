@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class UNDCardScrollView;
-
 @interface UNDMainView : UIView
 
-@property (nonatomic,strong) UNDCardScrollView *cardScrollView;
+@property (nonatomic,strong) UIScrollView *cardScrollView;
 
 //UIButtons
 @property (nonatomic,strong) UIButton *toolBtn;
