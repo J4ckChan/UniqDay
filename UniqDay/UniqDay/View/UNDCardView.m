@@ -41,14 +41,14 @@
         self.dayCountlabel.font = [UIFont systemFontOfSize:28 weight:UIFontWeightLight];
         self.dayCountlabel.textColor = [UIColor lightGrayColor];
         
-        self.daysSinceLabel     = [[UILabel alloc]init];
-        self.daysSinceLabel.text = @"DAYS SINCE";
-        self.daysSinceLabel.textAlignment = NSTextAlignmentCenter;
-        self.daysSinceLabel.textColor = [UIColor whiteColor];
-        self.daysSinceLabel.font = [UIFont systemFontOfSize:11 weight:UIFontWeightSemibold];
-        self.daysSinceLabel.backgroundColor = [UIColor lightGrayColor];
+        self.daysSinceLabel                    = [[UILabel alloc]init];
+        self.daysSinceLabel.text               = @"DAYS SINCE";
+        self.daysSinceLabel.textAlignment      = NSTextAlignmentCenter;
+        self.daysSinceLabel.textColor          = [UIColor whiteColor];
+        self.daysSinceLabel.font               = [UIFont systemFontOfSize:11 weight:UIFontWeightSemibold];
+        self.daysSinceLabel.backgroundColor    = [UIColor lightGrayColor];
         self.daysSinceLabel.layer.cornerRadius = 2;
-        self.daysSinceLabel.clipsToBounds = YES;
+        self.daysSinceLabel.clipsToBounds      = YES;
         
         [self addSubview:self.imageView];
         [self addSubview:self.titleLabel];
