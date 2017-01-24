@@ -13,11 +13,18 @@
 #import "UNDCardView.h"
 #import "UNDAddCardView.h"
 
+//rac
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
 @interface UNDViewController ()
+
+@property (nonatomic,strong) UNDAddCardView *addCardView;
 
 @end
 
 @implementation UNDViewController
+
+@synthesize addCardView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,8 +45,18 @@
 //    [self.view addSubview:cardView];
     
     //addCardView
-    UNDAddCardView *addCardView = [[UNDAddCardView alloc]initWithFrame:CGRectMake(8, viewHeight - 248, viewWidth - 16, 240)];
-    [self.view addSubview:addCardView];
+    self.addCardView = [[UNDAddCardView alloc]initWithFrame:CGRectMake(8, viewHeight - 248, viewWidth - 16, 240)];
+    [self.view addSubview:self.addCardView];
+    
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kRaiseAddCardViewNotification object:nil]
+     subscribeNext:^(NSNotification *notification) {
+        [self raiseAddCardView];
+    }];
+
+    [[self.addCardView cancelSignal] subscribeNext:^(id x) {
+        [self dismissAddCardView];
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,14 +64,33 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - AddCardView 
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)raiseAddCardView{
+    [UIView animateWithDuration:0.3 animations:^{
+        CGPoint orignialCenter = self.addCardView.center;
+        self.addCardView.center = CGPointMake(orignialCenter.x, orignialCenter.y - 260);
+    }];
 }
-*/
+
+- (void)dismissAddCardView{
+    
+    //dismiss keyboard
+    NSIndexPath *indePath = [NSIndexPath indexPathForRow:0 inSection:0];
+    UNDTitleTableViewCell *cell = [self.addCardView.tableView cellForRowAtIndexPath:indePath];
+    for (UIView *view in cell.contentView.subviews) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField*)view;
+            [textField resignFirstResponder];
+        }
+    }
+    
+    //dismiss AddCardView
+    [UIView animateWithDuration:0.3 animations:^{
+        CGPoint center0 = self.addCardView.center;
+        CGFloat centerY = [UIScreen mainScreen].bounds.size.height + self.addCardView.frame.size.height/2;
+        self.addCardView.center = CGPointMake(center0.x, centerY);
+    }];
+}
 
 @end

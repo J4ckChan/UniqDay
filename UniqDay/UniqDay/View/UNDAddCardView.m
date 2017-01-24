@@ -9,7 +9,6 @@
 #import "UNDAddCardView.h"
 #import <Masonry/Masonry.h>
 
-#import "UNDTitleTableViewCell.h"
 
 enum : NSUInteger {
     AddCardTableViewTitleCell,
@@ -20,9 +19,8 @@ enum : NSUInteger {
 
 @interface UNDAddCardView ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic,strong) UITableView *tableView;
-@property (nonatomic,strong) UIButton *cancelBtn;
 @property (nonatomic,strong) UIButton *doneBtn;
+@property (nonatomic,strong) UIButton *cancelBtn;
 
 @end
 
@@ -33,7 +31,7 @@ enum : NSUInteger {
     if (self) {
         
         self.clipsToBounds       = YES;
-        self.layer.cornerRadius  = 5;
+        self.layer.cornerRadius  = 8;
 
         _tableView               = [[UITableView alloc]init];
         _tableView.delegate      = self;
@@ -102,6 +100,16 @@ enum : NSUInteger {
         cell = [tableView dequeueReusableCellWithIdentifier:@"test" forIndexPath:indexPath];
     }
     return  cell;
+}
+
+#pragma mark - rac signal
+
+- (RACSignal *)cancelSignal{
+    return [self.cancelBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
+}
+
+- (RACSignal *)doneSignal{
+    return [self.doneBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
 }
 
 @end

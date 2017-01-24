@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UNDTitleTableViewCell.h"
+
+//rac
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface UNDAddCardView : UIView
+
+@property (nonatomic,strong) UITableView *tableView;
+
+
+- (RACSignal*)cancelSignal;
+- (RACSignal*)doneSignal;
 
 @end

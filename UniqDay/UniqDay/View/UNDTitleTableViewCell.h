@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString *kRaiseAddCardViewNotification;
+
 @interface UNDTitleTableViewCell : UITableViewCell
 
 @property (nonatomic,strong) UITextField *titleTextField;

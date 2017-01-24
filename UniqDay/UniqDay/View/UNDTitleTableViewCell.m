@@ -9,6 +9,13 @@
 #import "UNDTitleTableViewCell.h"
 
 #import <Masonry/Masonry.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
+@interface UNDTitleTableViewCell () <UITextFieldDelegate>
+
+@end
+
+NSString *kRaiseAddCardViewNotification = @"RaiseAddCardViewNotification";
 
 @implementation UNDTitleTableViewCell
 
@@ -30,14 +37,21 @@
     if (self) {
         self.titleTextField = [[UITextField alloc]init];
         self.titleTextField.placeholder = @"TITLE";
+        self.titleTextField.delegate = self;
         [self.contentView addSubview:self.titleTextField];
         
         UIEdgeInsets insets = UIEdgeInsetsMake(4, 15, 4, 4);
         [self.titleTextField mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.contentView).insets(insets);
         }];
+        
     }
     return self;
 }
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRaiseAddCardViewNotification object:nil];
+}
+
 
 @end
