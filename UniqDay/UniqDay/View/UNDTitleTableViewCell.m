@@ -35,10 +35,13 @@ NSString *kRaiseAddCardViewNotification = @"RaiseAddCardViewNotification";
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.titleTextField = [[UITextField alloc]init];
-        self.titleTextField.placeholder = @"TITLE";
-        self.titleTextField.delegate = self;
-        [self.contentView addSubview:self.titleTextField];
+        
+        [self.contentView addSubview:({
+            self.titleTextField = [[UITextField alloc]init];
+            self.titleTextField.placeholder = @"TITLE";
+            self.titleTextField.delegate = self;
+            self.titleTextField;
+        })];
         
         UIEdgeInsets insets = UIEdgeInsetsMake(4, 15, 4, 4);
         [self.titleTextField mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3D0B45A81DF8875200E29F5A /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0B45A71DF8875200E29F5A /* ReactiveCocoa.framework */; };
 		3D0B45AA1DF8877100E29F5A /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0B45A91DF8877100E29F5A /* Masonry.framework */; };
+		3D139C8C1E399259006DDC23 /* UNDDateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D139C8B1E399259006DDC23 /* UNDDateTableViewCell.m */; };
 		3D201C591E12D6580067BFF5 /* UNDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D201C581E12D6580067BFF5 /* UNDViewController.m */; };
 		3D201C671E12DA430067BFF5 /* ReactiveViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D201C661E12DA430067BFF5 /* ReactiveViewModel.framework */; };
 		3D3634B31DF71965001E3A6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3634B21DF71965001E3A6E /* main.m */; };
@@ -50,6 +51,8 @@
 		26537945C949EAB63A41BCE5 /* Pods-UniqDay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniqDay.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniqDay/Pods-UniqDay.release.xcconfig"; sourceTree = "<group>"; };
 		3D0B45A71DF8875200E29F5A /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = "../../../../Library/Developer/Xcode/DerivedData/UniqDay-bdjzuvwjhehnhmfzjreoviwkmtwp/Build/Products/Debug-iphonesimulator/ReactiveCocoa/ReactiveCocoa.framework"; sourceTree = "<group>"; };
 		3D0B45A91DF8877100E29F5A /* Masonry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Masonry.framework; path = "../../../../Library/Developer/Xcode/DerivedData/UniqDay-bdjzuvwjhehnhmfzjreoviwkmtwp/Build/Products/Debug-iphonesimulator/Masonry/Masonry.framework"; sourceTree = "<group>"; };
+		3D139C8A1E399259006DDC23 /* UNDDateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDDateTableViewCell.h; path = View/UNDDateTableViewCell.h; sourceTree = "<group>"; };
+		3D139C8B1E399259006DDC23 /* UNDDateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDDateTableViewCell.m; path = View/UNDDateTableViewCell.m; sourceTree = "<group>"; };
 		3D201C571E12D6580067BFF5 /* UNDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNDViewController.h; sourceTree = "<group>"; };
 		3D201C581E12D6580067BFF5 /* UNDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNDViewController.m; sourceTree = "<group>"; };
 		3D201C641E12D9180067BFF5 /* UniqDay.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UniqDay.xcdatamodel; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 				3DEB7B2A1E2538F00067311D /* UNDAddCardView.m */,
 				3DBB01A01E33939800963E74 /* UNDTitleTableViewCell.h */,
 				3DBB01A11E33939800963E74 /* UNDTitleTableViewCell.m */,
+				3D139C8A1E399259006DDC23 /* UNDDateTableViewCell.h */,
+				3D139C8B1E399259006DDC23 /* UNDDateTableViewCell.m */,
 			);
 			name = AddCardView;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D3634B61DF71965001E3A6E /* AppDelegate.m in Sources */,
+				3D139C8C1E399259006DDC23 /* UNDDateTableViewCell.m in Sources */,
 				3DEB7B231E23C5C40067311D /* UNDCard+CoreDataClass.m in Sources */,
 				3DEB7B281E23C6740067311D /* UNDCardViewModel.m in Sources */,
 				3D8559F21E20CABE0044B818 /* UNDMainView.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UNDTitleTableViewCell.h"
+#import "UNDDateTableViewCell.h"
 
 //rac
 #import <ReactiveCocoa/ReactiveCocoa.h>

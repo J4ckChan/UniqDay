@@ -12,7 +12,7 @@
 
 enum : NSUInteger {
     AddCardTableViewTitleCell,
-    AddCardTableViewTimeCell,
+    AddCardTableViewDateCell,
     AddCardTableViewImageCell,
     AddCardTableViewRowNum,
 };
@@ -25,6 +25,9 @@ enum : NSUInteger {
 @end
 
 @implementation UNDAddCardView
+
+static NSString *reuseIdetifierForTitle = @"Title";
+static NSString *reuseIdetifierForDate  = @"Date";
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -75,7 +78,8 @@ enum : NSUInteger {
             make.height.equalTo(btnHeightNum);
         }];
         
-        [self.tableView registerClass:[UNDTitleTableViewCell class] forCellReuseIdentifier:@"Title"];
+        [self.tableView registerClass:[UNDTitleTableViewCell class] forCellReuseIdentifier:reuseIdetifierForTitle];
+        [self.tableView registerClass:[UNDDateTableViewCell class] forCellReuseIdentifier:reuseIdetifierForDate];
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"test"];
     }
     return self;
@@ -92,10 +96,12 @@ enum : NSUInteger {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *reuseIdetifier = @"Title";
+    
     UITableViewCell *cell;
     if (indexPath.row == AddCardTableViewTitleCell) {
-        cell = (UNDTitleTableViewCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdetifier forIndexPath:indexPath];
+        cell = (UNDTitleTableViewCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdetifierForTitle forIndexPath:indexPath];
+    }else if (indexPath.row == AddCardTableViewDateCell){
+        cell = (UNDDateTableViewCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdetifierForDate forIndexPath:indexPath];
     }else{
         cell = [tableView dequeueReusableCellWithIdentifier:@"test" forIndexPath:indexPath];
     }
