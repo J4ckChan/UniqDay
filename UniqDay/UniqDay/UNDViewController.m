@@ -16,15 +16,18 @@
 //rac
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+#import <Masonry/Masonry.h>
+
 @interface UNDViewController ()
 
 @property (nonatomic,strong) UNDAddCardView *addCardView;
+@property (nonatomic,strong) UIDatePicker *datePicker;
 
 @end
 
 @implementation UNDViewController
 
-@synthesize addCardView;
+@synthesize addCardView,datePicker;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,29 +35,21 @@
     
     self.view.backgroundColor = [UIColor grayColor];
     
-    //test CardView
-    CGFloat viewWidth        = [UIScreen mainScreen].bounds.size.width;
-    CGFloat viewHeight       = [UIScreen mainScreen].bounds.size.height;
-//    UNDCardView *cardView    = [[UNDCardView alloc]initWithFrame:CGRectMake(16, 70, viewWidth - 32, viewHeight - 140)];
-//    
-//    cardView.backgroundColor = [UIColor whiteColor];
-//    cardView.clipsToBounds   = YES;
-//    cardView.layer.cornerRadius = 5;
-//    
-//    self.view.backgroundColor = [UIColor lightGrayColor];
-//    [self.view addSubview:cardView];
     
-    //addCardView
-    self.addCardView = [[UNDAddCardView alloc]initWithFrame:CGRectMake(8, viewHeight - 248, viewWidth - 16, 240)];
-    [self.view addSubview:self.addCardView];
+    //add +
+    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addBtn setImage:[UIImage imageNamed:@"addIcon"] forState:UIControlStateNormal];
+    [self.view addSubview:addBtn];
     
-    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kRaiseAddCardViewNotification object:nil]
-     subscribeNext:^(NSNotification *notification) {
-        [self raiseAddCardView];
+    CGSize size = CGSizeMake(32, 32);
+    [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(16);
+        make.bottom.equalTo(self.view).offset(-24);
+        make.size.mas_equalTo(size);
     }];
-
-    [[self.addCardView cancelSignal] subscribeNext:^(id x) {
-        [self dismissAddCardView];
+    
+    [[addBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [self showAddCardView];
     }];
     
 }
@@ -66,15 +61,101 @@
 
 #pragma mark - AddCardView 
 
+- (void)showAddCardView{
+    
+    //test CardView
+    CGFloat viewWidth        = [UIScreen mainScreen].bounds.size.width;
+    CGFloat viewHeight       = [UIScreen mainScreen].bounds.size.height;
+    
+    CGRect addCardViewFrame0 = CGRectMake(8, viewHeight - 248, viewWidth - 16, 240);
+    
+    if (self.addCardView != nil) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.addCardView.frame = addCardViewFrame0;
+        }];
+    }else{
+        //addCardView
+        self.addCardView = [[UNDAddCardView alloc]initWithFrame:addCardViewFrame0];
+        [self.view addSubview:self.addCardView];
+        
+        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kRaiseAddCardViewNotification object:nil]
+         subscribeNext:^(NSNotification *notification) {
+             [self raiseAddCardView];
+         }];
+        
+        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kRaiseDatePickerNotification object:nil]
+         subscribeNext:^(NSNotification *notification) {
+             [self raiseDatePicker];
+         }];
+        
+        [[self.addCardView cancelSignal] subscribeNext:^(id x) {
+            [self dismissAddCardView];
+        }];
+    }
+}
+
+
 - (void)raiseAddCardView{
+    
+    CGPoint orignialCenter = self.addCardView.center;
+    
+    CGFloat height = 216;
+    CGFloat top = [UIScreen mainScreen].bounds.size.height - height;
+    
     [UIView animateWithDuration:0.3 animations:^{
-        CGPoint orignialCenter = self.addCardView.center;
-        self.addCardView.center = CGPointMake(orignialCenter.x, orignialCenter.y - 260);
+        self.addCardView.center = CGPointMake(orignialCenter.x, top - 150);
     }];
 }
 
 - (void)dismissAddCardView{
     
+    [self dismissKeyboard];
+    
+    //dismiss datePicker
+    if (self.datePicker != nil) {
+        [UIView animateWithDuration:0.2 animations:^{
+            CGPoint center0 = self.datePicker.center;
+            CGFloat centerY = [UIScreen mainScreen].bounds.size.height + self.datePicker.frame.size.height/2;
+            self.datePicker.center = CGPointMake(center0.x, centerY);
+        }];
+        [self.datePicker removeFromSuperview];
+        self.datePicker = nil;
+    }
+    
+    //dismiss AddCardView
+    [UIView animateWithDuration:0.3 animations:^{
+        CGPoint center0 = self.addCardView.center;
+        CGFloat centerY = [UIScreen mainScreen].bounds.size.height + self.addCardView.frame.size.height/2;
+        self.addCardView.center = CGPointMake(center0.x, centerY);
+    }];
+}
+
+- (void)raiseDatePicker{
+    
+    [self dismissKeyboard];
+    
+    CGRect addCardViewFrame0 = self.addCardView.frame;
+    
+    CGFloat height = 216;
+    CGFloat top = [UIScreen mainScreen].bounds.size.height - height;
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.addCardView.frame = CGRectMake(addCardViewFrame0.origin.x,top - 248, addCardViewFrame0.size.width, addCardViewFrame0.size.height);
+    }];
+    
+    if (self.datePicker == nil) {
+        self.datePicker = [[UIDatePicker alloc]init];
+        self.datePicker.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:self.datePicker];
+        
+        [datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
+            UIEdgeInsets insets = UIEdgeInsetsMake(top, 0, 0, 0);
+            make.edges.equalTo(self.view).insets(insets);
+        }];
+    }
+}
+
+- (void)dismissKeyboard{
     //dismiss keyboard
     NSIndexPath *indePath = [NSIndexPath indexPathForRow:0 inSection:0];
     UNDTitleTableViewCell *cell = [self.addCardView.tableView cellForRowAtIndexPath:indePath];
@@ -84,13 +165,6 @@
             [textField resignFirstResponder];
         }
     }
-    
-    //dismiss AddCardView
-    [UIView animateWithDuration:0.3 animations:^{
-        CGPoint center0 = self.addCardView.center;
-        CGFloat centerY = [UIScreen mainScreen].bounds.size.height + self.addCardView.frame.size.height/2;
-        self.addCardView.center = CGPointMake(center0.x, centerY);
-    }];
 }
 
 @end

@@ -20,7 +20,7 @@
 
 @implementation UNDDateTableViewCell
 
-NSString *kRaiseDatePickerNotification = @"RaiseAddCardViewNotification";
+NSString *kRaiseDatePickerNotification = @"RaiseDatePickerNotification";
 
 @synthesize dateBtn;
 
