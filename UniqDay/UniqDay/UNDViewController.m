@@ -33,7 +33,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor grayColor];
+    self.view.backgroundColor = [UIColor colorWithRed:20 green:22 blue:27 alpha:0];
     
     
     //add +
@@ -102,25 +102,17 @@
     CGFloat height = 216;
     CGFloat top = [UIScreen mainScreen].bounds.size.height - height;
     
+    [self dismissDatePicker];
+    
     [UIView animateWithDuration:0.3 animations:^{
-        self.addCardView.center = CGPointMake(orignialCenter.x, top - 150);
+        self.addCardView.center = CGPointMake(orignialCenter.x, top - 170);
     }];
 }
 
 - (void)dismissAddCardView{
     
     [self dismissKeyboard];
-    
-    //dismiss datePicker
-    if (self.datePicker != nil) {
-        [UIView animateWithDuration:0.2 animations:^{
-            CGPoint center0 = self.datePicker.center;
-            CGFloat centerY = [UIScreen mainScreen].bounds.size.height + self.datePicker.frame.size.height/2;
-            self.datePicker.center = CGPointMake(center0.x, centerY);
-        }];
-        [self.datePicker removeFromSuperview];
-        self.datePicker = nil;
-    }
+    [self dismissDatePicker];
     
     //dismiss AddCardView
     [UIView animateWithDuration:0.3 animations:^{
@@ -164,6 +156,19 @@
             UITextField *textField = (UITextField*)view;
             [textField resignFirstResponder];
         }
+    }
+}
+
+- (void)dismissDatePicker{
+    //dismiss datePicker
+    if (self.datePicker != nil) {
+        [UIView animateWithDuration:0.2 animations:^{
+            CGPoint center0 = self.datePicker.center;
+            CGFloat centerY = [UIScreen mainScreen].bounds.size.height + self.datePicker.frame.size.height/2;
+            self.datePicker.center = CGPointMake(center0.x, centerY);
+        }];
+        [self.datePicker removeFromSuperview];
+        self.datePicker = nil;
     }
 }
 
