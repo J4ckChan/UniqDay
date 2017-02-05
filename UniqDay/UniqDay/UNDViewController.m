@@ -78,6 +78,7 @@
         self.addCardView = [[UNDAddCardView alloc]initWithFrame:addCardViewFrame0];
         [self.view addSubview:self.addCardView];
         
+        //rac
         [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kRaiseAddCardViewNotification object:nil]
          subscribeNext:^(NSNotification *notification) {
              [self raiseAddCardView];
@@ -138,17 +139,28 @@
     if (self.datePicker == nil) {
         self.datePicker = [[UIDatePicker alloc]init];
         self.datePicker.backgroundColor = [UIColor whiteColor];
+        self.datePicker.datePickerMode = UIDatePickerModeDate;
         [self.view addSubview:self.datePicker];
         
-        [datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
             UIEdgeInsets insets = UIEdgeInsetsMake(top, 0, 0, 0);
             make.edges.equalTo(self.view).insets(insets);
         }];
+        
+        //rac
+        NSIndexPath *indePath = [NSIndexPath indexPathForRow:1 inSection:0];
+        UNDDateTableViewCell *cell = [self.addCardView.tableView cellForRowAtIndexPath:indePath];
+        [[self.datePicker rac_newDateChannelWithNilValue:[NSDate date]]
+         subscribeNext:^(NSDate *date) {
+             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+             dateFormatter.dateStyle = kCFDateFormatterMediumStyle;
+             NSString *dateStr = [dateFormatter stringFromDate:date];
+             [cell.dateBtn setTitle:dateStr forState:UIControlStateNormal];
+         }];
     }
 }
 
 - (void)dismissKeyboard{
-    //dismiss keyboard
     NSIndexPath *indePath = [NSIndexPath indexPathForRow:0 inSection:0];
     UNDTitleTableViewCell *cell = [self.addCardView.tableView cellForRowAtIndexPath:indePath];
     for (UIView *view in cell.contentView.subviews) {
@@ -160,7 +172,6 @@
 }
 
 - (void)dismissDatePicker{
-    //dismiss datePicker
     if (self.datePicker != nil) {
         [UIView animateWithDuration:0.2 animations:^{
             CGPoint center0 = self.datePicker.center;

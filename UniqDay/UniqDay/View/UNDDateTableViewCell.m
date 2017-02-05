@@ -12,12 +12,6 @@
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
-@interface UNDDateTableViewCell ()
-
-@property (nonatomic,strong) UIButton *dateBtn;
-
-@end
-
 @implementation UNDDateTableViewCell
 
 NSString *kRaiseDatePickerNotification = @"RaiseDatePickerNotification";
@@ -59,6 +53,5 @@ NSString *kRaiseDatePickerNotification = @"RaiseDatePickerNotification";
     }
     return self;
 }
-
 
 @end

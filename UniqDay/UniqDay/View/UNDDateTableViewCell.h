@@ -12,4 +12,6 @@ extern NSString *kRaiseDatePickerNotification;
 
 @interface UNDDateTableViewCell : UITableViewCell
 
+@property (nonatomic,strong) UIButton *dateBtn;
+
 @end
