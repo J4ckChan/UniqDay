@@ -28,6 +28,7 @@ enum : NSUInteger {
 
 static NSString *reuseIdetifierForTitle = @"Title";
 static NSString *reuseIdetifierForDate  = @"Date";
+static NSString *reuseIdetifierForImage  = @"Image";
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -80,7 +81,7 @@ static NSString *reuseIdetifierForDate  = @"Date";
         
         [self.tableView registerClass:[UNDTitleTableViewCell class] forCellReuseIdentifier:reuseIdetifierForTitle];
         [self.tableView registerClass:[UNDDateTableViewCell class] forCellReuseIdentifier:reuseIdetifierForDate];
-        [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"test"];
+        [self.tableView registerClass:[UNDImageTableViewCell class] forCellReuseIdentifier:reuseIdetifierForImage];
     }
     return self;
 }
@@ -102,8 +103,8 @@ static NSString *reuseIdetifierForDate  = @"Date";
         cell = (UNDTitleTableViewCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdetifierForTitle forIndexPath:indexPath];
     }else if (indexPath.row == AddCardTableViewDateCell){
         cell = (UNDDateTableViewCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdetifierForDate forIndexPath:indexPath];
-    }else{
-        cell = [tableView dequeueReusableCellWithIdentifier:@"test" forIndexPath:indexPath];
+    }else if (indexPath.row == AddCardTableViewImageCell){
+        cell = (UNDImageTableViewCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdetifierForImage forIndexPath:indexPath];
     }
     return  cell;
 }

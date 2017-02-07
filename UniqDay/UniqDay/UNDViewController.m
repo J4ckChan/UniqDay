@@ -148,13 +148,14 @@
         }];
         
         //rac
-        NSIndexPath *indePath = [NSIndexPath indexPathForRow:1 inSection:0];
-        UNDDateTableViewCell *cell = [self.addCardView.tableView cellForRowAtIndexPath:indePath];
         [[self.datePicker rac_newDateChannelWithNilValue:[NSDate date]]
          subscribeNext:^(NSDate *date) {
              NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
              dateFormatter.dateStyle = kCFDateFormatterMediumStyle;
              NSString *dateStr = [dateFormatter stringFromDate:date];
+             
+             NSIndexPath *indePath = [NSIndexPath indexPathForRow:1 inSection:0];
+             UNDDateTableViewCell *cell = [self.addCardView.tableView cellForRowAtIndexPath:indePath];
              [cell.dateBtn setTitle:dateStr forState:UIControlStateNormal];
          }];
     }
