@@ -67,7 +67,7 @@
     CGFloat viewWidth        = [UIScreen mainScreen].bounds.size.width;
     CGFloat viewHeight       = [UIScreen mainScreen].bounds.size.height;
     
-    CGRect addCardViewFrame0 = CGRectMake(8, viewHeight - 248, viewWidth - 16, 240);
+    CGRect addCardViewFrame0 = CGRectMake(8, viewHeight - 248, viewWidth - 16, 256);
     
     if (self.addCardView != nil) {
         [UIView animateWithDuration:0.2 animations:^{

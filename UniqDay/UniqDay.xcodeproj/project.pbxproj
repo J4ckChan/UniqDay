@@ -22,7 +22,6 @@
 		3D8559F21E20CABE0044B818 /* UNDMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8559F11E20CABE0044B818 /* UNDMainView.m */; };
 		3D8559F81E20D0B80044B818 /* UNDCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8559F71E20D0B80044B818 /* UNDCardView.m */; };
 		3DBB01A21E33939800963E74 /* UNDTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBB01A11E33939800963E74 /* UNDTitleTableViewCell.m */; };
-		3DBB01A51E34F17800963E74 /* UNDAddCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBB01A41E34F17800963E74 /* UNDAddCardViewModel.m */; };
 		3DD02D7B1E4A089500414B51 /* UNDImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD02D7A1E4A089500414B51 /* UNDImageTableViewCell.m */; };
 		3DEB7B231E23C5C40067311D /* UNDCard+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB7B201E23C5C40067311D /* UNDCard+CoreDataClass.m */; };
 		3DEB7B241E23C5C40067311D /* UNDCard+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB7B221E23C5C40067311D /* UNDCard+CoreDataProperties.m */; };
@@ -78,8 +77,6 @@
 		3D8559F71E20D0B80044B818 /* UNDCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDCardView.m; path = View/UNDCardView.m; sourceTree = "<group>"; };
 		3DBB01A01E33939800963E74 /* UNDTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDTitleTableViewCell.h; path = View/UNDTitleTableViewCell.h; sourceTree = "<group>"; };
 		3DBB01A11E33939800963E74 /* UNDTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDTitleTableViewCell.m; path = View/UNDTitleTableViewCell.m; sourceTree = "<group>"; };
-		3DBB01A31E34F17800963E74 /* UNDAddCardViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDAddCardViewModel.h; path = ViewModel/UNDAddCardViewModel.h; sourceTree = "<group>"; };
-		3DBB01A41E34F17800963E74 /* UNDAddCardViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDAddCardViewModel.m; path = ViewModel/UNDAddCardViewModel.m; sourceTree = "<group>"; };
 		3DD02D791E4A089500414B51 /* UNDImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDImageTableViewCell.h; path = View/UNDImageTableViewCell.h; sourceTree = "<group>"; };
 		3DD02D7A1E4A089500414B51 /* UNDImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDImageTableViewCell.m; path = View/UNDImageTableViewCell.m; sourceTree = "<group>"; };
 		3DEB7B1F1E23C5C40067311D /* UNDCard+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UNDCard+CoreDataClass.h"; path = "Model/UNDCard+CoreDataClass.h"; sourceTree = "<group>"; };
@@ -222,8 +219,6 @@
 			children = (
 				3DEB7B261E23C6740067311D /* UNDCardViewModel.h */,
 				3DEB7B271E23C6740067311D /* UNDCardViewModel.m */,
-				3DBB01A31E34F17800963E74 /* UNDAddCardViewModel.h */,
-				3DBB01A41E34F17800963E74 /* UNDAddCardViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -457,7 +452,6 @@
 				3DEB7B2B1E2538F00067311D /* UNDAddCardView.m in Sources */,
 				3D201C591E12D6580067BFF5 /* UNDViewController.m in Sources */,
 				3DBB01A21E33939800963E74 /* UNDTitleTableViewCell.m in Sources */,
-				3DBB01A51E34F17800963E74 /* UNDAddCardViewModel.m in Sources */,
 				3D3634B31DF71965001E3A6E /* main.m in Sources */,
 				3DEB7B241E23C5C40067311D /* UNDCard+CoreDataProperties.m in Sources */,
 				3D8559F81E20D0B80044B818 /* UNDCardView.m in Sources */,

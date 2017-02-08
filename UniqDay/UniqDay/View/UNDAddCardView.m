@@ -52,7 +52,7 @@ static NSString *reuseIdetifierForImage  = @"Image";
         [self addSubview:_cancelBtn];
         [self addSubview:_doneBtn];
         
-        CGFloat tableViewHeight = 180;
+        CGFloat tableViewHeight = 196;
         NSNumber *tablViewHeightNum = [NSNumber numberWithFloat:tableViewHeight];
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.mas_top);
@@ -93,7 +93,11 @@ static NSString *reuseIdetifierForImage  = @"Image";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    if (indexPath.row == AddCardTableViewImageCell) {
+        return 78;
+    }else{
+        return 60;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

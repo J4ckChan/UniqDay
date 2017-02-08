@@ -31,7 +31,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _scrollView = [[UIScrollView alloc]init];
-        _scrollView.backgroundColor = [UIColor lightGrayColor];
         _scrollView.showsHorizontalScrollIndicator = NO;
         [self.contentView addSubview:_scrollView];
         [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -53,28 +52,44 @@
     }];
     
     UIImageView *lastView;
-    CGFloat imageWidth = 40;
+    CGFloat imageWidth = 60;
     int imageCount = 18;
     for (int i = 0 ; i < imageCount; i++) {
-        UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"test"]];
-        [contentView addSubview:imageView];
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
-        imageView.userInteractionEnabled = YES;
-        [imageView addGestureRecognizer:tap];
-        
-        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            if (lastView != nil) {
-                make.left.mas_equalTo(lastView.mas_right).offset(12);
-            }else{
+        if (i == 0) {
+            self.addImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [self.addImageBtn setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+            [self.addImageBtn setBackgroundImage:[UIImage imageNamed:@"addBgImage"] forState:UIControlStateNormal];
+            self.addImageBtn.clipsToBounds = YES;
+            self.addImageBtn.layer.cornerRadius = 30;
+            [contentView addSubview:self.addImageBtn];
+            
+            [addImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(@16);
-            }
-            make.top.equalTo(@8);
-            make.width.mas_equalTo(imageWidth);
-            make.bottom.equalTo(@(-8));
-        }];
-        
-        lastView = imageView;
+                make.width.mas_equalTo(imageWidth);
+                make.top.equalTo(@8);
+                make.bottom.equalTo(@(-8));
+            }];
+            lastView = addImageBtn.imageView;
+        }else{
+            UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"test"]];
+            imageView.clipsToBounds= YES;
+            imageView.layer.cornerRadius = 10;
+            [contentView addSubview:imageView];
+            
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
+            imageView.userInteractionEnabled = YES;
+            [imageView addGestureRecognizer:tap];
+            
+            [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(lastView.mas_right).offset(12);
+                make.width.mas_equalTo(imageWidth);
+                make.top.equalTo(@8);
+                make.bottom.equalTo(@(-8));
+            }];
+            
+            lastView = imageView;
+        }
     }
     
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
