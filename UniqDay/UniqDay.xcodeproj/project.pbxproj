@@ -23,10 +23,9 @@
 		3D8559F81E20D0B80044B818 /* UNDCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8559F71E20D0B80044B818 /* UNDCardView.m */; };
 		3DBB01A21E33939800963E74 /* UNDTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBB01A11E33939800963E74 /* UNDTitleTableViewCell.m */; };
 		3DD02D7B1E4A089500414B51 /* UNDImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD02D7A1E4A089500414B51 /* UNDImageTableViewCell.m */; };
-		3DEB7B231E23C5C40067311D /* UNDCard+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB7B201E23C5C40067311D /* UNDCard+CoreDataClass.m */; };
-		3DEB7B241E23C5C40067311D /* UNDCard+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB7B221E23C5C40067311D /* UNDCard+CoreDataProperties.m */; };
-		3DEB7B281E23C6740067311D /* UNDCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB7B271E23C6740067311D /* UNDCardViewModel.m */; };
 		3DEB7B2B1E2538F00067311D /* UNDAddCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB7B2A1E2538F00067311D /* UNDAddCardView.m */; };
+		3DFD38D71E4C942700945F08 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFD38D61E4C942700945F08 /* Realm.framework */; };
+		3DFD38DA1E4CBA8C00945F08 /* UNDCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD38D91E4CBA8C00945F08 /* UNDCard.m */; };
 		7F3E4D70C662C13BC6AF4BB2 /* Pods_UniqDay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5507201A3042CBA9B69E53D /* Pods_UniqDay.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,14 +78,11 @@
 		3DBB01A11E33939800963E74 /* UNDTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDTitleTableViewCell.m; path = View/UNDTitleTableViewCell.m; sourceTree = "<group>"; };
 		3DD02D791E4A089500414B51 /* UNDImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDImageTableViewCell.h; path = View/UNDImageTableViewCell.h; sourceTree = "<group>"; };
 		3DD02D7A1E4A089500414B51 /* UNDImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDImageTableViewCell.m; path = View/UNDImageTableViewCell.m; sourceTree = "<group>"; };
-		3DEB7B1F1E23C5C40067311D /* UNDCard+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UNDCard+CoreDataClass.h"; path = "Model/UNDCard+CoreDataClass.h"; sourceTree = "<group>"; };
-		3DEB7B201E23C5C40067311D /* UNDCard+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UNDCard+CoreDataClass.m"; path = "Model/UNDCard+CoreDataClass.m"; sourceTree = "<group>"; };
-		3DEB7B211E23C5C40067311D /* UNDCard+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UNDCard+CoreDataProperties.h"; path = "Model/UNDCard+CoreDataProperties.h"; sourceTree = "<group>"; };
-		3DEB7B221E23C5C40067311D /* UNDCard+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UNDCard+CoreDataProperties.m"; path = "Model/UNDCard+CoreDataProperties.m"; sourceTree = "<group>"; };
-		3DEB7B261E23C6740067311D /* UNDCardViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDCardViewModel.h; path = ViewModel/UNDCardViewModel.h; sourceTree = "<group>"; };
-		3DEB7B271E23C6740067311D /* UNDCardViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDCardViewModel.m; path = ViewModel/UNDCardViewModel.m; sourceTree = "<group>"; };
 		3DEB7B291E2538EF0067311D /* UNDAddCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDAddCardView.h; path = View/UNDAddCardView.h; sourceTree = "<group>"; };
 		3DEB7B2A1E2538F00067311D /* UNDAddCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDAddCardView.m; path = View/UNDAddCardView.m; sourceTree = "<group>"; };
+		3DFD38D61E4C942700945F08 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "Pods/../build/Debug-iphoneos/Realm/Realm.framework"; sourceTree = "<group>"; };
+		3DFD38D81E4CBA8C00945F08 /* UNDCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDCard.h; path = Model/UNDCard.h; sourceTree = "<group>"; };
+		3DFD38D91E4CBA8C00945F08 /* UNDCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDCard.m; path = Model/UNDCard.m; sourceTree = "<group>"; };
 		82FDDE00B5F00A49773E5A8D /* Pods-UniqDay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniqDay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniqDay/Pods-UniqDay.debug.xcconfig"; sourceTree = "<group>"; };
 		B5507201A3042CBA9B69E53D /* Pods_UniqDay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniqDay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -96,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DFD38D71E4C942700945F08 /* Realm.framework in Frameworks */,
 				3D201C671E12DA430067BFF5 /* ReactiveViewModel.framework in Frameworks */,
 				3D0B45AA1DF8877100E29F5A /* Masonry.framework in Frameworks */,
 				3D0B45A81DF8875200E29F5A /* ReactiveCocoa.framework in Frameworks */,
@@ -164,6 +161,7 @@
 		3D3634B11DF71965001E3A6E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3D201C631E12D9180067BFF5 /* UniqDay.xcdatamodeld */,
 				3D3634B21DF71965001E3A6E /* main.m */,
 			);
 			name = "Supporting Files";
@@ -190,11 +188,8 @@
 		3D3634F21DF71B75001E3A6E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3D201C631E12D9180067BFF5 /* UniqDay.xcdatamodeld */,
-				3DEB7B1F1E23C5C40067311D /* UNDCard+CoreDataClass.h */,
-				3DEB7B201E23C5C40067311D /* UNDCard+CoreDataClass.m */,
-				3DEB7B211E23C5C40067311D /* UNDCard+CoreDataProperties.h */,
-				3DEB7B221E23C5C40067311D /* UNDCard+CoreDataProperties.m */,
+				3DFD38D81E4CBA8C00945F08 /* UNDCard.h */,
+				3DFD38D91E4CBA8C00945F08 /* UNDCard.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -217,8 +212,6 @@
 		3DEB7B251E23C6430067311D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				3DEB7B261E23C6740067311D /* UNDCardViewModel.h */,
-				3DEB7B271E23C6740067311D /* UNDCardViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -238,6 +231,7 @@
 		88F409DB6ED9F4255C24F4ED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3DFD38D61E4C942700945F08 /* Realm.framework */,
 				3D201C661E12DA430067BFF5 /* ReactiveViewModel.framework */,
 				3D0B45A91DF8877100E29F5A /* Masonry.framework */,
 				3D0B45A71DF8875200E29F5A /* ReactiveCocoa.framework */,
@@ -321,7 +315,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = UND;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = ChanLiang;
 				TargetAttributes = {
 					3D3634AD1DF71965001E3A6E = {
@@ -446,15 +440,13 @@
 				3D3634B61DF71965001E3A6E /* AppDelegate.m in Sources */,
 				3DD02D7B1E4A089500414B51 /* UNDImageTableViewCell.m in Sources */,
 				3D139C8C1E399259006DDC23 /* UNDDateTableViewCell.m in Sources */,
-				3DEB7B231E23C5C40067311D /* UNDCard+CoreDataClass.m in Sources */,
-				3DEB7B281E23C6740067311D /* UNDCardViewModel.m in Sources */,
 				3D8559F21E20CABE0044B818 /* UNDMainView.m in Sources */,
 				3DEB7B2B1E2538F00067311D /* UNDAddCardView.m in Sources */,
 				3D201C591E12D6580067BFF5 /* UNDViewController.m in Sources */,
 				3DBB01A21E33939800963E74 /* UNDTitleTableViewCell.m in Sources */,
 				3D3634B31DF71965001E3A6E /* main.m in Sources */,
-				3DEB7B241E23C5C40067311D /* UNDCard+CoreDataProperties.m in Sources */,
 				3D8559F81E20D0B80044B818 /* UNDCardView.m in Sources */,
+				3DFD38DA1E4CBA8C00945F08 /* UNDCard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +519,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -574,6 +567,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -603,6 +597,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = W2LJR8SM8M;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Realm",
+				);
 				INFOPLIST_FILE = UniqDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChanStudio.UniqDay;
@@ -616,6 +614,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = W2LJR8SM8M;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Realm",
+				);
 				INFOPLIST_FILE = UniqDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChanStudio.UniqDay;

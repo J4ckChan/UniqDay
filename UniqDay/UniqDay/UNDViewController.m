@@ -34,11 +34,11 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor colorWithRed:20 green:22 blue:27 alpha:0];
-    
+
     
     //add +
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addBtn setImage:[UIImage imageNamed:@"addIcon"] forState:UIControlStateNormal];
+    [addBtn setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
     [self.view addSubview:addBtn];
     
     CGSize size = CGSizeMake(32, 32);
@@ -67,7 +67,7 @@
     CGFloat viewWidth        = [UIScreen mainScreen].bounds.size.width;
     CGFloat viewHeight       = [UIScreen mainScreen].bounds.size.height;
     
-    CGRect addCardViewFrame0 = CGRectMake(8, viewHeight - 248, viewWidth - 16, 256);
+    CGRect addCardViewFrame0 = CGRectMake(8, viewHeight - 264, viewWidth - 16, 256);
     
     if (self.addCardView != nil) {
         [UIView animateWithDuration:0.2 animations:^{
@@ -89,6 +89,11 @@
              [self raiseDatePicker];
          }];
         
+        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kAddImageNotification object:nil]
+         subscribeNext:^(id x) {
+            //add image action
+        }];
+        
         [[self.addCardView cancelSignal] subscribeNext:^(id x) {
             [self dismissAddCardView];
         }];
@@ -106,7 +111,7 @@
     [self dismissDatePicker];
     
     [UIView animateWithDuration:0.3 animations:^{
-        self.addCardView.center = CGPointMake(orignialCenter.x, top - 170);
+        self.addCardView.center = CGPointMake(orignialCenter.x, top - 178);
     }];
 }
 
@@ -133,7 +138,7 @@
     CGFloat top = [UIScreen mainScreen].bounds.size.height - height;
     
     [UIView animateWithDuration:0.2 animations:^{
-        self.addCardView.frame = CGRectMake(addCardViewFrame0.origin.x,top - 248, addCardViewFrame0.size.width, addCardViewFrame0.size.height);
+        self.addCardView.frame = CGRectMake(addCardViewFrame0.origin.x,top - 264, addCardViewFrame0.size.width, addCardViewFrame0.size.height);
     }];
     
     if (self.datePicker == nil) {

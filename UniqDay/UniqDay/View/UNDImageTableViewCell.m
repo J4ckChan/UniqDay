@@ -10,11 +10,15 @@
 
 #import <Masonry/Masonry.h>
 
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
 @implementation UNDImageTableViewCell{
     UIScrollView *_scrollView;
 }
 
 @synthesize addImageBtn,imageArray;
+
+NSString *kAddImageNotification = @"AddImageNotification";
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -61,20 +65,26 @@
             [self.addImageBtn setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
             [self.addImageBtn setBackgroundImage:[UIImage imageNamed:@"addBgImage"] forState:UIControlStateNormal];
             self.addImageBtn.clipsToBounds = YES;
-            self.addImageBtn.layer.cornerRadius = 30;
+            self.addImageBtn.layer.cornerRadius = 28;
+            [[self.addImageBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
+                subscribeNext:^(id x) {
+                    [self sendAddImageNotification];
+                }];
             [contentView addSubview:self.addImageBtn];
             
             [addImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(@16);
-                make.width.mas_equalTo(imageWidth);
-                make.top.equalTo(@8);
-                make.bottom.equalTo(@(-8));
+                make.width.mas_equalTo(@56);
+                make.top.equalTo(@10);
+                make.bottom.equalTo(@(-10));
             }];
-            lastView = addImageBtn.imageView;
+            
         }else{
+//            NSString *imageStr = [NSString stringWithFormat:@"%@%d",@"CardImage",i];
             UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"test"]];
             imageView.clipsToBounds= YES;
             imageView.layer.cornerRadius = 10;
+            imageView.tag = i;
             [contentView addSubview:imageView];
             
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
@@ -82,7 +92,11 @@
             [imageView addGestureRecognizer:tap];
             
             [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(lastView.mas_right).offset(12);
+                if (lastView != nil) {
+                    make.left.mas_equalTo(lastView.mas_right).offset(12);
+                }else{
+                    make.left.equalTo(addImageBtn.mas_right).offset(12);
+                }
                 make.width.mas_equalTo(imageWidth);
                 make.top.equalTo(@8);
                 make.bottom.equalTo(@(-8));
@@ -99,6 +113,14 @@
 
 - (void)singleTap:(UITapGestureRecognizer*)sender {
     NSLog(@"%@",sender);
+    UIImageView *imageViewTaped = (UIImageView*)sender.view;
+    [UIView animateWithDuration:0.2 animations:^{
+        imageViewTaped.frame = CGRectMake(imageViewTaped.frame.origin.x + 6, imageViewTaped.frame.origin.y + 6, 48, 48);
+    } completion:nil];
 };
+
+- (void)sendAddImageNotification{
+    [[NSNotificationCenter defaultCenter]postNotificationName:kAddImageNotification object:nil];
+}
 
 @end

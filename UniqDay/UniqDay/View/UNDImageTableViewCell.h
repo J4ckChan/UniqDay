@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString *kAddImageNotification;
+
 @interface UNDImageTableViewCell : UITableViewCell
 
 @property (nonatomic,strong) NSArray *imageArray;
