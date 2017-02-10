@@ -12,7 +12,7 @@ extern NSString *kAddImageNotification;
 
 @interface UNDImageTableViewCell : UITableViewCell
 
-@property (nonatomic,strong) NSArray *imageArray;
+@property (nonatomic,strong) NSMutableArray *imageArray;
 @property (nonatomic,strong) UIButton *addImageBtn;
 
 @end

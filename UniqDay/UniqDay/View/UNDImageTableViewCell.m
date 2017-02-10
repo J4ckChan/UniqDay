@@ -40,7 +40,6 @@ NSString *kAddImageNotification = @"AddImageNotification";
         [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.contentView);
         }];
-
         [self generateContent];
     }
     return self;
@@ -58,6 +57,7 @@ NSString *kAddImageNotification = @"AddImageNotification";
     UIImageView *lastView;
     CGFloat imageWidth = 60;
     int imageCount = 18;
+    self.imageArray = NSMutableArray.new;
     for (int i = 0 ; i < imageCount; i++) {
         
         if (i == 0) {
@@ -82,6 +82,9 @@ NSString *kAddImageNotification = @"AddImageNotification";
         }else{
 //            NSString *imageStr = [NSString stringWithFormat:@"%@%d",@"CardImage",i];
             UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"test"]];
+            NSDictionary *imageDict0 = @{@"imageView":imageView,@"selected":@0,@"index":@(i)};
+            NSMutableDictionary *imageDict = [NSMutableDictionary dictionaryWithDictionary:imageDict0];
+            [self.imageArray addObject:imageDict];
             imageView.clipsToBounds= YES;
             imageView.layer.cornerRadius = 10;
             imageView.tag = i;
@@ -112,11 +115,34 @@ NSString *kAddImageNotification = @"AddImageNotification";
 }
 
 - (void)singleTap:(UITapGestureRecognizer*)sender {
-    NSLog(@"%@",sender);
     UIImageView *imageViewTaped = (UIImageView*)sender.view;
-    [UIView animateWithDuration:0.2 animations:^{
-        imageViewTaped.frame = CGRectMake(imageViewTaped.frame.origin.x + 6, imageViewTaped.frame.origin.y + 6, 48, 48);
-    } completion:nil];
+    NSNumber *tag = @(imageViewTaped.tag);
+    for (NSMutableDictionary *dict in self.imageArray) {
+        NSNumber *index = dict[@"index"];
+        if ([tag isEqual:index]) {
+            NSNumber *selected = dict[@"selected"];
+            if ([selected isEqual:@0]) {
+//                CGPoint origin = imageViewTaped.frame.origin;
+//                CGSize size = imageViewTaped.frame.size;
+                [UIView animateWithDuration:0.2 animations:^{
+                    imageViewTaped.layer.borderWidth = 4;
+                    imageViewTaped.layer.borderColor = [UIColor greenColor].CGColor;
+                } completion:^(BOOL finished) {
+                
+                }];
+                for (NSMutableDictionary *subDict in self.imageArray) {
+                    NSNumber *subSelected = subDict[@"selected"];
+                    if ([subSelected isEqual:@1]) {
+                        UIImageView *imageViewSelected = subDict[@"imageView"];
+                        imageViewSelected.layer.borderWidth = 0;
+                        [subDict setValue:@0 forKey:@"selected"];
+                    }
+                }
+                [dict setValue:@1 forKey:@"selected"];
+            }
+        }
+    }
+
 };
 
 - (void)sendAddImageNotification{
