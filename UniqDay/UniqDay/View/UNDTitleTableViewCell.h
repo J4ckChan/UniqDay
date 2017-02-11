@@ -14,4 +14,7 @@ extern NSString *kRaiseAddCardViewNotification;
 
 @property (nonatomic,strong) UITextField *titleTextField;
 
+- (void)resetTitle;
+- (void)textFieldResignFirstResponder;
+
 @end

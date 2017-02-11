@@ -122,28 +122,35 @@ NSString *kAddImageNotification = @"AddImageNotification";
         if ([tag isEqual:index]) {
             NSNumber *selected = dict[@"selected"];
             if ([selected isEqual:@0]) {
-//                CGPoint origin = imageViewTaped.frame.origin;
-//                CGSize size = imageViewTaped.frame.size;
                 [UIView animateWithDuration:0.2 animations:^{
                     imageViewTaped.layer.borderWidth = 4;
                     imageViewTaped.layer.borderColor = [UIColor greenColor].CGColor;
                 } completion:^(BOOL finished) {
                 
                 }];
-                for (NSMutableDictionary *subDict in self.imageArray) {
-                    NSNumber *subSelected = subDict[@"selected"];
-                    if ([subSelected isEqual:@1]) {
-                        UIImageView *imageViewSelected = subDict[@"imageView"];
-                        imageViewSelected.layer.borderWidth = 0;
-                        [subDict setValue:@0 forKey:@"selected"];
-                    }
-                }
+                [self resetAllImageView:self.imageArray];
                 [dict setValue:@1 forKey:@"selected"];
             }
         }
     }
 
 };
+
+- (void)resetAllImageView:(NSMutableArray *)images{
+    for (NSMutableDictionary *dict in images) {
+        NSNumber *selected = dict[@"selected"];
+        if ([selected isEqual:@1]) {
+            UIImageView *imageView = dict[@"imageView"];
+            [UIView animateWithDuration:0.2 animations:^{
+                imageView.layer.borderWidth = 0;
+            } completion:^(BOOL finished) {
+                [dict setValue:@"0" forKey:@"selected"];
+            }];
+        }
+    }
+}
+
+#pragma mark - notification
 
 - (void)sendAddImageNotification{
     [[NSNotificationCenter defaultCenter]postNotificationName:kAddImageNotification object:nil];

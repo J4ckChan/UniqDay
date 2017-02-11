@@ -14,4 +14,6 @@ extern NSString *kRaiseDatePickerNotification;
 
 @property (nonatomic,strong) UIButton *dateBtn;
 
+- (void)resetDate;
+
 @end

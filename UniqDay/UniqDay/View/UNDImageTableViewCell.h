@@ -15,4 +15,6 @@ extern NSString *kAddImageNotification;
 @property (nonatomic,strong) NSMutableArray *imageArray;
 @property (nonatomic,strong) UIButton *addImageBtn;
 
+- (void)resetAllImageView:(NSMutableArray *)images;
+
 @end

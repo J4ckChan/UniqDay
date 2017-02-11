@@ -56,5 +56,13 @@ NSString *kRaiseAddCardViewNotification = @"RaiseAddCardViewNotification";
     [[NSNotificationCenter defaultCenter] postNotificationName:kRaiseAddCardViewNotification object:nil];
 }
 
+- (void)resetTitle{
+    self.titleTextField.text = @"";
+}
+
+- (void)textFieldResignFirstResponder{
+    [self.titleTextField resignFirstResponder];
+}
+
 
 @end

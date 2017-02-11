@@ -54,4 +54,8 @@ NSString *kRaiseDatePickerNotification = @"RaiseDatePickerNotification";
     return self;
 }
 
+- (void)resetDate{
+    [self.dateBtn setTitle:@"DATE" forState:UIControlStateNormal];
+}
+
 @end

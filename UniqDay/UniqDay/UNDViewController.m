@@ -117,7 +117,7 @@
 
 - (void)dismissAddCardView{
     
-    [self dismissKeyboard];
+    [self.addCardView dismissKeyboard];
     [self dismissDatePicker];
     
     //dismiss AddCardView
@@ -125,12 +125,14 @@
         CGPoint center0 = self.addCardView.center;
         CGFloat centerY = [UIScreen mainScreen].bounds.size.height + self.addCardView.frame.size.height/2;
         self.addCardView.center = CGPointMake(center0.x, centerY);
+    } completion:^(BOOL finished) {
+        [self.addCardView clearData];
     }];
 }
 
 - (void)raiseDatePicker{
     
-    [self dismissKeyboard];
+    [self.addCardView dismissKeyboard];
     
     CGRect addCardViewFrame0 = self.addCardView.frame;
     
@@ -166,17 +168,6 @@
     }
 }
 
-- (void)dismissKeyboard{
-    NSIndexPath *indePath = [NSIndexPath indexPathForRow:0 inSection:0];
-    UNDTitleTableViewCell *cell = [self.addCardView.tableView cellForRowAtIndexPath:indePath];
-    for (UIView *view in cell.contentView.subviews) {
-        if ([view isKindOfClass:[UITextField class]]) {
-            UITextField *textField = (UITextField*)view;
-            [textField resignFirstResponder];
-        }
-    }
-}
-
 - (void)dismissDatePicker{
     if (self.datePicker != nil) {
         [UIView animateWithDuration:0.2 animations:^{
@@ -188,5 +179,6 @@
         self.datePicker = nil;
     }
 }
+
 
 @end

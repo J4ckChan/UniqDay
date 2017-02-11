@@ -18,8 +18,9 @@
 
 @property (nonatomic,strong) UITableView *tableView;
 
-
 - (RACSignal*)cancelSignal;
 - (RACSignal*)doneSignal;
+- (void)clearData;
+- (void)dismissKeyboard;
 
 @end

@@ -10,12 +10,12 @@
 #import <Masonry/Masonry.h>
 
 
-enum : NSUInteger {
+typedef enum : NSUInteger {
     AddCardTableViewTitleCell,
     AddCardTableViewDateCell,
     AddCardTableViewImageCell,
     AddCardTableViewRowNum,
-};
+}AddCardTableCell;
 
 @interface UNDAddCardView ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -113,6 +113,7 @@ static NSString *reuseIdetifierForImage  = @"Image";
     return  cell;
 }
 
+
 #pragma mark - rac signal
 
 - (RACSignal *)cancelSignal{
@@ -121,6 +122,32 @@ static NSString *reuseIdetifierForImage  = @"Image";
 
 - (RACSignal *)doneSignal{
     return [self.doneBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma mark -
+
+- (void)dismissKeyboard{
+    NSIndexPath *indePath = [NSIndexPath indexPathForRow:0 inSection:0];
+    UNDTitleTableViewCell *cell = [_tableView cellForRowAtIndexPath:indePath];
+    [cell textFieldResignFirstResponder];
+}
+
+- (void)clearData{
+    for (NSUInteger i = 0; i < AddCardTableViewRowNum ; i++) {
+        if (i == AddCardTableViewTitleCell) {
+            NSIndexPath *indePath = [NSIndexPath indexPathForRow:0 inSection:0];
+            UNDTitleTableViewCell *cell = [_tableView cellForRowAtIndexPath:indePath];
+            [cell resetTitle];
+        }else if (i == AddCardTableViewDateCell){
+            NSIndexPath *indePath = [NSIndexPath indexPathForRow:1 inSection:0];
+            UNDDateTableViewCell *cell = [_tableView cellForRowAtIndexPath:indePath];
+            [cell resetDate];
+        }else if (i == AddCardTableViewImageCell){
+            NSIndexPath *indePath = [NSIndexPath indexPathForRow:2 inSection:0];
+            UNDImageTableViewCell *cell = [_tableView cellForRowAtIndexPath:indePath];
+            [cell resetAllImageView:cell.imageArray];
+        }
+    }
 }
 
 @end
