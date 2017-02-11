@@ -10,4 +10,8 @@
 
 @interface UNDCard : RLMObject
 
+@property NSString *title;
+@property NSDate *date;
+@property NSData *image;
+
 @end
