@@ -150,4 +150,17 @@ static NSString *reuseIdetifierForImage  = @"Image";
     }
 }
 
+- (RACSignal *)rac_titleSignal{
+    NSIndexPath *indePath = [NSIndexPath indexPathForRow:0 inSection:0];
+    UNDTitleTableViewCell *cell = [_tableView cellForRowAtIndexPath:indePath];
+    return cell.titleTextField.rac_textSignal;
+}
+
+- (RACSignal *)rac_imageSignal{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    UNDImageTableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+    return RACObserve(cell, image);
+}
+
+
 @end

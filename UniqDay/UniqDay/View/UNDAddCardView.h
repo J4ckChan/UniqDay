@@ -18,6 +18,8 @@
 
 @property (nonatomic,strong) UITableView *tableView;
 
+- (RACSignal *)rac_titleSignal;
+- (RACSignal *)rac_imageSignal;
 - (RACSignal*)cancelSignal;
 - (RACSignal*)doneSignal;
 - (void)clearData;

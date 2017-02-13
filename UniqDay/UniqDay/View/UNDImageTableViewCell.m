@@ -130,6 +130,7 @@ NSString *kAddImageNotification = @"AddImageNotification";
                 }];
                 [self resetAllImageView:self.imageArray];
                 [dict setValue:@1 forKey:@"selected"];
+                self.image = imageViewTaped.image;
             }
         }
     }

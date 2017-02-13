@@ -8,6 +8,8 @@
 
 #import <ReactiveViewModel/ReactiveViewModel.h>
 
+#import <UIKit/UIKit.h>
+
 typedef enum : NSUInteger {
     UNDAddCardModelTitleFailure,
     UNDAddCardModelDateFailure,
@@ -19,8 +21,8 @@ typedef enum : NSUInteger {
 
 @property (nonatomic,strong) NSString *title;
 @property (nonatomic,strong) NSDate *date;
-@property (nonatomic,strong) NSData *image;
+@property (nonatomic,strong) UIImage *image;
 
-- (UNDAddCardModelResult)adddCardModel;
+- (UNDAddCardModelResult)addCardModel;
 
 @end

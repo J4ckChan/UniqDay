@@ -13,6 +13,9 @@
 #import "UNDCardView.h"
 #import "UNDAddCardView.h"
 
+//ViewModel
+#import "UNDAddCardViewModel.h"
+
 //rac
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
@@ -23,11 +26,14 @@
 @property (nonatomic,strong) UNDAddCardView *addCardView;
 @property (nonatomic,strong) UIDatePicker *datePicker;
 
+//ViewModel
+@property (nonatomic,strong) UNDAddCardViewModel *addCardViewModel;
+
 @end
 
 @implementation UNDViewController
 
-@synthesize addCardView,datePicker;
+@synthesize addCardView,datePicker,addCardViewModel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -68,17 +74,20 @@
     CGFloat viewHeight       = [UIScreen mainScreen].bounds.size.height;
     
     CGRect addCardViewFrame0 = CGRectMake(8, viewHeight - 264, viewWidth - 16, 256);
+    CGRect addCardViewFrame1 = CGRectMake(8, viewHeight, viewWidth - 16, 256);
     
-    if (self.addCardView != nil) {
-        [UIView animateWithDuration:0.2 animations:^{
-            self.addCardView.frame = addCardViewFrame0;
-        }];
-    }else{
-        //addCardView
-        self.addCardView = [[UNDAddCardView alloc]initWithFrame:addCardViewFrame0];
+    //init addCardViewModel
+    self.addCardViewModel = [[UNDAddCardViewModel alloc]init];
+    
+    if (self.addCardView == nil) {
+        self.addCardView = [[UNDAddCardView alloc]initWithFrame:addCardViewFrame1];
         [self.view addSubview:self.addCardView];
-        
-        //rac
+    }
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.addCardView.frame = addCardViewFrame0;
+    } completion:^(BOOL finished) {
+        //rac -- notification
         [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kRaiseAddCardViewNotification object:nil]
          subscribeNext:^(NSNotification *notification) {
              [self raiseAddCardView];
@@ -91,13 +100,21 @@
         
         [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kAddImageNotification object:nil]
          subscribeNext:^(id x) {
-            //add image action
-        }];
+             //add image action
+         }];
         
+        //rac
         [[self.addCardView cancelSignal] subscribeNext:^(id x) {
             [self dismissAddCardView];
         }];
-    }
+        
+        [self.addCardView.doneSignal subscribeNext:^(id x) {
+            [self.addCardViewModel addCardModel];
+        }];
+        
+        RAC(self.addCardViewModel,title) = self.addCardView.rac_titleSignal;
+        RAC(self.addCardViewModel,image) = self.addCardView.rac_imageSignal;
+    }];
 }
 
 
@@ -164,6 +181,8 @@
              NSIndexPath *indePath = [NSIndexPath indexPathForRow:1 inSection:0];
              UNDDateTableViewCell *cell = [self.addCardView.tableView cellForRowAtIndexPath:indePath];
              [cell.dateBtn setTitle:dateStr forState:UIControlStateNormal];
+             
+             self.addCardViewModel.date = date;
          }];
     }
 }

@@ -25,12 +25,14 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        
+        self.title = [[NSString alloc]init];
+        self.date = [[NSDate alloc]init];
+        self.image = [[UIImage alloc]init];
     }
     return self;
 }
 
-- (UNDAddCardModelResult)adddCardModel{
+- (UNDAddCardModelResult)addCardModel{
 
     if (self.title == nil || [self.title isEqualToString:@""]) {
         return UNDAddCardModelTitleFailure;
@@ -47,7 +49,7 @@
     _model = [[UNDCard alloc]init];
     _model.title = self.title;
     _model.date = self.date;
-    _model.image = self.image;
+    _model.image = UIImagePNGRepresentation(self.image);
     
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
