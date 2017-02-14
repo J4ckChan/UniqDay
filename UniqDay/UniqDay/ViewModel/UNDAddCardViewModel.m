@@ -26,7 +26,7 @@
     self = [super init];
     if (self) {
         self.title = [[NSString alloc]init];
-        self.date = [[NSDate alloc]init];
+        self.date = nil;
         self.image = [[UIImage alloc]init];
     }
     return self;

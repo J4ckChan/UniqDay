@@ -109,7 +109,29 @@
         }];
         
         [self.addCardView.doneSignal subscribeNext:^(id x) {
-            [self.addCardViewModel addCardModel];
+            UNDAddCardModelResult result = [self.addCardViewModel addCardModel];
+            NSString *message;
+            switch (result) {
+                case UNDAddCardModelTitleFailure:
+                    message = NSLocalizedString(@"Please Enter Title!", nil);
+                    break;
+                case UNDAddCardModelDateFailure:
+                    message = NSLocalizedString(@"Please Enter Date!", nil);
+                    break;
+                case UNDAddCardModelImageFailure:
+                    message = NSLocalizedString(@"Please Add Image!", nil);
+                    break;
+                case UNDAddCardModelSuccess:
+                    [self dismissAddCardView];
+                    break;
+            }
+            
+            if (result != UNDAddCardModelSuccess) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Warning", nil) message:message preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *done = [UIAlertAction actionWithTitle:NSLocalizedString(@"Done", nil) style:UIAlertActionStyleCancel handler:nil];
+                [alert addAction:done];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
         }];
         
         RAC(self.addCardViewModel,title) = self.addCardView.rac_titleSignal;
@@ -164,6 +186,7 @@
         self.datePicker = [[UIDatePicker alloc]init];
         self.datePicker.backgroundColor = [UIColor whiteColor];
         self.datePicker.datePickerMode = UIDatePickerModeDate;
+        self.datePicker.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];
         [self.view addSubview:self.datePicker];
         
         [self.datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -172,7 +195,7 @@
         }];
         
         //rac
-        [[self.datePicker rac_newDateChannelWithNilValue:[NSDate date]]
+        [[self.datePicker rac_newDateChannelWithNilValue:nil]
          subscribeNext:^(NSDate *date) {
              NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
              dateFormatter.dateStyle = kCFDateFormatterMediumStyle;
@@ -181,7 +204,6 @@
              NSIndexPath *indePath = [NSIndexPath indexPathForRow:1 inSection:0];
              UNDDateTableViewCell *cell = [self.addCardView.tableView cellForRowAtIndexPath:indePath];
              [cell.dateBtn setTitle:dateStr forState:UIControlStateNormal];
-             
              self.addCardViewModel.date = date;
          }];
     }
