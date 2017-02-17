@@ -12,13 +12,13 @@
 //views
 #import "UNDCardView.h"
 #import "UNDAddCardView.h"
+#import "UNDScrollView.h"
 
 //ViewModel
 #import "UNDAddCardViewModel.h"
 
-//rac
+//Vendors
 #import <ReactiveCocoa/ReactiveCocoa.h>
-
 #import <Masonry/Masonry.h>
 
 @interface UNDViewController ()
@@ -40,8 +40,16 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor colorWithRed:20 green:22 blue:27 alpha:0];
-
     
+    UNDScrollView *scrollView = [[UNDScrollView alloc]init];
+    [self.view addSubview:scrollView];
+    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view);
+        make.top.equalTo(self.view);
+        make.width.equalTo(self.view);
+        make.height.equalTo(@547);
+    }];
+
     //add +
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];

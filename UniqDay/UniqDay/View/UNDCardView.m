@@ -19,12 +19,13 @@
 
 @synthesize imageView,titleLabel,timeLabel,dayCountlabel;
 
-- (instancetype)initWithFrame:(CGRect)frame{
-    self = [super initWithFrame:frame];
+- (instancetype)init{
+    self = [super init];
     if (self) {
         
         //test code
         self.imageView          = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"test"]];
+        self.backgroundColor = [UIColor whiteColor];
         
         self.titleLabel         = [[UILabel alloc]init];
         self.titleLabel.text    = @"ShangHai -> HangZhou";
