@@ -16,8 +16,7 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        RLMResults<UNDCard*> *reulsts = [UNDCard allObjects];
-        self.models = [reulsts copy];
+        self.models = [UNDCard allObjects];
     }
     return self;
 }

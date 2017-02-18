@@ -51,7 +51,7 @@
     _model = [[UNDCard alloc]init];
     _model.title = self.title;
     _model.date = self.date;
-    _model.image = UIImagePNGRepresentation(self.image);
+    _model.imageDate = UIImagePNGRepresentation(self.image);
     
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];

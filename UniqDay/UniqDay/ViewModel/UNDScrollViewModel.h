@@ -10,8 +10,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class RLMResults;
+
 @interface UNDScrollViewModel : RVMViewModel
 
-@property (nonatomic,copy) NSArray *models;
+@property (nonatomic,strong) RLMResults *models;
 
 @end

@@ -9,19 +9,19 @@
 #import "UNDCardViewModel.h"
 #import "UNDCard.h"
 
-@implementation UNDCardViewModel{
-    UNDCard *_model;
-}
+#import <UIKit/UIKit.h>
 
-@synthesize model,title,dateStr,dayCountStr;
+@implementation UNDCardViewModel
 
-- (instancetype)initWithModel:(UNDCard *)modelP{
+@synthesize title,dateStr,dayCountStr;
+
+- (instancetype)initWithModel:(UNDCard *)model{
     self = [super init];
     if (self) {
-        _model = self.model;
-        self.title = _model.title;
-        self.dateStr = [NSString stringWithFormat:@"%@",_model.date];
-        self.dayCountStr = [self dayCountFromNow:_model.date];
+        self.title       = model.title;
+        self.dateStr     = [NSString stringWithFormat:@"%@",model.date];
+        self.dayCountStr = [self dayCountFromNow:model.date];
+        self.image       = [[UIImage alloc]initWithData:model.imageDate];
     }
     return self;
 }

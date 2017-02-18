@@ -12,6 +12,6 @@
 
 @property NSString *title;
 @property NSDate *date;
-@property NSData *image;
+@property NSData *imageDate;
 
 @end

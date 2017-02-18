@@ -31,7 +31,10 @@
 
 @end
 
-@implementation UNDViewController
+@implementation UNDViewController{
+    CGFloat _viewWidth;
+    CGFloat _viewHeight;
+}
 
 @synthesize addCardView,datePicker,addCardViewModel;
 
@@ -39,15 +42,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    _viewWidth  = [UIScreen mainScreen].bounds.size.width;
+    _viewHeight = [UIScreen mainScreen].bounds.size.height;
+
     self.view.backgroundColor = [UIColor colorWithRed:20 green:22 blue:27 alpha:0];
     
     UNDScrollView *scrollView = [[UNDScrollView alloc]init];
     [self.view addSubview:scrollView];
+    CGFloat scrollViewHeight = _viewHeight - 120;
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
         make.top.equalTo(self.view);
         make.width.equalTo(self.view);
-        make.height.equalTo(@547);
+        make.height.mas_equalTo(@(scrollViewHeight));
     }];
 
     //add +
@@ -77,12 +84,8 @@
 
 - (void)showAddCardView{
     
-    //test CardView
-    CGFloat viewWidth        = [UIScreen mainScreen].bounds.size.width;
-    CGFloat viewHeight       = [UIScreen mainScreen].bounds.size.height;
-    
-    CGRect addCardViewFrame0 = CGRectMake(8, viewHeight - 264, viewWidth - 16, 256);
-    CGRect addCardViewFrame1 = CGRectMake(8, viewHeight, viewWidth - 16, 256);
+    CGRect addCardViewFrame0 = CGRectMake(8, _viewHeight - 264, _viewWidth - 16, 256);
+    CGRect addCardViewFrame1 = CGRectMake(8, _viewHeight, _viewWidth - 16, 256);
     
     //init addCardViewModel
     self.addCardViewModel = [[UNDAddCardViewModel alloc]init];

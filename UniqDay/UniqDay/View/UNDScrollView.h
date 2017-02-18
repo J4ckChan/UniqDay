@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class RLMResults;
+
 @interface UNDScrollView : UIView
 
-@property (nonatomic,strong) NSArray *cards;
+@property (nonatomic,strong) RLMResults *cards;
 
 @end

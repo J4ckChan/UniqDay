@@ -23,24 +23,27 @@
     self = [super init];
     if (self) {
         
+        self.layer.cornerRadius = 5;
+        self.clipsToBounds = YES;
         //test code
-        self.imageView          = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"test"]];
-        self.backgroundColor = [UIColor whiteColor];
-        
-        self.titleLabel         = [[UILabel alloc]init];
-        self.titleLabel.text    = @"ShangHai -> HangZhou";
-        self.titleLabel.font    = [UIFont systemFontOfSize:17 weight:UIFontWeightBold];
+        self.imageView                  = [[UIImageView alloc]init];
+
+        self.backgroundColor            = [UIColor whiteColor];
+
+        self.titleLabel                 = [[UILabel alloc]init];
+//        self.titleLabel.text            = @"ShangHai -> HangZhou";
+        self.titleLabel.font            = [UIFont systemFontOfSize:17 weight:UIFontWeightBold];
         self.titleLabel.backgroundColor = [UIColor orangeColor];
-        
-        self.timeLabel          = [[UILabel alloc]init];
-        self.timeLabel.text     = @"June 05, 2016";
-        self.timeLabel.font     = [UIFont systemFontOfSize:14];
+
+        self.timeLabel                  = [[UILabel alloc]init];
+//        self.timeLabel.text             = @"June 05, 2016";
+        self.timeLabel.font             = [UIFont systemFontOfSize:14];
 //        self.timeLabel.backgroundColor = [UIColor brownColor];
-        
-        self.dayCountlabel      = [[UILabel alloc]init];
-        self.dayCountlabel.text = @"D+216";
-        self.dayCountlabel.font = [UIFont systemFontOfSize:28 weight:UIFontWeightLight];
-        self.dayCountlabel.textColor = [UIColor lightGrayColor];
+
+        self.dayCountlabel              = [[UILabel alloc]init];
+//        self.dayCountlabel.text         = @"D+216";
+        self.dayCountlabel.font         = [UIFont systemFontOfSize:28 weight:UIFontWeightLight];
+        self.dayCountlabel.textColor    = [UIColor lightGrayColor];
         
         self.daysSinceLabel                    = [[UILabel alloc]init];
         self.daysSinceLabel.text               = @"DAYS SINCE";
@@ -57,7 +60,7 @@
         [self addSubview:self.dayCountlabel];
         [self addSubview:self.daysSinceLabel];
         
-        CGFloat imageViewHeight = self.frame.size.height/7.0 *5.0;
+        CGFloat imageViewHeight = ([UIScreen mainScreen].bounds.size.height - 120 - 32)/7.0 * 5.0;
         NSNumber *imageViewHeightNum = [NSNumber numberWithFloat:imageViewHeight];
         
         [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
