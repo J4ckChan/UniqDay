@@ -25,6 +25,7 @@
 
 @property (nonatomic,strong) UNDAddCardView *addCardView;
 @property (nonatomic,strong) UIDatePicker *datePicker;
+@property (nonatomic,strong) UIVisualEffectView *addCardBgView;
 
 //ViewModel
 @property (nonatomic,strong) UNDAddCardViewModel *addCardViewModel;
@@ -52,7 +53,7 @@
     CGFloat scrollViewHeight = _viewHeight - 120;
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
-        make.top.equalTo(self.view);
+        make.top.equalTo(self.view).offset(60);
         make.width.equalTo(self.view);
         make.height.mas_equalTo(@(scrollViewHeight));
     }];
@@ -84,9 +85,11 @@
 
 - (void)showAddCardView{
     
+    [self showAddCardViewBackgroundView];
+    
     CGRect addCardViewFrame0 = CGRectMake(8, _viewHeight - 264, _viewWidth - 16, 256);
     CGRect addCardViewFrame1 = CGRectMake(8, _viewHeight, _viewWidth - 16, 256);
-    
+
     //init addCardViewModel
     self.addCardViewModel = [[UNDAddCardViewModel alloc]init];
     
@@ -169,6 +172,7 @@
     
     [self.addCardView dismissKeyboard];
     [self dismissDatePicker];
+    [self dimissAddCardViewBackgroundView];
     
     //dismiss AddCardView
     [UIView animateWithDuration:0.3 animations:^{
@@ -229,6 +233,28 @@
         }];
         [self.datePicker removeFromSuperview];
         self.datePicker = nil;
+    }
+}
+
+- (void)showAddCardViewBackgroundView{
+    //Blur Effect
+    if (self.addCardBgView == nil) {
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        self.addCardBgView       = [[UIVisualEffectView alloc]initWithEffect:blurEffect];
+        self.addCardBgView.frame = self.view.frame;
+        [self.view addSubview:self.addCardBgView];
+    }else{
+        [UIView animateWithDuration:0.01 animations:^{
+            self.addCardBgView.center = CGPointMake(_viewWidth/2.0, _viewHeight/2);
+        }];
+    }
+}
+
+- (void)dimissAddCardViewBackgroundView{
+    if (self.addCardBgView != nil) {
+        [UIView animateWithDuration:0.1 animations:^{
+            self.addCardBgView.center = CGPointMake(_viewWidth/2.0, _viewHeight * 1.5);
+        }];
     }
 }
 

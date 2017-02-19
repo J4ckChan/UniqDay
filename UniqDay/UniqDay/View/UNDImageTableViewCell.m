@@ -56,9 +56,9 @@ NSString *kAddImageNotification = @"AddImageNotification";
     
     UIImageView *lastView;
     CGFloat imageWidth = 60;
-    int imageCount = 18;
-    self.imageArray = NSMutableArray.new;
-    for (int i = 0 ; i < imageCount; i++) {
+    int imageCount     = 8;
+    self.imageArray    = NSMutableArray.new;
+    for (int i = 0 ; i < imageCount + 1; i++) {
         
         if (i == 0) {
             self.addImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -80,17 +80,18 @@ NSString *kAddImageNotification = @"AddImageNotification";
             }];
             
         }else{
-//            NSString *imageStr = [NSString stringWithFormat:@"%@%d",@"CardImage",i];
-            UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"test"]];
-            NSDictionary *imageDict0 = @{@"imageView":imageView,@"selected":@0,@"index":@(i)};
-            NSMutableDictionary *imageDict = [NSMutableDictionary dictionaryWithDictionary:imageDict0];
+            NSString *imageStr               = [NSString stringWithFormat:@"%@%d",@"sample",i];
+            UIImage *sampleImage             = [UIImage imageNamed:imageStr];
+            UIImageView *imageView           = [[UIImageView alloc]initWithImage:sampleImage];
+            NSDictionary *imageDict0         = @{@"imageView":imageView,@"selected":@0,@"index":@(i)};
+            NSMutableDictionary *imageDict   = [NSMutableDictionary dictionaryWithDictionary:imageDict0];
             [self.imageArray addObject:imageDict];
-            imageView.clipsToBounds= YES;
-            imageView.layer.cornerRadius = 10;
-            imageView.tag = i;
+            imageView.clipsToBounds          = YES;
+            imageView.layer.cornerRadius     = 10;
+            imageView.tag                    = i;
             [contentView addSubview:imageView];
-            
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
+
+            UITapGestureRecognizer *tap      = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
             imageView.userInteractionEnabled = YES;
             [imageView addGestureRecognizer:tap];
             

@@ -23,37 +23,32 @@
     self = [super init];
     if (self) {
         
-        self.layer.cornerRadius = 5;
-        self.clipsToBounds = YES;
-        //test code
-        self.imageView                  = [[UIImageView alloc]init];
+        self.layer.cornerRadius                = 5;
+        self.clipsToBounds                     = YES;
 
-        self.backgroundColor            = [UIColor whiteColor];
+        self.imageView                         = [[UIImageView alloc]init];
 
-        self.titleLabel                 = [[UILabel alloc]init];
-//        self.titleLabel.text            = @"ShangHai -> HangZhou";
-        self.titleLabel.font            = [UIFont systemFontOfSize:17 weight:UIFontWeightBold];
-        self.titleLabel.backgroundColor = [UIColor orangeColor];
+        self.backgroundColor                   = [UIColor whiteColor];
 
-        self.timeLabel                  = [[UILabel alloc]init];
-//        self.timeLabel.text             = @"June 05, 2016";
-        self.timeLabel.font             = [UIFont systemFontOfSize:14];
-//        self.timeLabel.backgroundColor = [UIColor brownColor];
+        self.titleLabel                        = [[UILabel alloc]init];
+        self.titleLabel.font                   = [UIFont systemFontOfSize:17 weight:UIFontWeightBold];
 
-        self.dayCountlabel              = [[UILabel alloc]init];
-//        self.dayCountlabel.text         = @"D+216";
-        self.dayCountlabel.font         = [UIFont systemFontOfSize:28 weight:UIFontWeightLight];
-        self.dayCountlabel.textColor    = [UIColor lightGrayColor];
-        
+        self.timeLabel                         = [[UILabel alloc]init];
+        self.timeLabel.font                    = [UIFont systemFontOfSize:14];
+
+        self.dayCountlabel                     = [[UILabel alloc]init];
+        self.dayCountlabel.font                = [UIFont systemFontOfSize:30 weight:UIFontWeightLight];
+        self.dayCountlabel.textColor           = [UIColor lightGrayColor];
+
         self.daysSinceLabel                    = [[UILabel alloc]init];
         self.daysSinceLabel.text               = @"DAYS SINCE";
         self.daysSinceLabel.textAlignment      = NSTextAlignmentCenter;
         self.daysSinceLabel.textColor          = [UIColor whiteColor];
-        self.daysSinceLabel.font               = [UIFont systemFontOfSize:11 weight:UIFontWeightSemibold];
+        self.daysSinceLabel.font               = [UIFont systemFontOfSize:11 weight:UIFontWeightBold];
         self.daysSinceLabel.backgroundColor    = [UIColor lightGrayColor];
         self.daysSinceLabel.layer.cornerRadius = 2;
         self.daysSinceLabel.clipsToBounds      = YES;
-        
+
         [self addSubview:self.imageView];
         [self addSubview:self.titleLabel];
         [self addSubview:self.timeLabel];

@@ -209,8 +209,16 @@
 		3D76E8701E2A1D7D00D50D99 /* AddCardView */ = {
 			isa = PBXGroup;
 			children = (
+				3DB463F11E598E09003D58F3 /* Cell */,
 				3DEB7B291E2538EF0067311D /* UNDAddCardView.h */,
 				3DEB7B2A1E2538F00067311D /* UNDAddCardView.m */,
+			);
+			name = AddCardView;
+			sourceTree = "<group>";
+		};
+		3DB463F11E598E09003D58F3 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
 				3DBB01A01E33939800963E74 /* UNDTitleTableViewCell.h */,
 				3DBB01A11E33939800963E74 /* UNDTitleTableViewCell.m */,
 				3D139C8A1E399259006DDC23 /* UNDDateTableViewCell.h */,
@@ -218,7 +226,7 @@
 				3DD02D791E4A089500414B51 /* UNDImageTableViewCell.h */,
 				3DD02D7A1E4A089500414B51 /* UNDImageTableViewCell.m */,
 			);
-			name = AddCardView;
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		3DEB7B251E23C6430067311D /* ViewModel */ = {

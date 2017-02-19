@@ -19,7 +19,7 @@
     self = [super init];
     if (self) {
         self.title       = model.title;
-        self.dateStr     = [NSString stringWithFormat:@"%@",model.date];
+        self.dateStr     = [self dateString:model.date];
         self.dayCountStr = [self dayCountFromNow:model.date];
         self.image       = [[UIImage alloc]initWithData:model.imageDate];
     }
@@ -28,7 +28,22 @@
                             
 - (NSString *)dayCountFromNow:(NSDate *)date{
     NSTimeInterval timeInter = date.timeIntervalSinceNow;
-    return [NSString stringWithFormat:@"%lf",timeInter];
+    double dayDouble = timeInter/(24*3600);
+    int dayInt = (int)dayDouble;
+    NSString *dayStr;
+    if (dayInt >= 0) {
+        dayStr = [NSString stringWithFormat:@"D+%d",dayInt];
+    }else{
+        dayStr = [NSString stringWithFormat:@"D%d",dayInt];
+    }
+    return dayStr;
+}
+
+- (NSString *)dateString:(NSDate *)date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    dateFormatter.dateFormat = @"MMM d, YYYY";
+    NSString *dateString = [dateFormatter stringFromDate:date];
+    return dateString;
 }
 
 @end
