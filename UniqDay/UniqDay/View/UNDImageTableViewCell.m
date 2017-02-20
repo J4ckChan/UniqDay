@@ -146,7 +146,7 @@ NSString *kAddImageNotification = @"AddImageNotification";
             [UIView animateWithDuration:0.2 animations:^{
                 imageView.layer.borderWidth = 0;
             } completion:^(BOOL finished) {
-                [dict setValue:@"0" forKey:@"selected"];
+                [dict setValue:@0 forKey:@"selected"];
             }];
         }
     }

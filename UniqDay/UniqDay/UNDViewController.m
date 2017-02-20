@@ -8,6 +8,8 @@
 
 #import "UNDViewController.h"
 
+//models
+#import "UNDCard.h"
 
 //views
 #import "UNDCardView.h"
@@ -23,6 +25,7 @@
 
 @interface UNDViewController ()
 
+@property (nonatomic,strong) UNDScrollView *scrollView;
 @property (nonatomic,strong) UNDAddCardView *addCardView;
 @property (nonatomic,strong) UIDatePicker *datePicker;
 @property (nonatomic,strong) UIVisualEffectView *addCardBgView;
@@ -30,14 +33,20 @@
 //ViewModel
 @property (nonatomic,strong) UNDAddCardViewModel *addCardViewModel;
 
+//realm
+@property (nonatomic,strong) RLMNotificationToken *token;
+
 @end
 
 @implementation UNDViewController{
     CGFloat _viewWidth;
     CGFloat _viewHeight;
+    int refreshScrollViewTag;
 }
 
 @synthesize addCardView,datePicker,addCardViewModel;
+
+#pragma mark - life cycle 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,17 +57,27 @@
 
     self.view.backgroundColor = [UIColor colorWithRed:20 green:22 blue:27 alpha:0];
     
-    UNDScrollView *scrollView = [[UNDScrollView alloc]init];
-    [self.view addSubview:scrollView];
-    CGFloat scrollViewHeight = _viewHeight - 120;
-    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view);
-        make.top.equalTo(self.view).offset(60);
-        make.width.equalTo(self.view);
-        make.height.mas_equalTo(@(scrollViewHeight));
-    }];
+    //add scrollView
+    [self initOrRefreshScrollView];
 
     //add +
+    [self addAddCardViewButton];
+    
+    //add realm notification observer
+    [self addRealmNotifcationObserver];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc{
+    [self.token stop];
+}
+
+#pragma mark - addButton
+- (void)addAddCardViewButton{
     UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [addBtn setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
     [self.view addSubview:addBtn];
@@ -73,12 +92,6 @@
     [[addBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         [self showAddCardView];
     }];
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - AddCardView 
@@ -123,29 +136,7 @@
         }];
         
         [self.addCardView.doneSignal subscribeNext:^(id x) {
-            UNDAddCardModelResult result = [self.addCardViewModel addCardModel];
-            NSString *message;
-            switch (result) {
-                case UNDAddCardModelTitleFailure:
-                    message = NSLocalizedString(@"Please Enter Title!", nil);
-                    break;
-                case UNDAddCardModelDateFailure:
-                    message = NSLocalizedString(@"Please Enter Date!", nil);
-                    break;
-                case UNDAddCardModelImageFailure:
-                    message = NSLocalizedString(@"Please Add Image!", nil);
-                    break;
-                case UNDAddCardModelSuccess:
-                    [self dismissAddCardView];
-                    break;
-            }
-            
-            if (result != UNDAddCardModelSuccess) {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Warning", nil) message:message preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *done = [UIAlertAction actionWithTitle:NSLocalizedString(@"Done", nil) style:UIAlertActionStyleCancel handler:nil];
-                [alert addAction:done];
-                [self presentViewController:alert animated:YES completion:nil];
-            }
+            [self addCardModelResult];
         }];
         
         RAC(self.addCardViewModel,title) = self.addCardView.rac_titleSignal;
@@ -180,9 +171,12 @@
         CGFloat centerY = [UIScreen mainScreen].bounds.size.height + self.addCardView.frame.size.height/2;
         self.addCardView.center = CGPointMake(center0.x, centerY);
     } completion:^(BOOL finished) {
-        [self.addCardView clearData];
+        [self.addCardView removeFromSuperview];
+        self.addCardView = nil;
     }];
 }
+
+#pragma mark - Date Picker
 
 - (void)raiseDatePicker{
     
@@ -210,7 +204,7 @@
         }];
         
         //rac
-        [[self.datePicker rac_newDateChannelWithNilValue:nil]
+        [[self.datePicker rac_newDateChannelWithNilValue:[NSDate date]]
          subscribeNext:^(NSDate *date) {
              NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
              dateFormatter.dateStyle = kCFDateFormatterMediumStyle;
@@ -219,6 +213,7 @@
              NSIndexPath *indePath = [NSIndexPath indexPathForRow:1 inSection:0];
              UNDDateTableViewCell *cell = [self.addCardView.tableView cellForRowAtIndexPath:indePath];
              [cell.dateBtn setTitle:dateStr forState:UIControlStateNormal];
+             [cell.dateBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
              self.addCardViewModel.date = date;
          }];
     }
@@ -230,11 +225,14 @@
             CGPoint center0 = self.datePicker.center;
             CGFloat centerY = [UIScreen mainScreen].bounds.size.height + self.datePicker.frame.size.height/2;
             self.datePicker.center = CGPointMake(center0.x, centerY);
+        } completion:^(BOOL finished) {
+            [self.datePicker removeFromSuperview];
+            self.datePicker = nil;
         }];
-        [self.datePicker removeFromSuperview];
-        self.datePicker = nil;
     }
 }
+
+#pragma mark - AddCardViewBackgroundView
 
 - (void)showAddCardViewBackgroundView{
     //Blur Effect
@@ -243,10 +241,6 @@
         self.addCardBgView       = [[UIVisualEffectView alloc]initWithEffect:blurEffect];
         self.addCardBgView.frame = self.view.frame;
         [self.view addSubview:self.addCardBgView];
-    }else{
-        [UIView animateWithDuration:0.01 animations:^{
-            self.addCardBgView.center = CGPointMake(_viewWidth/2.0, _viewHeight/2);
-        }];
     }
 }
 
@@ -254,9 +248,75 @@
     if (self.addCardBgView != nil) {
         [UIView animateWithDuration:0.1 animations:^{
             self.addCardBgView.center = CGPointMake(_viewWidth/2.0, _viewHeight * 1.5);
+        }completion:^(BOOL finished) {
+            [self.addCardBgView removeFromSuperview];
+            self.addCardBgView = nil;
         }];
     }
 }
 
+#pragma mark - ScrollView
+
+- (void)initOrRefreshScrollView{
+    if (self.scrollView != nil) {
+        [self.scrollView removeFromSuperview];
+        self.scrollView = nil;
+    }
+    self.scrollView = [[UNDScrollView alloc]init];
+    [self.view addSubview:self.scrollView];
+    CGFloat scrollViewHeight = _viewHeight - 120;
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view);
+        make.top.equalTo(self.view).offset(60);
+        make.width.equalTo(self.view);
+        make.height.mas_equalTo(@(scrollViewHeight));
+    }];
+}
+
+#pragma mark - Realm
+
+- (void)addRealmNotifcationObserver{
+    __weak typeof(self) weakSelf = self;
+    self.token = [[UNDCard allObjects] addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Failed to open Realm on background worker: %@", error);
+            return;
+        }
+        
+        if (!change) {
+            return;
+        }
+        
+        [weakSelf initOrRefreshScrollView];
+    }];
+}
+
+#pragma mark - else
+
+- (void)addCardModelResult{
+    UNDAddCardModelResult result = [self.addCardViewModel addCardModel];
+    NSString *message;
+    switch (result) {
+        case UNDAddCardModelTitleFailure:
+            message = NSLocalizedString(@"Please Enter Title!", nil);
+            break;
+        case UNDAddCardModelDateFailure:
+            message = NSLocalizedString(@"Please Enter Date!", nil);
+            break;
+        case UNDAddCardModelImageFailure:
+            message = NSLocalizedString(@"Please Add Image!", nil);
+            break;
+        case UNDAddCardModelSuccess:
+            [self dismissAddCardView];
+            break;
+    }
+    
+    if (result != UNDAddCardModelSuccess) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Warning", nil) message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *done = [UIAlertAction actionWithTitle:NSLocalizedString(@"Done", nil) style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:done];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
 
 @end
