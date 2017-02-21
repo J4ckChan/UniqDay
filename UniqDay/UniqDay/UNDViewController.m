@@ -15,6 +15,7 @@
 #import "UNDCardView.h"
 #import "UNDAddCardView.h"
 #import "UNDScrollView.h"
+#import "UNDBottomBarView.h"
 
 //ViewModel
 #import "UNDAddCardViewModel.h"
@@ -26,6 +27,7 @@
 @interface UNDViewController ()
 
 @property (nonatomic,strong) UNDScrollView *scrollView;
+@property (nonatomic,strong) UNDBottomBarView *bottomBar;
 @property (nonatomic,strong) UNDAddCardView *addCardView;
 @property (nonatomic,strong) UIDatePicker *datePicker;
 @property (nonatomic,strong) UIVisualEffectView *addCardBgView;
@@ -57,13 +59,10 @@
 
     self.view.backgroundColor = [UIColor colorWithRed:20 green:22 blue:27 alpha:0];
     
-    //add scrollView
     [self initOrRefreshScrollView];
 
-    //add +
-    [self addAddCardViewButton];
+    [self addBottomBar];
     
-    //add realm notification observer
     [self addRealmNotifcationObserver];
 }
 
@@ -76,20 +75,17 @@
     [self.token stop];
 }
 
-#pragma mark - addButton
-- (void)addAddCardViewButton{
-    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addBtn setImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
-    [self.view addSubview:addBtn];
-    
-    CGSize size = CGSizeMake(32, 32);
-    [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(16);
-        make.bottom.equalTo(self.view).offset(-24);
-        make.size.mas_equalTo(size);
+#pragma mark - BottomBarView
+
+- (void)addBottomBar{
+    self.bottomBar = [[UNDBottomBarView alloc]init];
+    [self.view addSubview:self.bottomBar];
+    [self.bottomBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.scrollView.mas_bottom).offset(8);
+        make.width.mas_equalTo(_viewWidth);
+        make.height.mas_equalTo(44);
     }];
-    
-    [[addBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+    [self.bottomBar.rac_addCardSignal subscribeNext:^(id x) {
         [self showAddCardView];
     }];
 }
