@@ -14,6 +14,7 @@
 //views
 #import "UNDCardView.h"
 #import "UNDAddCardView.h"
+#import "UNDTopBarView.h"
 #import "UNDScrollView.h"
 #import "UNDBottomBarView.h"
 
@@ -26,6 +27,7 @@
 
 @interface UNDViewController ()
 
+@property (nonatomic,strong) UNDTopBarView *topBar;
 @property (nonatomic,strong) UNDScrollView *scrollView;
 @property (nonatomic,strong) UNDBottomBarView *bottomBar;
 @property (nonatomic,strong) UNDAddCardView *addCardView;
@@ -37,6 +39,9 @@
 
 //realm
 @property (nonatomic,strong) RLMNotificationToken *token;
+
+//constraints
+@property (nonatomic,strong) NSMutableArray *antimationConstraints;
 
 @end
 
@@ -59,8 +64,8 @@
 
     self.view.backgroundColor = [UIColor colorWithRed:20 green:22 blue:27 alpha:0];
     
+    [self addTopBar];
     [self initOrRefreshScrollView];
-
     [self addBottomBar];
     
     [self addRealmNotifcationObserver];
@@ -75,19 +80,73 @@
     [self.token stop];
 }
 
-#pragma mark - BottomBarView
+#pragma mark - TopBarView & ScrollView & BottomBarView
+
+- (void)addTopBar{
+    self.topBar = [[UNDTopBarView alloc]init];
+    [self.view addSubview:self.topBar];
+    [self.topBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(16);
+        make.width.mas_equalTo(_viewWidth);
+        make.height.mas_equalTo(36);
+    }];
+    
+    [self.topBar.rac_moreSignal subscribeNext:^(id x) {
+        [self showToolBar];
+    }];
+}
+
+- (void)initOrRefreshScrollView{
+    if (self.scrollView != nil) {
+        [self.scrollView removeFromSuperview];
+        self.scrollView = nil;
+    }
+    self.antimationConstraints = [NSMutableArray new];
+    self.scrollView = [[UNDScrollView alloc]init];
+    [self.view addSubview:self.scrollView];
+    CGFloat scrollViewHeight = _viewHeight - 120;
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.antimationConstraints = [NSMutableArray arrayWithArray:@[
+        make.top.equalTo(self.topBar.mas_bottom).offset(8)
+        ]];
+        make.left.equalTo(self.view);
+        make.width.equalTo(self.view);
+        make.height.mas_equalTo(@(scrollViewHeight));
+    }];
+}
 
 - (void)addBottomBar{
     self.bottomBar = [[UNDBottomBarView alloc]init];
     [self.view addSubview:self.bottomBar];
     [self.bottomBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.scrollView.mas_bottom).offset(8);
+        [self.antimationConstraints addObject:
+         make.top.equalTo(self.scrollView.mas_bottom).offset(8)
+         ];
         make.width.mas_equalTo(_viewWidth);
         make.height.mas_equalTo(44);
     }];
+    
     [self.bottomBar.rac_addCardSignal subscribeNext:^(id x) {
         [self showAddCardView];
     }];
+}
+
+#pragma mark - ToolBar
+
+- (void)showToolBar{
+    
+    self.topBar.alpha = 0.2;
+    self.scrollView.alpha = 0.2;
+    self.bottomBar.alpha = 0.2;
+    
+    for (MASConstraint *constraint in self.antimationConstraints) {
+        constraint.offset = 68;
+    }
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+    
 }
 
 #pragma mark - AddCardView 
@@ -251,23 +310,6 @@
     }
 }
 
-#pragma mark - ScrollView
-
-- (void)initOrRefreshScrollView{
-    if (self.scrollView != nil) {
-        [self.scrollView removeFromSuperview];
-        self.scrollView = nil;
-    }
-    self.scrollView = [[UNDScrollView alloc]init];
-    [self.view addSubview:self.scrollView];
-    CGFloat scrollViewHeight = _viewHeight - 120;
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view);
-        make.top.equalTo(self.view).offset(60);
-        make.width.equalTo(self.view);
-        make.height.mas_equalTo(@(scrollViewHeight));
-    }];
-}
 
 #pragma mark - Realm
 
