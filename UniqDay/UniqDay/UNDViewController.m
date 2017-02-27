@@ -15,6 +15,7 @@
 #import "UNDCardView.h"
 #import "UNDAddCardView.h"
 #import "UNDTopBarView.h"
+#import "UNDToolsBar.h"
 #import "UNDScrollView.h"
 #import "UNDBottomBarView.h"
 
@@ -140,13 +141,22 @@
     self.bottomBar.alpha = 0.2;
     
     for (MASConstraint *constraint in self.antimationConstraints) {
-        constraint.offset = 68;
+        constraint.offset = 60;
     }
     
     [UIView animateWithDuration:0.3 animations:^{
         [self.view layoutIfNeeded];
     }];
     
+    UNDToolsBar *toolsBar = [[UNDToolsBar alloc]init];
+//    toolsBar.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:toolsBar];
+    
+    [toolsBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.topBar.mas_bottom);
+        make.width.equalTo(self.view);
+        make.height.equalTo(@60);
+    }];
 }
 
 #pragma mark - AddCardView 
