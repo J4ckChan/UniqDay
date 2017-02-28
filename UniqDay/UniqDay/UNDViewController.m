@@ -141,7 +141,7 @@
     self.bottomBar.alpha = 0.2;
     
     for (MASConstraint *constraint in self.antimationConstraints) {
-        constraint.offset = 60;
+        constraint.offset = 100;
     }
     
     [UIView animateWithDuration:0.3 animations:^{
@@ -155,7 +155,7 @@
     [toolsBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topBar.mas_bottom);
         make.width.equalTo(self.view);
-        make.height.equalTo(@60);
+        make.height.equalTo(@100);
     }];
 }
 
