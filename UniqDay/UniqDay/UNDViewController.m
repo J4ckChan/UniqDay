@@ -29,6 +29,8 @@
 @interface UNDViewController ()
 
 @property (nonatomic,strong) UNDTopBarView *topBar;
+@property (nonatomic,strong) UNDToolsBar *toolsBar;
+@property (nonatomic,strong) UIView *toolsBarBgView;
 @property (nonatomic,strong) UNDScrollView *scrollView;
 @property (nonatomic,strong) UNDBottomBarView *bottomBar;
 @property (nonatomic,strong) UNDAddCardView *addCardView;
@@ -52,9 +54,9 @@
     int refreshScrollViewTag;
 }
 
-@synthesize addCardView,datePicker,addCardViewModel;
+@synthesize addCardView,datePicker,addCardViewModel,toolsBar;
 
-#pragma mark - life cycle 
+#pragma mark - life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -136,26 +138,56 @@
 
 - (void)showToolBar{
     
-    self.topBar.alpha = 0.2;
+    self.toolsBarBgView                 = [[UIView alloc]init];
+    self.toolsBarBgView.backgroundColor = [UIColor clearColor];
+    UITapGestureRecognizer *tap         = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideToolsBar)];
+    [self.toolsBarBgView addGestureRecognizer:tap];
+    [self.view addSubview:self.toolsBarBgView];
+    [self.toolsBarBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+
+    self.topBar.alpha     = 0.2;
     self.scrollView.alpha = 0.2;
-    self.bottomBar.alpha = 0.2;
-    
+    self.bottomBar.alpha  = 0.2;
+
     for (MASConstraint *constraint in self.antimationConstraints) {
         constraint.offset = 100;
     }
-    
+
     [UIView animateWithDuration:0.3 animations:^{
         [self.view layoutIfNeeded];
     }];
-    
-    UNDToolsBar *toolsBar = [[UNDToolsBar alloc]init];
-//    toolsBar.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:toolsBar];
-    
+
+    self.toolsBar = [[UNDToolsBar alloc]init];
+    [self.toolsBarBgView addSubview:toolsBar];
+
     [toolsBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topBar.mas_bottom);
-        make.width.equalTo(self.view);
+        make.width.equalTo(self.toolsBarBgView);
         make.height.equalTo(@100);
+    }];
+}
+
+- (void)hideToolsBar{
+    
+    for (MASConstraint *constraint in self.antimationConstraints) {
+        constraint.offset = 8;
+    }
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.toolsBar.frame = CGRectMake(0, 60, _viewWidth, 0);
+        [self.toolsBar hideButtons];
+        [self.view layoutSubviews];
+    } completion:^(BOOL finished) {
+        [self.toolsBar removeButtons];
+        [self.toolsBar removeFromSuperview];
+        self.toolsBar = nil;
+        [self.toolsBarBgView removeFromSuperview];
+        self.toolsBarBgView = nil;
+        self.topBar.alpha = 1;
+        self.scrollView.alpha = 1;
+        self.bottomBar.alpha = 1;
     }];
 }
 

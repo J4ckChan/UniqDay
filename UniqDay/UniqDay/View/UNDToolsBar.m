@@ -49,13 +49,13 @@
                 }else{
                     make.centerX.equalTo(self.mas_right).offset(space-16);
                 }
-                make.centerY.equalTo(self).offset(-120);
+                make.centerY.equalTo(self).offset(-150);
             }];
             lastBtn = btn;
         }
         
         CABasicAnimation *dropAnimation = [CABasicAnimation animationWithKeyPath:@"position.y"];
-        dropAnimation.fromValue = @(-120);
+        dropAnimation.fromValue = @(-150);
         dropAnimation.toValue = @50;
         dropAnimation.duration = 0.4;
         dropAnimation.removedOnCompletion = NO;
@@ -68,6 +68,24 @@
         }
     }
     return self;
+}
+
+-(void)hideButtons{
+    _editBtn.alpha   = 0;
+    _annivBtn.alpha  = 0;
+    _shareBtn.alpha  = 0;
+    _deleteBtn.alpha = 0;
+}
+
+-(void)removeButtons{
+    [_editBtn removeFromSuperview];
+    [_annivBtn removeFromSuperview];
+    [_shareBtn removeFromSuperview];
+    [_deleteBtn removeFromSuperview];
+    _editBtn   = nil;
+    _annivBtn  = nil;
+    _shareBtn  = nil;
+    _deleteBtn = nil;
 }
 
 @end

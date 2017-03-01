@@ -10,4 +10,7 @@
 
 @interface UNDToolsBar : UIView
 
+-(void)hideButtons;
+-(void)removeButtons;
+
 @end
