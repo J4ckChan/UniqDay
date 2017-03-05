@@ -82,6 +82,7 @@ static NSString *reuseIdetifierForImage  = @"Image";
         [self.tableView registerClass:[UNDTitleTableViewCell class] forCellReuseIdentifier:reuseIdetifierForTitle];
         [self.tableView registerClass:[UNDDateTableViewCell class] forCellReuseIdentifier:reuseIdetifierForDate];
         [self.tableView registerClass:[UNDImageTableViewCell class] forCellReuseIdentifier:reuseIdetifierForImage];
+        
     }
     return self;
 }
@@ -120,7 +121,7 @@ static NSString *reuseIdetifierForImage  = @"Image";
     return [self.cancelBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
 }
 
-- (RACSignal *)doneSignal{
+- (RACSignal *)rac_doneSignal{
     return [self.doneBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
 }
 

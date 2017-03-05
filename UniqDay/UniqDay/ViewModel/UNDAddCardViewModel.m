@@ -12,9 +12,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
 @interface UNDAddCardViewModel ()
 
 @property (nonatomic,strong) UNDCard *model;
+@property (nonatomic,strong) RACSignal *rac_validSignal;
 
 @end
 
@@ -25,9 +28,12 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        self.title = [[NSString alloc]init];
-        self.date = nil;
-        self.image = [[UIImage alloc]init];
+        _model = [[UNDCard alloc]init];
+        RAC(_model,title) = RACObserve(self, title);
+        RAC(_model,date) = RACObserve(self, date);
+        RAC(_model,imageData) = [RACObserve(self, image) map:^id(UIImage *value) {
+            return UIImagePNGRepresentation(value);
+        }];
     }
     return self;
 }
@@ -48,11 +54,6 @@
         return UNDAddCardModelImageFailure;
     }
     
-    _model = [[UNDCard alloc]init];
-    _model.title = self.title;
-    _model.date = self.date;
-    _model.imageDate = UIImagePNGRepresentation(self.image);
-    
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
     [realm addObject:_model];
@@ -60,5 +61,6 @@
     
     return UNDAddCardModelSuccess;
 }
+
 
 @end

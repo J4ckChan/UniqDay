@@ -20,8 +20,8 @@
 
 - (RACSignal *)rac_titleSignal;
 - (RACSignal *)rac_imageSignal;
-- (RACSignal*)cancelSignal;
-- (RACSignal*)doneSignal;
+- (RACSignal *)cancelSignal;
+- (RACSignal *)rac_doneSignal;
 - (void)clearData;
 - (void)dismissKeyboard;
 

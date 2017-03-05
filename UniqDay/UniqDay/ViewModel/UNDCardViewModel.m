@@ -21,7 +21,7 @@
         self.title       = model.title;
         self.dateStr     = [self dateString:model.date];
         self.dayCountStr = [self dayCountFromNow:model.date];
-        self.image       = [[UIImage alloc]initWithData:model.imageDate];
+        self.image       = [[UIImage alloc]initWithData:model.imageData];
     }
     return self;
 }

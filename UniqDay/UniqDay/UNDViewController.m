@@ -199,9 +199,6 @@
     
     CGRect addCardViewFrame0 = CGRectMake(8, _viewHeight - 264, _viewWidth - 16, 256);
     CGRect addCardViewFrame1 = CGRectMake(8, _viewHeight, _viewWidth - 16, 256);
-
-    //init addCardViewModel
-    self.addCardViewModel = [[UNDAddCardViewModel alloc]init];
     
     if (self.addCardView == nil) {
         self.addCardView = [[UNDAddCardView alloc]initWithFrame:addCardViewFrame1];
@@ -232,10 +229,17 @@
             [self dismissAddCardView];
         }];
         
-        [self.addCardView.doneSignal subscribeNext:^(id x) {
+        [[self.addCardView rac_doneSignal] subscribeNext:^(id x) {
             [self addCardModelResult];
         }];
         
+        
+        //init addCardViewModel
+        self.addCardViewModel = [[UNDAddCardViewModel alloc]init];
+        self.addCardViewModel.title = nil;
+        self.addCardViewModel.date  = nil;
+        self.addCardViewModel.image = nil;
+
         RAC(self.addCardViewModel,title) = self.addCardView.rac_titleSignal;
         RAC(self.addCardViewModel,image) = self.addCardView.rac_imageSignal;
     }];
