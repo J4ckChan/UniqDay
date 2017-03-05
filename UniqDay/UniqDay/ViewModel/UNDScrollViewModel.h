@@ -16,4 +16,9 @@
 
 @property (nonatomic,strong) RLMResults *models;
 
+- (void)sortByCreatedDate;
+- (void)sortByCountDay;
+- (void)addNewCardModel;
+- (void)deleteCardModel;
+
 @end

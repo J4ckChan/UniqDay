@@ -21,4 +21,12 @@
     return self;
 }
 
+- (void)sortByCountDay{
+    self.models = [[UNDCard allObjects] sortedResultsUsingProperty:@"date" ascending:NO];
+}
+
+- (void)sortByCreatedDate{
+    self.models = [[UNDCard allObjects] sortedResultsUsingProperty:@"createdDate" ascending:YES];
+}
+
 @end

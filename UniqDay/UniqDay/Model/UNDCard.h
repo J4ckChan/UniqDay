@@ -13,5 +13,6 @@
 @property NSString *title;
 @property NSDate *date;
 @property NSData *imageData;
+@property NSDate *createdDate;
 
 @end

@@ -56,4 +56,12 @@
     return [_addBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
 }
 
+- (RACSignal *)rac_dayCountOrder{
+    return [_dayCountOrderBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
+}
+
+- (RACSignal *)rac_CreatedDateOder{
+    return [_listBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
+}
+
 @end

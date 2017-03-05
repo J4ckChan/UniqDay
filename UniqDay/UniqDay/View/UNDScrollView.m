@@ -25,18 +25,19 @@
 
 @property (nonatomic,strong) UIScrollView *scrollView;
 @property (nonatomic,strong) UIView *contentView;
+@property (nonatomic,strong) NSMutableArray *cardsArray;
 
 @end
 
 @implementation UNDScrollView
 
-@synthesize scrollView,cards;
+@synthesize scrollView,models;
 
 - (instancetype)init{
     self = [super init];
     if (self) {
-        
-        self.scrollView = UIScrollView.new;
+        self.cardsArray = [[NSMutableArray alloc]init];
+        self.scrollView = [[UIScrollView alloc]init];
         self.scrollView.showsHorizontalScrollIndicator = NO;
         self.scrollView.pagingEnabled = YES;
         [self addSubview:self.scrollView];
@@ -58,7 +59,7 @@
         }];
     }
     
-    int num = (int)cards.count;
+    int num = (int)models.count;
 
     if (num == 0) {
         return;
@@ -71,9 +72,10 @@
     for (int i = 0; i < num; i++) {
         UNDCardView *cardView = [[UNDCardView alloc]init];
         [_contentView addSubview:cardView];
+        [self.cardsArray addObject:cardView];
         
         //configure cardView
-        UNDCard *card = [self.cards objectAtIndex:i];
+        UNDCard *card = [self.models objectAtIndex:i];
         [self configureCardView:cardView withModel:card];
         
         //add tap
@@ -112,6 +114,16 @@
     RAC(cardView.titleLabel,text)    = RACObserve(viewModel, title);
     RAC(cardView.timeLabel,text)     = RACObserve(viewModel, dateStr);
     RAC(cardView.dayCountlabel,text) = RACObserve(viewModel, dayCountStr);
+}
+
+- (void)configureScorllViewWithModels{
+    int cardsNum = (int)self.models.count;
+    for (int i = 0; i < cardsNum; i++) {
+        UNDCardView *cardView = [self.cardsArray objectAtIndex:i];
+        UNDCard *model = self.models[i];
+        [self configureCardView:cardView withModel:model];
+    }
+    [self layoutIfNeeded];
 }
 
 

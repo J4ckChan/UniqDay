@@ -28,9 +28,10 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        _model = [[UNDCard alloc]init];
-        RAC(_model,title) = RACObserve(self, title);
-        RAC(_model,date) = RACObserve(self, date);
+        _model                = [[UNDCard alloc]init];
+        _model.createdDate    = [NSDate date];
+        RAC(_model,title)     = RACObserve(self, title);
+        RAC(_model,date)      = RACObserve(self, date);
         RAC(_model,imageData) = [RACObserve(self, image) map:^id(UIImage *value) {
             return UIImagePNGRepresentation(value);
         }];

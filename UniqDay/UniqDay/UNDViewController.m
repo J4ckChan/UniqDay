@@ -66,6 +66,7 @@
     
     _viewWidth  = [UIScreen mainScreen].bounds.size.width;
     _viewHeight = [UIScreen mainScreen].bounds.size.height;
+    self.antimationConstraints = [NSMutableArray new];
 
     self.view.backgroundColor = [UIColor colorWithRed:20 green:22 blue:27 alpha:0];
     
@@ -106,13 +107,15 @@
         [self.scrollView removeFromSuperview];
         self.scrollView = nil;
     }
-    self.antimationConstraints = [NSMutableArray new];
+    
     self.scrollView = [[UNDScrollView alloc]init];
     self.scrollViewModel = [[UNDScrollViewModel alloc]init];
-    self.scrollView.cards = self.scrollViewModel.models;
-    RAC(self.scrollView,cards) = RACObserve(self.scrollViewModel, models);
+    self.scrollView.models = self.scrollViewModel.models;
+    RAC(self.scrollView,models) = RACObserve(self.scrollViewModel, models);
     [self.scrollView generateContent];
     [self.view addSubview:self.scrollView];
+    
+    //layout
     CGFloat scrollViewHeight = _viewHeight - 120;
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         self.antimationConstraints = [NSMutableArray arrayWithArray:@[
@@ -128,15 +131,23 @@
     self.bottomBar = [[UNDBottomBarView alloc]init];
     [self.view addSubview:self.bottomBar];
     [self.bottomBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        [self.antimationConstraints addObject:
-         make.top.equalTo(self.scrollView.mas_bottom).offset(8)
-         ];
+        make.top.equalTo(self.scrollView.mas_bottom).offset(8);
         make.width.mas_equalTo(_viewWidth);
         make.height.mas_equalTo(44);
     }];
     
     [self.bottomBar.rac_addCardSignal subscribeNext:^(id x) {
         [self showAddCardView];
+    }];
+    
+    [self.bottomBar.rac_dayCountOrder subscribeNext:^(id x) {
+        [self.scrollViewModel sortByCountDay];
+        [self.scrollView configureScorllViewWithModels];
+    }];
+    
+    [self.bottomBar.rac_CreatedDateOder subscribeNext:^(id x) {
+        [self.scrollViewModel sortByCreatedDate];
+        [self.scrollView configureScorllViewWithModels];
     }];
 }
 
@@ -196,6 +207,8 @@
         self.bottomBar.alpha = 1;
     }];
 }
+
+#pragma mark - BottomBarView
 
 #pragma mark - AddCardView 
 
@@ -408,5 +421,9 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
+
+
+
+
 
 @end

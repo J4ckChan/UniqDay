@@ -12,8 +12,10 @@
 
 @interface UNDScrollView : UIView
 
-@property (nonatomic,strong) RLMResults *cards;
+@property (nonatomic,strong) RLMResults *models;
 
 - (void)generateContent;
+
+- (void)configureScorllViewWithModels;
 
 @end
