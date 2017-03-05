@@ -21,6 +21,7 @@
 
 //ViewModel
 #import "UNDAddCardViewModel.h"
+#import "UNDScrollViewModel.h"
 
 //Vendors
 #import <ReactiveCocoa/ReactiveCocoa.h>
@@ -39,6 +40,7 @@
 
 //ViewModel
 @property (nonatomic,strong) UNDAddCardViewModel *addCardViewModel;
+@property (nonatomic,strong) UNDScrollViewModel *scrollViewModel;
 
 //realm
 @property (nonatomic,strong) RLMNotificationToken *token;
@@ -106,6 +108,10 @@
     }
     self.antimationConstraints = [NSMutableArray new];
     self.scrollView = [[UNDScrollView alloc]init];
+    self.scrollViewModel = [[UNDScrollViewModel alloc]init];
+    self.scrollView.cards = self.scrollViewModel.models;
+    RAC(self.scrollView,cards) = RACObserve(self.scrollViewModel, models);
+    [self.scrollView generateContent];
     [self.view addSubview:self.scrollView];
     CGFloat scrollViewHeight = _viewHeight - 120;
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {

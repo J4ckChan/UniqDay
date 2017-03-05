@@ -24,6 +24,7 @@
 @interface UNDScrollView ()
 
 @property (nonatomic,strong) UIScrollView *scrollView;
+@property (nonatomic,strong) UIView *contentView;
 
 @end
 
@@ -35,9 +36,6 @@
     self = [super init];
     if (self) {
         
-        UNDScrollViewModel *scrollViewModel = [[UNDScrollViewModel alloc]init];
-        self.cards = scrollViewModel.models;
-        
         self.scrollView = UIScrollView.new;
         self.scrollView.showsHorizontalScrollIndicator = NO;
         self.scrollView.pagingEnabled = YES;
@@ -45,20 +43,20 @@
         [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
         }];
-        
-        [self generateContent];
     }
     return self;
 }
 
 - (void)generateContent{
-    UIView *contentView = UIView.new;
-    [self.scrollView addSubview:contentView];
     
-    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.scrollView);
-        make.height.equalTo(self.scrollView);
-    }];
+    if (_contentView == nil) {
+        _contentView = UIView.new;
+        [self.scrollView addSubview:_contentView];
+        [_contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.scrollView);
+            make.height.equalTo(self.scrollView);
+        }];
+    }
     
     int num = (int)cards.count;
 
@@ -72,7 +70,7 @@
     
     for (int i = 0; i < num; i++) {
         UNDCardView *cardView = [[UNDCardView alloc]init];
-        [contentView addSubview:cardView];
+        [_contentView addSubview:cardView];
         
         //configure cardView
         UNDCard *card = [self.cards objectAtIndex:i];
@@ -95,7 +93,7 @@
         lastCardView = cardView;
     }
     
-    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(lastCardView).offset(space);
     }];
 }
