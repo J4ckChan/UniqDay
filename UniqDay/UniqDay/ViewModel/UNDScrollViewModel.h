@@ -18,7 +18,7 @@
 
 - (void)sortByCreatedDate;
 - (void)sortByCountDay;
-- (void)addNewCardModel;
-- (void)deleteCardModel;
+- (void)updateCardModels;
+- (void)modifyModel;
 
 @end

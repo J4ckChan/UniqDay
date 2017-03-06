@@ -29,4 +29,10 @@
     self.models = [[UNDCard allObjects] sortedResultsUsingProperty:@"createdDate" ascending:YES];
 }
 
+- (void)updateCardModels{
+    self.models = [UNDCard allObjects];
+}
+
+
+
 @end

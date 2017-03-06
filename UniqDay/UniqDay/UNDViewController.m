@@ -71,7 +71,7 @@
     self.view.backgroundColor = [UIColor colorWithRed:20 green:22 blue:27 alpha:0];
     
     [self addTopBar];
-    [self initOrRefreshScrollView];
+    [self initScrollView];
     [self addBottomBar];
     
     [self addRealmNotifcationObserver];
@@ -102,11 +102,7 @@
     }];
 }
 
-- (void)initOrRefreshScrollView{
-    if (self.scrollView != nil) {
-        [self.scrollView removeFromSuperview];
-        self.scrollView = nil;
-    }
+- (void)initScrollView{
     
     self.scrollView = [[UNDScrollView alloc]init];
     self.scrollViewModel = [[UNDScrollViewModel alloc]init];
@@ -125,6 +121,11 @@
         make.width.equalTo(self.view);
         make.height.mas_equalTo(@(scrollViewHeight));
     }];
+}
+
+- (void)updateScrollView{
+    [self.scrollViewModel updateCardModels];
+    [self.scrollView generateContent];
 }
 
 - (void)addBottomBar{
@@ -390,7 +391,7 @@
             return;
         }
         
-        [weakSelf initOrRefreshScrollView];
+        [weakSelf updateScrollView];
     }];
 }
 
