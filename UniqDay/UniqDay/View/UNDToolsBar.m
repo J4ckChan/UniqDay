@@ -9,34 +9,31 @@
 #import "UNDToolsBar.h"
 #import <Masonry/Masonry.h>
 
-@implementation UNDToolsBar{
-    UIButton *_editBtn;
-    UIButton *_annivBtn;
-    UIButton *_shareBtn;
-    UIButton *_deleteBtn;
-}
+@implementation UNDToolsBar
+
+@synthesize editBtn,annivBtn,shareBtn,deleteBtn;
 
 - (instancetype)init{
     self = [super init];
     if (self) {
         
-        _editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_editBtn setImage:[UIImage imageNamed:@"editBtn"] forState:UIControlStateNormal];
-        [self addSubview:_editBtn];
+        self.editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.editBtn setImage:[UIImage imageNamed:@"editBtn"] forState:UIControlStateNormal];
+        [self addSubview:self.editBtn];
         
-        _annivBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_annivBtn setImage:[UIImage imageNamed:@"annivBtn"] forState:UIControlStateNormal];
-        [self addSubview:_annivBtn];
+        self.annivBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.annivBtn setImage:[UIImage imageNamed:@"annivBtn"] forState:UIControlStateNormal];
+        [self addSubview:self.annivBtn];
         
-        _shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_shareBtn setImage:[UIImage imageNamed:@"shareBtn"] forState:UIControlStateNormal];
-        [self addSubview:_shareBtn];
+        self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.shareBtn setImage:[UIImage imageNamed:@"shareBtn"] forState:UIControlStateNormal];
+        [self addSubview:self.shareBtn];
         
-        _deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_deleteBtn setImage:[UIImage imageNamed:@"deleteBtn"] forState:UIControlStateNormal];
-        [self addSubview:_deleteBtn];
+        self.deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.deleteBtn setImage:[UIImage imageNamed:@"deleteBtn"] forState:UIControlStateNormal];
+        [self addSubview:self.deleteBtn];
         
-        NSArray *btnArray = @[_deleteBtn,_shareBtn,_annivBtn,_editBtn];
+        NSArray *btnArray = @[self.deleteBtn,self.shareBtn,self.annivBtn,self.editBtn];
         CGFloat width = [UIScreen mainScreen].bounds.size.width - 32;
         CGFloat space = - (width/8);
         
@@ -71,21 +68,21 @@
 }
 
 -(void)hideButtons{
-    _editBtn.alpha   = 0;
-    _annivBtn.alpha  = 0;
-    _shareBtn.alpha  = 0;
-    _deleteBtn.alpha = 0;
+    self.editBtn.alpha   = 0;
+    self.annivBtn.alpha  = 0;
+    self.shareBtn.alpha  = 0;
+    self.deleteBtn.alpha = 0;
 }
 
 -(void)removeButtons{
-    [_editBtn removeFromSuperview];
-    [_annivBtn removeFromSuperview];
-    [_shareBtn removeFromSuperview];
-    [_deleteBtn removeFromSuperview];
-    _editBtn   = nil;
-    _annivBtn  = nil;
-    _shareBtn  = nil;
-    _deleteBtn = nil;
+    [self.editBtn removeFromSuperview];
+    [self.annivBtn removeFromSuperview];
+    [self.shareBtn removeFromSuperview];
+    [self.deleteBtn removeFromSuperview];
+    self.editBtn   = nil;
+    self.annivBtn  = nil;
+    self.shareBtn  = nil;
+    self.deleteBtn = nil;
 }
 
 @end

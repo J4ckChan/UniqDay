@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class RLMResults;
+@class RLMResults,UNDCard;
 
 @interface UNDScrollView : UIView
 
 @property (nonatomic,strong) RLMResults *models;
+@property (nonatomic,strong) UNDCard *currentModel;
 
 - (void)generateContent;
 

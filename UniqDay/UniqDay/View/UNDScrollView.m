@@ -21,7 +21,7 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 
-@interface UNDScrollView ()
+@interface UNDScrollView ()<UIScrollViewDelegate>
 
 @property (nonatomic,strong) UIScrollView *scrollView;
 @property (nonatomic,strong) UIView *contentView;
@@ -31,7 +31,7 @@
 
 @implementation UNDScrollView
 
-@synthesize scrollView,models;
+@synthesize scrollView,models,currentModel;
 
 - (instancetype)init{
     self = [super init];
@@ -39,6 +39,7 @@
         self.scrollView = [[UIScrollView alloc]init];
         self.scrollView.showsHorizontalScrollIndicator = NO;
         self.scrollView.pagingEnabled = YES;
+        self.scrollView.delegate = self;
         [self addSubview:self.scrollView];
         [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
@@ -130,6 +131,13 @@
     }
 }
 
+#pragma mark - UIScorllViewDelegate
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat xPoint = scrollView.contentOffset.x;
+    int index = xPoint/width;
+    self.currentModel = [self.models objectAtIndex:index];
+}
 
 @end

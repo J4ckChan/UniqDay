@@ -180,11 +180,17 @@
     self.toolsBar = [[UNDToolsBar alloc]init];
     [self.toolsBarBgView addSubview:toolsBar];
 
-    [toolsBar mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.toolsBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topBar.mas_bottom);
         make.width.equalTo(self.toolsBarBgView);
         make.height.equalTo(@100);
     }];
+    
+    self.toolsBar.editBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+        
+        return [RACSignal empty];
+    }];
+    
 }
 
 - (void)hideToolsBar{
@@ -324,20 +330,26 @@
             make.edges.equalTo(self.view).insets(insets);
         }];
         
-        //rac
+        NSIndexPath *indePath = [NSIndexPath indexPathForRow:1 inSection:0];
+        UNDDateTableViewCell *cell = [self.addCardView.tableView cellForRowAtIndexPath:indePath];
+        [cell.dateBtn setTitle:[self dateToDateStr:[NSDate date]] forState:UIControlStateNormal];
+         [cell.dateBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.addCardViewModel.date = self.datePicker.date;
+
         [[self.datePicker rac_newDateChannelWithNilValue:[NSDate date]]
          subscribeNext:^(NSDate *date) {
-             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-             dateFormatter.dateStyle = kCFDateFormatterMediumStyle;
-             NSString *dateStr = [dateFormatter stringFromDate:date];
-             
-             NSIndexPath *indePath = [NSIndexPath indexPathForRow:1 inSection:0];
-             UNDDateTableViewCell *cell = [self.addCardView.tableView cellForRowAtIndexPath:indePath];
+             NSString *dateStr = [self dateToDateStr:date];
              [cell.dateBtn setTitle:dateStr forState:UIControlStateNormal];
-             [cell.dateBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
              self.addCardViewModel.date = date;
          }];
     }
+}
+
+- (NSString *)dateToDateStr:(NSDate *)date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    dateFormatter.dateStyle = kCFDateFormatterMediumStyle;
+    NSString *dateStr = [dateFormatter stringFromDate:date];
+    return dateStr;
 }
 
 - (void)dismissDatePicker{
