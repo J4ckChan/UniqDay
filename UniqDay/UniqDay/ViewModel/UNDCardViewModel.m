@@ -13,15 +13,13 @@
 
 @implementation UNDCardViewModel
 
-@synthesize title,dateStr,dayCountStr;
-
 - (instancetype)initWithModel:(UNDCard *)model{
     self = [super init];
     if (self) {
-        self.title       = model.title;
-        self.dateStr     = [self dateString:model.date];
-        self.dayCountStr = [self dayCountFromNow:model.date];
-        self.image       = [[UIImage alloc]initWithData:model.imageData];
+        _title       = model.title;
+        _dateStr     = [self dateString:model.date];
+        _dayCountStr = [self dayCountFromNow:model.date];
+        _image       = [[UIImage alloc]initWithData:model.imageData];
     }
     return self;
 }
