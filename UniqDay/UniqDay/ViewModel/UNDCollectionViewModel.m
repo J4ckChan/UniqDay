@@ -29,15 +29,30 @@
     self = [super init];
     if (self) {
         _models = [UNDCard allObjects];
-        _mutableCellViewModels = [[NSMutableArray alloc]init];
-        for (UNDCard *model in _models) {
-            UNDCardViewModel *cardViewModel = [[UNDCardViewModel alloc] initWithModel:model];
-            [_mutableCellViewModels addObject:cardViewModel];
-        }
-        _cellViewModels = [_mutableCellViewModels copy];
     }
     return self;
 }
+
+- (void)sortByCreatedDay{
+    _models = [[UNDCard allObjects] sortedResultsUsingProperty:@"createdDate" ascending:YES];
+}
+
+- (void)sortByDate{
+    _models = [[UNDCard allObjects] sortedResultsUsingProperty:@"date" ascending:NO];
+}
+
+- (NSArray *)cellViewModels{
+    _mutableCellViewModels = [[NSMutableArray alloc]init];
+    NSArray *cellViewModels = [[NSArray alloc]init];
+    for (UNDCard *model in _models) {
+        UNDCardViewModel *cardViewModel = [[UNDCardViewModel alloc] initWithModel:model];
+        [_mutableCellViewModels addObject:cardViewModel];
+    }
+    cellViewModels = [_mutableCellViewModels copy];
+    return cellViewModels;
+}
+
+
 
 
 @end

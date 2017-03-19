@@ -21,23 +21,23 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.contentView.layer.cornerRadius                = 5;
-        self.contentView.clipsToBounds                     = YES;
-        
+        self.contentView.layer.cornerRadius    = 5;
+        self.contentView.clipsToBounds         = YES;
+
         self.imageView                         = [[UIImageView alloc]init];
-        
-        self.contentView.backgroundColor                   = [UIColor whiteColor];
-        
+
+        self.contentView.backgroundColor       = [UIColor whiteColor];
+
         self.titleLabel                        = [[UILabel alloc]init];
         self.titleLabel.font                   = [UIFont systemFontOfSize:17 weight:UIFontWeightBold];
-        
+
         self.timeLabel                         = [[UILabel alloc]init];
         self.timeLabel.font                    = [UIFont systemFontOfSize:14];
-        
+
         self.dayCountlabel                     = [[UILabel alloc]init];
         self.dayCountlabel.font                = [UIFont systemFontOfSize:30 weight:UIFontWeightLight];
         self.dayCountlabel.textColor           = [UIColor lightGrayColor];
-        
+
         self.daysSinceLabel                    = [[UILabel alloc]init];
         self.daysSinceLabel.text               = @"DAYS SINCE";
         self.daysSinceLabel.textAlignment      = NSTextAlignmentCenter;
@@ -95,33 +95,17 @@
 }
 
 - (void)setViewModel:(UNDCardViewModel *)viewModel{
-
     _viewModel = viewModel;
-    
+    [self displayCardViewCell];
+}
+
+- (void)displayCardViewCell{
     self.imageView.image         = self.viewModel.image;
     self.titleLabel.text         = self.viewModel.title;
     self.timeLabel.text          = self.viewModel.dateStr;
     self.dayCountlabel.text      = self.viewModel.dayCountStr;
-
 }
 
 
-- (void)configureCardViewCellWithViewModel{
-    
-    if (!self.viewModel) {
-        return;
-    }
-    //Init
-    self.imageView.image         = self.viewModel.image;
-    self.titleLabel.text         = self.viewModel.title;
-    self.timeLabel.text          = self.viewModel.dateStr;
-    self.dayCountlabel.text      = self.viewModel.dayCountStr;
-    
-    //RAC Bindinhg
-    RAC(self.imageView,image)    = RACObserve(self.viewModel, image);
-    RAC(self.titleLabel,text)    = RACObserve(self.viewModel, title);
-    RAC(self.timeLabel,text)     = RACObserve(self.viewModel, dateStr);
-    RAC(self.dayCountlabel,text) = RACObserve(self.viewModel, dayCountStr);
-}
 
 @end

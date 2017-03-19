@@ -6,6 +6,7 @@
 //  Copyright © 2016 ChanLiang. All rights reserved.
 //
 
+//controller
 #import "UNDViewController.h"
 
 //models
@@ -16,15 +17,11 @@
 #import "UNDAddCardView.h"
 #import "UNDTopBarView.h"
 #import "UNDToolsBar.h"
-#import "UNDScrollView.h"
 #import "UNDBottomBarView.h"
-
 #import "UNDCardViewCell.h"
 
 //ViewModel
 #import "UNDAddCardViewModel.h"
-#import "UNDScrollViewModel.h"
-
 #import "UNDCollectionViewModel.h"
 
 //Vendors
@@ -36,7 +33,6 @@
 @property (nonatomic,strong) UNDTopBarView *topBar;
 @property (nonatomic,strong) UNDToolsBar *toolsBar;
 @property (nonatomic,strong) UIView *toolsBarBgView;
-@property (nonatomic,strong) UNDScrollView *scrollView;
 @property (nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic,strong) UNDBottomBarView *bottomBar;
 @property (nonatomic,strong) UNDAddCardView *addCardView;
@@ -45,8 +41,6 @@
 
 //ViewModel
 @property (nonatomic,strong) UNDAddCardViewModel *addCardViewModel;
-@property (nonatomic,strong) UNDScrollViewModel *scrollViewModel;
-
 @property (nonatomic,strong) UNDCollectionViewModel *collectionViewModel;
 
 //realm
@@ -154,13 +148,13 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     }];
     
     [self.bottomBar.rac_dayCountOrder subscribeNext:^(id x) {
-        [self.scrollViewModel sortByCountDay];
-        [self.scrollView configureScorllViewWithModels];
+        [self.collectionViewModel sortByDate];
+        [self.collectionView reloadData];
     }];
     
     [self.bottomBar.rac_CreatedDateOder subscribeNext:^(id x) {
-        [self.scrollViewModel sortByCreatedDate];
-        [self.scrollView configureScorllViewWithModels];
+        [self.collectionViewModel sortByCreatedDay];
+        [self.collectionView reloadData];
     }];
 }
 
@@ -177,12 +171,12 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
         make.edges.equalTo(self.view);
     }];
 
-    self.topBar.alpha     = 0.2;
-    self.scrollView.alpha = 0.2;
-    self.bottomBar.alpha  = 0.2;
+    self.topBar.alpha         = 0.2;
+    self.collectionView.alpha = 0.2;
+    self.bottomBar.alpha      = 0.2;
 
     for (MASConstraint *constraint in self.antimationConstraints) {
-        constraint.offset = 100;
+        constraint.offset     = 100;
     }
 
     [UIView animateWithDuration:0.3 animations:^{
@@ -222,8 +216,8 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
         [self.toolsBarBgView removeFromSuperview];
         self.toolsBarBgView = nil;
         self.topBar.alpha = 1;
-        self.scrollView.alpha = 1;
         self.bottomBar.alpha = 1;
+        self.collectionView.alpha = 1;
     }];
 }
 

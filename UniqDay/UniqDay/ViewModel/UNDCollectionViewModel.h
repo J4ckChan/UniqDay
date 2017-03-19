@@ -14,4 +14,8 @@
 
 @property (nonatomic,readonly,copy) NSArray *cellViewModels;
 
+- (void)sortByCreatedDay;
+- (void)sortByDate;
+
+
 @end
