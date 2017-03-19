@@ -17,16 +17,16 @@
 @synthesize imageView,titleLabel,timeLabel,dayCountlabel;
 
 
-- (instancetype)init{
-    self = [super init];
+- (instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
     if (self) {
         
-        self.layer.cornerRadius                = 5;
-        self.clipsToBounds                     = YES;
+        self.contentView.layer.cornerRadius                = 5;
+        self.contentView.clipsToBounds                     = YES;
         
         self.imageView                         = [[UIImageView alloc]init];
         
-        self.backgroundColor                   = [UIColor whiteColor];
+        self.contentView.backgroundColor                   = [UIColor whiteColor];
         
         self.titleLabel                        = [[UILabel alloc]init];
         self.titleLabel.font                   = [UIFont systemFontOfSize:17 weight:UIFontWeightBold];
@@ -47,26 +47,26 @@
         self.daysSinceLabel.layer.cornerRadius = 2;
         self.daysSinceLabel.clipsToBounds      = YES;
         
-        [self addSubview:self.imageView];
-        [self addSubview:self.titleLabel];
-        [self addSubview:self.timeLabel];
-        [self addSubview:self.dayCountlabel];
-        [self addSubview:self.daysSinceLabel];
+        [self.contentView addSubview:self.imageView];
+        [self.contentView addSubview:self.titleLabel];
+        [self.contentView addSubview:self.timeLabel];
+        [self.contentView addSubview:self.dayCountlabel];
+        [self.contentView addSubview:self.daysSinceLabel];
         
         CGFloat imageViewHeight = ([UIScreen mainScreen].bounds.size.height - 120 - 32)/7.0 * 5.0;
         NSNumber *imageViewHeightNum = [NSNumber numberWithFloat:imageViewHeight];
         
         [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.mas_top);
-            make.left.equalTo(self.mas_left);
-            make.right.equalTo(self.mas_right);
+            make.top.equalTo(self.contentView.mas_top);
+            make.left.equalTo(self.contentView.mas_left);
+            make.right.equalTo(self.contentView.mas_right);
             make.height.equalTo(imageViewHeightNum);
         }];
         
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.imageView.mas_bottom).offset(8);
-            make.left.equalTo (self).offset(16);
-            make.right.equalTo(self).offset(-16);
+            make.left.equalTo (self.contentView).offset(16);
+            make.right.equalTo(self.contentView).offset(-16);
         }];
         
         [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,15 +76,15 @@
         }];
         
         [self.dayCountlabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self).offset(16);
-            make.bottom.equalTo(self).offset(-8);
+            make.left.equalTo(self.contentView).offset(16);
+            make.bottom.equalTo(self.contentView).offset(-8);
             make.width.equalTo(@200);
         }];
         
         self.daysSinceLabel.text = NSLocalizedString(@"DAYS SINCE", nil);
         
         [self.daysSinceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self).offset(-16);
+            make.right.equalTo(self.contentView).offset(-16);
             make.centerY.equalTo(self.dayCountlabel);
             make.width.equalTo(@76);
             make.height.equalTo(@20);
@@ -92,6 +92,17 @@
     }
     
     return self;
+}
+
+- (void)setViewModel:(UNDCardViewModel *)viewModel{
+
+    _viewModel = viewModel;
+    
+    self.imageView.image         = self.viewModel.image;
+    self.titleLabel.text         = self.viewModel.title;
+    self.timeLabel.text          = self.viewModel.dateStr;
+    self.dayCountlabel.text      = self.viewModel.dayCountStr;
+
 }
 
 

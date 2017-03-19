@@ -19,20 +19,25 @@
 #import "UNDScrollView.h"
 #import "UNDBottomBarView.h"
 
+#import "UNDCardViewCell.h"
+
 //ViewModel
 #import "UNDAddCardViewModel.h"
 #import "UNDScrollViewModel.h"
+
+#import "UNDCollectionViewModel.h"
 
 //Vendors
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <Masonry/Masonry.h>
 
-@interface UNDViewController ()
+@interface UNDViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic,strong) UNDTopBarView *topBar;
 @property (nonatomic,strong) UNDToolsBar *toolsBar;
 @property (nonatomic,strong) UIView *toolsBarBgView;
 @property (nonatomic,strong) UNDScrollView *scrollView;
+@property (nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic,strong) UNDBottomBarView *bottomBar;
 @property (nonatomic,strong) UNDAddCardView *addCardView;
 @property (nonatomic,strong) UIDatePicker *datePicker;
@@ -41,6 +46,8 @@
 //ViewModel
 @property (nonatomic,strong) UNDAddCardViewModel *addCardViewModel;
 @property (nonatomic,strong) UNDScrollViewModel *scrollViewModel;
+
+@property (nonatomic,strong) UNDCollectionViewModel *collectionViewModel;
 
 //realm
 @property (nonatomic,strong) RLMNotificationToken *token;
@@ -58,6 +65,8 @@
 
 @synthesize addCardView,datePicker,addCardViewModel,toolsBar;
 
+static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
+
 #pragma mark - life cycle
 
 - (void)viewDidLoad {
@@ -71,7 +80,7 @@
     self.view.backgroundColor = [UIColor colorWithRed:20 green:22 blue:27 alpha:0];
     
     [self addTopBar];
-    [self initScrollView];
+    [self initColletctionView];
     [self addBottomBar];
     
     [self addRealmNotifcationObserver];
@@ -86,7 +95,7 @@
     [self.token stop];
 }
 
-#pragma mark - TopBarView & ScrollView & BottomBarView
+#pragma mark - TopBarView & CollectionView & BottomBarView
 
 - (void)addTopBar{
     self.topBar = [[UNDTopBarView alloc]init];
@@ -102,37 +111,40 @@
     }];
 }
 
-- (void)initScrollView{
-    
-    self.scrollView = [[UNDScrollView alloc]init];
-    self.scrollViewModel = [[UNDScrollViewModel alloc]init];
-    self.scrollView.models = self.scrollViewModel.models;
-    RAC(self.scrollView,models) = RACObserve(self.scrollViewModel, models);
-    [self.scrollView generateContent];
-    [self.view addSubview:self.scrollView];
-    
-    //layout
-    CGFloat scrollViewHeight = _viewHeight - 120;
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        self.antimationConstraints = [NSMutableArray arrayWithArray:@[
-        make.top.equalTo(self.topBar.mas_bottom).offset(8)
-        ]];
-        make.left.equalTo(self.view);
-        make.width.equalTo(self.view);
-        make.height.mas_equalTo(@(scrollViewHeight));
-    }];
-}
+- (void)initColletctionView{
+    if (self.collectionView == nil) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+        flowLayout.scrollDirection             = UICollectionViewScrollDirectionHorizontal;
+        flowLayout.minimumLineSpacing          = 40;
+        flowLayout.sectionInset                = UIEdgeInsetsMake(16, 20, 16, 20);
+        flowLayout.itemSize                    = CGSizeMake(_viewWidth - 40, _viewHeight - 32 - 120);
+        self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        self.collectionView.delegate           = self;
+        self.collectionView.dataSource         = self;
+        self.collectionView.pagingEnabled      = YES;
+        self.collectionView.showsHorizontalScrollIndicator = NO;
+        [self.collectionView registerClass:[UNDCardViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+        [self.view addSubview:self.collectionView];
 
-- (void)updateScrollView{
-    [self.scrollViewModel updateCardModels];
-    [self.scrollView generateContent];
+        //bind viewModel
+        self.collectionViewModel = [[UNDCollectionViewModel alloc]init];
+        
+        CGFloat collectionViewHeight = _viewHeight - 120;
+        [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            self.antimationConstraints = [NSMutableArray arrayWithArray:@[
+            make.top.equalTo(self.topBar.mas_bottom).offset(8)]];
+            make.left.equalTo(self.view);
+            make.width.equalTo(self.view);
+            make.height.mas_equalTo(@(collectionViewHeight));
+        }];
+    }
 }
 
 - (void)addBottomBar{
     self.bottomBar = [[UNDBottomBarView alloc]init];
     [self.view addSubview:self.bottomBar];
     [self.bottomBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.scrollView.mas_bottom).offset(8);
+        make.top.equalTo(self.collectionView.mas_bottom).offset(8);
         make.width.mas_equalTo(_viewWidth);
         make.height.mas_equalTo(44);
     }];
@@ -403,7 +415,7 @@
             return;
         }
         
-        [weakSelf updateScrollView];
+        [weakSelf.collectionView reloadData];
     }];
 }
 
@@ -436,7 +448,17 @@
 }
 
 
+#pragma mark - UICollectionViewDelegate & DataSource
 
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.collectionViewModel.cellViewModels.count;
+}
 
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UNDCardViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    cell.viewModel = self.collectionViewModel.cellViewModels[indexPath.item];
+    return cell;
+}
 
 @end
