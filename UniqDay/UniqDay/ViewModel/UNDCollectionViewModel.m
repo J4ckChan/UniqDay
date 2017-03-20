@@ -34,7 +34,7 @@
 }
 
 - (void)sortByCreatedDay{
-    _models = [[UNDCard allObjects] sortedResultsUsingProperty:@"createdDate" ascending:YES];
+    _models = [[UNDCard allObjects] sortedResultsUsingProperty:@"createdDate" ascending:NO];
 }
 
 - (void)sortByDate{

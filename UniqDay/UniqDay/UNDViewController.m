@@ -23,6 +23,7 @@
 //ViewModel
 #import "UNDAddCardViewModel.h"
 #import "UNDCollectionViewModel.h"
+#import "UNDTopBarViewModel.h"
 
 //Vendors
 #import <ReactiveCocoa/ReactiveCocoa.h>
@@ -100,8 +101,9 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
         make.height.mas_equalTo(36);
     }];
     
-    [self.topBar.rac_moreSignal subscribeNext:^(id x) {
+    self.topBar.allBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
         [self showToolBar];
+        return [RACSignal empty];
     }];
 }
 
@@ -453,6 +455,13 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     UNDCardViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     cell.viewModel = self.collectionViewModel.cellViewModels[indexPath.item];
     return cell;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    CGFloat contentOffsetX = scrollView.contentOffset.x;
+    int index = contentOffsetX/_viewWidth + 1;
+    NSString *indexStr = [NSString stringWithFormat:@"%d/%lu",index,(unsigned long)[UNDCard allObjects].count];
+    self.topBar.viewModel.indexStr = indexStr;
 }
 
 @end

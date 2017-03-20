@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class RACSignal;
+@class UNDTopBarViewModel;
 
 @interface UNDTopBarView : UIView
 
-- (RACSignal *)rac_moreSignal;
+@property (nonatomic,strong) UNDTopBarViewModel *viewModel;
+
+@property (nonatomic,strong) UIButton *moreBtn;
+@property (nonatomic,strong) UIButton *allBtn;
+@property (nonatomic,strong) UILabel *indexLabel;
 
 @end

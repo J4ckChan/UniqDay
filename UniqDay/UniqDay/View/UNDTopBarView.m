@@ -9,15 +9,16 @@
 #import "UNDTopBarView.h"
 #import <Masonry/Masonry.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import "UNDTopBarViewModel.h"
 
-@implementation UNDTopBarView{
-    UIButton *_moreBtn;
-    UIButton *_allBtn;
-}
+@implementation UNDTopBarView
 
 - (instancetype)init{
     self = [super init];
     if (self) {
+        
+        _viewModel = [[UNDTopBarViewModel alloc]init];
+        
         _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_moreBtn setImage:[UIImage imageNamed:@"moreBtn"] forState:UIControlStateNormal];
         [self addSubview:_moreBtn];
@@ -25,6 +26,12 @@
         _allBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_allBtn setImage:[UIImage imageNamed:@"allBtn"] forState:UIControlStateNormal];
         [self addSubview:_allBtn];
+        
+        _indexLabel = [[UILabel alloc]init];
+        _indexLabel.text = _viewModel.indexStr;
+        RAC(_indexLabel,text) = RACObserve(_viewModel, indexStr);
+        _indexLabel.textColor = [UIColor whiteColor];
+        [self addSubview:_indexLabel];
         
         [_allBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self);
@@ -37,14 +44,13 @@
             make.right.equalTo(self).offset(-16);
             make.size.mas_equalTo(CGSizeMake(24, 8));
         }];
+        
+        [_indexLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self);
+            make.centerY.equalTo(_allBtn);
+        }];
     }
     return self;
 }
-
-- (RACSignal *)rac_moreSignal{
-    return [_moreBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
-}
-
-
 
 @end
