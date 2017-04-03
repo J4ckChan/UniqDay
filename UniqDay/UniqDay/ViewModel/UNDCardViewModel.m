@@ -16,10 +16,11 @@
 - (instancetype)initWithModel:(UNDCard *)model{
     self = [super init];
     if (self) {
-        _title       = model.title;
-        _dateStr     = [self dateString:model.date];
-        _dayCountStr = [self dayCountFromNow:model.date];
-        _image       = [[UIImage alloc]initWithData:model.imageData];
+        _model       = model;
+        _title       = _model.title;
+        _dateStr     = [self dateString:_model.date];
+        _dayCountStr = [self dayCountFromNow:_model.date];
+        _image       = [[UIImage alloc]initWithData:_model.imageData];
     }
     return self;
 }

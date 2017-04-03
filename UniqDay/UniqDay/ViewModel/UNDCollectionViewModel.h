@@ -8,11 +8,12 @@
 
 #import <ReactiveViewModel/ReactiveViewModel.h>
 
-@class UNDCardViewModel;
+@class UNDCardViewModel,UNDCard;
 
 @interface UNDCollectionViewModel : RVMViewModel
 
-@property (nonatomic,readonly,copy) NSArray *cellViewModels;
+@property (nonatomic,readonly,copy) NSArray<UNDCardViewModel *> *cellViewModels;
+@property (nonatomic,strong) UNDCard *currentModel;
 
 - (void)sortByCreatedDay;
 - (void)sortByDate;

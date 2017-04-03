@@ -18,4 +18,6 @@
 @property (nonatomic,strong) UIButton *allBtn;
 @property (nonatomic,strong) UILabel *indexLabel;
 
+- (void)refreshIndex;
+
 @end

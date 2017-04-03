@@ -24,6 +24,8 @@
 #import "UNDAddCardViewModel.h"
 #import "UNDCollectionViewModel.h"
 #import "UNDTopBarViewModel.h"
+#import "UNDCardViewModel.h"
+#import "UNDToolsBarViewModel.h"
 
 //Vendors
 #import <ReactiveCocoa/ReactiveCocoa.h>
@@ -43,6 +45,7 @@
 //ViewModel
 @property (nonatomic,strong) UNDAddCardViewModel *addCardViewModel;
 @property (nonatomic,strong) UNDCollectionViewModel *collectionViewModel;
+@property (nonatomic,strong) UNDToolsBarViewModel *toolsBarViewModel;
 
 //realm
 @property (nonatomic,strong) RLMNotificationToken *token;
@@ -101,7 +104,7 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
         make.height.mas_equalTo(36);
     }];
     
-    self.topBar.allBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+    self.topBar.moreBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
         [self showToolBar];
         return [RACSignal empty];
     }];
@@ -194,11 +197,13 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
         make.height.equalTo(@100);
     }];
     
-    self.toolsBar.editBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
-        
-        return [RACSignal empty];
-    }];
+    self.toolsBarViewModel = [[UNDToolsBarViewModel alloc]init];
     
+    self.toolsBar.deleteBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+        [self.toolsBarViewModel deleteCurrentCardModel:self.collectionViewModel.currentModel];
+        [self.collectionView reloadData];
+        return [RACSignal empty];
+    }];    
 }
 
 - (void)hideToolsBar{
@@ -397,7 +402,11 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
 }
 
 
-#pragma mark - Realm
+#pragma mark - Realm  
+
+/*
+    realm code will be refactor into UNDCollectionViewModel
+*/
 
 - (void)addRealmNotifcationObserver{
     __weak typeof(self) weakSelf = self;
@@ -412,6 +421,7 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
         }
         
         [weakSelf.collectionView reloadData];
+        [_topBar refreshIndex];
     }];
 }
 
@@ -459,9 +469,12 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     CGFloat contentOffsetX = scrollView.contentOffset.x;
-    int index = contentOffsetX/_viewWidth + 1;
-    NSString *indexStr = [NSString stringWithFormat:@"%d/%lu",index,(unsigned long)[UNDCard allObjects].count];
+    int index = contentOffsetX/_viewWidth;
+    NSString *indexStr = [NSString stringWithFormat:@"%d/%lu",index + 1,(unsigned long)[UNDCard allObjects].count];
     self.topBar.viewModel.indexStr = indexStr;
+    
+    UNDCard *indexModel = self.collectionViewModel.cellViewModels[index].model;
+    self.collectionViewModel.currentModel = indexModel;
 }
 
 @end

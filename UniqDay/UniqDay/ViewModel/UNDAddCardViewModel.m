@@ -41,7 +41,7 @@
 
 - (UNDAddCardModelResult)addCardModel{
 
-    NSLog(@"%@",[RLMRealmConfiguration defaultConfiguration].fileURL);
+//    NSLog(@"%@",[RLMRealmConfiguration defaultConfiguration].fileURL);
     
     if (self.title == nil || [self.title isEqualToString:@""]) {
         return UNDAddCardModelTitleFailure;

@@ -54,13 +54,13 @@
         CABasicAnimation *dropAnimation = [CABasicAnimation animationWithKeyPath:@"position.y"];
         dropAnimation.fromValue = @(-150);
         dropAnimation.toValue = @50;
-        dropAnimation.duration = 0.4;
+        dropAnimation.duration = 0.3;
         dropAnimation.removedOnCompletion = NO;
         dropAnimation.fillMode = kCAFillModeForwards;
         
         for (int j = 0; j < 4; j++) {
             UIButton *btn = btnArray[j];
-            dropAnimation.beginTime = CACurrentMediaTime() + j * 0.2;
+            dropAnimation.beginTime = CACurrentMediaTime() + j * 0.1;
             [btn.layer addAnimation:dropAnimation forKey:nil];
         }
     }
@@ -84,5 +84,25 @@
     self.shareBtn  = nil;
     self.deleteBtn = nil;
 }
+
+
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+//    if ([self pointInside:point withEvent:event]) {
+//        if (CGRectContainsPoint(self.editBtn.layer.presentationLayer.frame, point)) {
+//            return self.editBtn;
+//        }else if (CGRectContainsPoint(self.annivBtn.layer.presentationLayer.frame, point)){
+//            return self.annivBtn;
+//        }else if (CGRectContainsPoint(self.shareBtn.layer.presentationLayer.frame, point)){
+//            return self.shareBtn;
+//        }else if (CGRectContainsPoint(self.deleteBtn.layer.presentationLayer.frame, point)){
+//            [self.deleteBtn.layer.presentationLayer hitTest:point];
+//            return self.deleteBtn;
+//        }else{
+//            return self;
+//        }
+//    }else{
+//        return nil;
+//    }
+//}
 
 @end

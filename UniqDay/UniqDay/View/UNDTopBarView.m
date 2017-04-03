@@ -53,4 +53,11 @@
     return self;
 }
 
+- (void)refreshIndex{
+//    [_viewModel refreshIndex];
+//    _indexLabel.text = _viewModel.indexStr;
+}
+
+
+
 @end

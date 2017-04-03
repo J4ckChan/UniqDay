@@ -8,10 +8,10 @@
 
 #import <ReactiveViewModel/ReactiveViewModel.h>
 
-@class RACCommand;
+@class UNDCard;
 
 @interface UNDToolsBarViewModel : RVMViewModel
 
-@property (nonatomic,strong) RACCommand *rac_editComand;
+- (void)deleteCurrentCardModel:(UNDCard *)model;
 
 @end

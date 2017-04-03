@@ -8,9 +8,7 @@
 
 #import <ReactiveViewModel/ReactiveViewModel.h>
 
-#import "UNDCard.h"
-
-@class UIImage;
+@class UIImage,UNDCard;
 
 @interface UNDCardViewModel : RVMViewModel
 
@@ -19,6 +17,7 @@
 @property (nonatomic,strong) NSString *dayCountStr;
 @property (nonatomic,strong) UIImage *image;
 
+@property (nonatomic,strong) UNDCard *model;
 
 - (instancetype)initWithModel:(UNDCard*)model;
 

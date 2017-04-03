@@ -8,13 +8,13 @@
 
 //view
 #import "UNDCollectionViewModel.h"
-#import "UNDCard.h"
 
 //viewModel
 #import "UNDCardViewModel.h"
 
 //model
 #import <Realm/Realm.h>
+#import "UNDCard.h"
 
 @interface UNDCollectionViewModel ()
 
@@ -29,19 +29,22 @@
     self = [super init];
     if (self) {
         _models = [UNDCard allObjects];
+        _currentModel = _models.firstObject;
     }
     return self;
 }
 
 - (void)sortByCreatedDay{
     _models = [[UNDCard allObjects] sortedResultsUsingProperty:@"createdDate" ascending:NO];
+    _currentModel = _models.firstObject;
 }
 
 - (void)sortByDate{
     _models = [[UNDCard allObjects] sortedResultsUsingProperty:@"date" ascending:NO];
+    _currentModel = _models.firstObject;
 }
 
-- (NSArray *)cellViewModels{
+- (NSArray <UNDCardViewModel *>*)cellViewModels{
     _mutableCellViewModels = [[NSMutableArray alloc]init];
     NSArray *cellViewModels = [[NSArray alloc]init];
     for (UNDCard *model in _models) {

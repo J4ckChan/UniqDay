@@ -8,8 +8,15 @@
 
 #import "UNDToolsBarViewModel.h"
 
+#import "UNDCard.h"
+
 @implementation UNDToolsBarViewModel
 
-
+- (void)deleteCurrentCardModel:(UNDCard *)model{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    [realm deleteObject:model];
+    [realm commitWriteTransaction];
+}
 
 @end
