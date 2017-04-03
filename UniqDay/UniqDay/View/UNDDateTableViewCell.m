@@ -14,7 +14,7 @@
 
 @implementation UNDDateTableViewCell
 
-NSString *kRaiseDatePickerNotification = @"RaiseDatePickerNotification";
+NSString *const UNDRaiseDatePickerNotification = @"UNDRaiseDatePickerNotification";
 
 @synthesize dateBtn;
 
@@ -47,9 +47,10 @@ NSString *kRaiseDatePickerNotification = @"RaiseDatePickerNotification";
         }];
         
         [[self.dateBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
-         subscribeNext:^(id x) {
-             [[NSNotificationCenter defaultCenter] postNotificationName:kRaiseDatePickerNotification object:nil];
-        }];
+                                    subscribeNext:^(id x) {
+                                        [[NSNotificationCenter defaultCenter]
+                                            postNotificationName:UNDRaiseDatePickerNotification object:nil];
+                                    }];
     }
     return self;
 }

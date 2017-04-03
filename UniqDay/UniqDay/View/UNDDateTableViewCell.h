@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString *kRaiseDatePickerNotification;
+extern NSString *const UNDRaiseDatePickerNotification;
 
 @interface UNDDateTableViewCell : UITableViewCell
 

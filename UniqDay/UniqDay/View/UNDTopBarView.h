@@ -13,11 +13,8 @@
 @interface UNDTopBarView : UIView
 
 @property (nonatomic,strong) UNDTopBarViewModel *viewModel;
-
 @property (nonatomic,strong) UIButton *moreBtn;
 @property (nonatomic,strong) UIButton *allBtn;
 @property (nonatomic,strong) UILabel *indexLabel;
-
-- (void)refreshIndex;
 
 @end

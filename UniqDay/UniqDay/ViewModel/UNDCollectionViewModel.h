@@ -18,5 +18,4 @@
 - (void)sortByCreatedDay;
 - (void)sortByDate;
 
-
 @end

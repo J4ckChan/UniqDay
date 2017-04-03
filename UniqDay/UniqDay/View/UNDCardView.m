@@ -17,8 +17,6 @@
 
 @implementation UNDCardView
 
-@synthesize imageView,titleLabel,timeLabel,dayCountlabel;
-
 - (instancetype)init{
     self = [super init];
     if (self) {
@@ -26,68 +24,68 @@
         self.layer.cornerRadius                = 5;
         self.clipsToBounds                     = YES;
 
-        self.imageView                         = [[UIImageView alloc]init];
+        _imageView                         = [[UIImageView alloc]init];
 
         self.backgroundColor                   = [UIColor whiteColor];
 
-        self.titleLabel                        = [[UILabel alloc]init];
-        self.titleLabel.font                   = [UIFont systemFontOfSize:17 weight:UIFontWeightBold];
+        _titleLabel                        = [[UILabel alloc]init];
+        _titleLabel.font                   = [UIFont systemFontOfSize:17 weight:UIFontWeightBold];
 
-        self.timeLabel                         = [[UILabel alloc]init];
-        self.timeLabel.font                    = [UIFont systemFontOfSize:14];
+        _timeLabel                         = [[UILabel alloc]init];
+        _timeLabel.font                    = [UIFont systemFontOfSize:14];
 
-        self.dayCountlabel                     = [[UILabel alloc]init];
-        self.dayCountlabel.font                = [UIFont systemFontOfSize:30 weight:UIFontWeightLight];
-        self.dayCountlabel.textColor           = [UIColor lightGrayColor];
+        _dayCountlabel                     = [[UILabel alloc]init];
+        _dayCountlabel.font                = [UIFont systemFontOfSize:30 weight:UIFontWeightLight];
+        _dayCountlabel.textColor           = [UIColor lightGrayColor];
 
-        self.daysSinceLabel                    = [[UILabel alloc]init];
-        self.daysSinceLabel.text               = @"DAYS SINCE";
-        self.daysSinceLabel.textAlignment      = NSTextAlignmentCenter;
-        self.daysSinceLabel.textColor          = [UIColor whiteColor];
-        self.daysSinceLabel.font               = [UIFont systemFontOfSize:11 weight:UIFontWeightBold];
-        self.daysSinceLabel.backgroundColor    = [UIColor lightGrayColor];
-        self.daysSinceLabel.layer.cornerRadius = 2;
-        self.daysSinceLabel.clipsToBounds      = YES;
+        _daysSinceLabel                    = [[UILabel alloc]init];
+        _daysSinceLabel.text               = @"DAYS SINCE";
+        _daysSinceLabel.textAlignment      = NSTextAlignmentCenter;
+        _daysSinceLabel.textColor          = [UIColor whiteColor];
+        _daysSinceLabel.font               = [UIFont systemFontOfSize:11 weight:UIFontWeightBold];
+        _daysSinceLabel.backgroundColor    = [UIColor lightGrayColor];
+        _daysSinceLabel.layer.cornerRadius = 2;
+        _daysSinceLabel.clipsToBounds      = YES;
 
-        [self addSubview:self.imageView];
-        [self addSubview:self.titleLabel];
-        [self addSubview:self.timeLabel];
-        [self addSubview:self.dayCountlabel];
-        [self addSubview:self.daysSinceLabel];
+        [self addSubview:_imageView];
+        [self addSubview:_titleLabel];
+        [self addSubview:_timeLabel];
+        [self addSubview:_dayCountlabel];
+        [self addSubview:_daysSinceLabel];
         
         CGFloat imageViewHeight = ([UIScreen mainScreen].bounds.size.height - 120 - 32)/7.0 * 5.0;
         NSNumber *imageViewHeightNum = [NSNumber numberWithFloat:imageViewHeight];
         
-        [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.mas_top);
             make.left.equalTo(self.mas_left);
             make.right.equalTo(self.mas_right);
             make.height.equalTo(imageViewHeightNum);
         }];
         
-        [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.imageView.mas_bottom).offset(8);
+        [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_imageView.mas_bottom).offset(8);
             make.left.equalTo (self).offset(16);
             make.right.equalTo(self).offset(-16);
         }];
         
-        [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.titleLabel.mas_bottom).offset(2);
-            make.left.equalTo(self.titleLabel);
-            make.right.equalTo(self.titleLabel);
+        [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_titleLabel.mas_bottom).offset(2);
+            make.left.equalTo(_titleLabel);
+            make.right.equalTo(_titleLabel);
         }];
         
-        [self.dayCountlabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_dayCountlabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self).offset(16);
             make.bottom.equalTo(self).offset(-8);
             make.width.equalTo(@200);
         }];
         
-        self.daysSinceLabel.text = NSLocalizedString(@"DAYS SINCE", nil);
+        _daysSinceLabel.text = NSLocalizedString(@"DAYS SINCE", nil);
 
-        [self.daysSinceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_daysSinceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self).offset(-16);
-            make.centerY.equalTo(self.dayCountlabel);
+            make.centerY.equalTo(_dayCountlabel);
             make.width.equalTo(@76);
             make.height.equalTo(@20);
         }];

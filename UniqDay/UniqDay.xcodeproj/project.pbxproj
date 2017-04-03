@@ -19,7 +19,6 @@
 		3D3634C41DF71965001E3A6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D3634C21DF71965001E3A6E /* LaunchScreen.storyboard */; };
 		3D3634CF1DF71966001E3A6E /* UniqDayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3634CE1DF71966001E3A6E /* UniqDayTests.m */; };
 		3D3634DA1DF71966001E3A6E /* UniqDayUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3634D91DF71966001E3A6E /* UniqDayUITests.m */; };
-		3D8559F21E20CABE0044B818 /* UNDMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8559F11E20CABE0044B818 /* UNDMainView.m */; };
 		3DB1C03B1E8034E90062442A /* UNDTopBarViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB1C03A1E8034E90062442A /* UNDTopBarViewModel.m */; };
 		3DB463E71E56020F003D58F3 /* UNDCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB463E61E56020F003D58F3 /* UNDCardViewModel.m */; };
 		3DBB01A21E33939800963E74 /* UNDTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBB01A11E33939800963E74 /* UNDTitleTableViewCell.m */; };
@@ -79,8 +78,6 @@
 		3D3634D51DF71966001E3A6E /* UniqDayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UniqDayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3634D91DF71966001E3A6E /* UniqDayUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UniqDayUITests.m; sourceTree = "<group>"; };
 		3D3634DB1DF71966001E3A6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3D8559F01E20CABE0044B818 /* UNDMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDMainView.h; path = View/UNDMainView.h; sourceTree = "<group>"; };
-		3D8559F11E20CABE0044B818 /* UNDMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDMainView.m; path = View/UNDMainView.m; sourceTree = "<group>"; };
 		3DB1C0391E8034E90062442A /* UNDTopBarViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDTopBarViewModel.h; path = ViewModel/UNDTopBarViewModel.h; sourceTree = "<group>"; };
 		3DB1C03A1E8034E90062442A /* UNDTopBarViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDTopBarViewModel.m; path = ViewModel/UNDTopBarViewModel.m; sourceTree = "<group>"; };
 		3DB463E51E56020F003D58F3 /* UNDCardViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDCardViewModel.h; path = ViewModel/UNDCardViewModel.h; sourceTree = "<group>"; };
@@ -265,8 +262,6 @@
 			isa = PBXGroup;
 			children = (
 				3D76E8701E2A1D7D00D50D99 /* AddCardView */,
-				3D8559F01E20CABE0044B818 /* UNDMainView.h */,
-				3D8559F11E20CABE0044B818 /* UNDMainView.m */,
 				3DC509991E5C8B0B00282E46 /* UNDTopBarView.h */,
 				3DC5099A1E5C8B0B00282E46 /* UNDTopBarView.m */,
 				3DC15D7B1E7B0E9B00B1789F /* UNDCardViewCell.h */,
@@ -499,7 +494,6 @@
 				3DD02D7B1E4A089500414B51 /* UNDImageTableViewCell.m in Sources */,
 				3DC5099B1E5C8B0B00282E46 /* UNDTopBarView.m in Sources */,
 				3D139C8C1E399259006DDC23 /* UNDDateTableViewCell.m in Sources */,
-				3D8559F21E20CABE0044B818 /* UNDMainView.m in Sources */,
 				3DBB567C1E6DC5C90028E334 /* UNDToolsBarViewModel.m in Sources */,
 				3DEB7B2B1E2538F00067311D /* UNDAddCardView.m in Sources */,
 				3D201C591E12D6580067BFF5 /* UNDViewController.m in Sources */,

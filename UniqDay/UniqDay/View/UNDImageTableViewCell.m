@@ -16,9 +16,7 @@
     UIScrollView *_scrollView;
 }
 
-@synthesize addImageBtn,imageArray;
-
-NSString *kAddImageNotification = @"AddImageNotification";
+NSString *const UNDAddImageNotification = @"UNDAddImageNotification";
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -67,12 +65,12 @@ NSString *kAddImageNotification = @"AddImageNotification";
             self.addImageBtn.clipsToBounds = YES;
             self.addImageBtn.layer.cornerRadius = 28;
             [[self.addImageBtn rac_signalForControlEvents:UIControlEventTouchUpInside]
-                subscribeNext:^(id x) {
-                    [self sendAddImageNotification];
-                }];
+                                            subscribeNext:^(id x) {
+                                                [self sendAddImageNotification];
+                                            }];
             [contentView addSubview:self.addImageBtn];
             
-            [addImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            [_addImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(@16);
                 make.width.mas_equalTo(@56);
                 make.top.equalTo(@10);
@@ -99,7 +97,7 @@ NSString *kAddImageNotification = @"AddImageNotification";
                 if (lastView != nil) {
                     make.left.mas_equalTo(lastView.mas_right).offset(12);
                 }else{
-                    make.left.equalTo(addImageBtn.mas_right).offset(12);
+                    make.left.equalTo(_addImageBtn.mas_right).offset(12);
                 }
                 make.width.mas_equalTo(imageWidth);
                 make.top.equalTo(@8);
@@ -155,7 +153,7 @@ NSString *kAddImageNotification = @"AddImageNotification";
 #pragma mark - notification
 
 - (void)sendAddImageNotification{
-    [[NSNotificationCenter defaultCenter]postNotificationName:kAddImageNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UNDAddImageNotification object:nil];
 }
 
 @end

@@ -12,8 +12,8 @@
 
 @interface UNDBottomBarView : UIView
 
-- (RACSignal*)rac_addCardSignal;
-- (RACSignal *)rac_dayCountOrder;
-- (RACSignal *)rac_CreatedDateOder;
+@property (nonatomic,strong) UIButton *addBtn;
+@property (nonatomic,strong) UIButton *dayCountOrderBtn;
+@property (nonatomic,strong) UIButton *listBtn;
 
 @end

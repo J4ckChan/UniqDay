@@ -19,7 +19,7 @@
 @interface UNDCollectionViewModel ()
 
 @property (nonatomic,strong) RLMResults *models;
-@property (nonatomic,readwrite,copy) NSMutableArray *mutableCellViewModels;
+@property (nonatomic,copy) NSMutableArray *mutableCellViewModels;
 
 @end
 
@@ -45,7 +45,7 @@
 }
 
 - (NSArray <UNDCardViewModel *>*)cellViewModels{
-    _mutableCellViewModels = [[NSMutableArray alloc]init];
+    _mutableCellViewModels  = [[NSMutableArray alloc]init];
     NSArray *cellViewModels = [[NSArray alloc]init];
     for (UNDCard *model in _models) {
         UNDCardViewModel *cardViewModel = [[UNDCardViewModel alloc] initWithModel:model];

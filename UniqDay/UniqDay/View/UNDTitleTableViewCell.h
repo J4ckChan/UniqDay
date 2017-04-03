@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString *kRaiseAddCardViewNotification;
+extern NSString *const UNDRaiseAddCardViewNotification;
 
 @interface UNDTitleTableViewCell : UITableViewCell
 

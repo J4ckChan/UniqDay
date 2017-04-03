@@ -10,11 +10,7 @@
 #import <Masonry/Masonry.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
-@implementation UNDBottomBarView{
-    UIButton *_addBtn;
-    UIButton *_dayCountOrderBtn;
-    UIButton *_listBtn;
-}
+@implementation UNDBottomBarView
 
 - (instancetype)init{
     self = [super init];
@@ -50,18 +46,6 @@
         }];
     }
     return self;
-}
-
-- (RACSignal*)rac_addCardSignal{
-    return [_addBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
-}
-
-- (RACSignal *)rac_dayCountOrder{
-    return [_dayCountOrderBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
-}
-
-- (RACSignal *)rac_CreatedDateOder{
-    return [_listBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
 }
 
 @end

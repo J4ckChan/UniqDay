@@ -65,7 +65,7 @@
 
 static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
 
-#pragma mark - life cycle
+#pragma mark - View Lifecyle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -74,7 +74,6 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     _viewWidth  = [UIScreen mainScreen].bounds.size.width;
     _viewHeight = [UIScreen mainScreen].bounds.size.height;
     self.antimationConstraints = [NSMutableArray new];
-
     self.view.backgroundColor = [UIColor colorWithRed:20 green:22 blue:27 alpha:0];
     
     [self addTopBar];
@@ -92,8 +91,6 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
 - (void)dealloc{
     [self.token stop];
 }
-
-#pragma mark - TopBarView & CollectionView & BottomBarView
 
 - (void)addTopBar{
     self.topBar = [[UNDTopBarView alloc]init];
@@ -147,29 +144,32 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
         make.width.mas_equalTo(_viewWidth);
         make.height.mas_equalTo(44);
     }];
-    
-    [self.bottomBar.rac_addCardSignal subscribeNext:^(id x) {
+
+    self.bottomBar.addBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
         [self showAddCardView];
+        return [RACSignal empty];
     }];
     
-    [self.bottomBar.rac_dayCountOrder subscribeNext:^(id x) {
+    self.bottomBar.dayCountOrderBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
         [self.collectionViewModel sortByDate];
         [self.collectionView reloadData];
+        return [RACSignal empty];
     }];
     
-    [self.bottomBar.rac_CreatedDateOder subscribeNext:^(id x) {
+    self.bottomBar.listBtn.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [self.collectionViewModel sortByCreatedDay];
         [self.collectionView reloadData];
+        return [RACSignal empty];
     }];
 }
 
-#pragma mark - ToolBar
+#pragma mark - IBActions
 
 - (void)showToolBar{
     
     self.toolsBarBgView                 = [[UIView alloc]init];
     self.toolsBarBgView.backgroundColor = [UIColor clearColor];
-    UITapGestureRecognizer *tap         = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideToolsBar)];
+    UITapGestureRecognizer *tap         = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideToolsBar:)];
     [self.toolsBarBgView addGestureRecognizer:tap];
     [self.view addSubview:self.toolsBarBgView];
     [self.toolsBarBgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -206,7 +206,7 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     }];    
 }
 
-- (void)hideToolsBar{
+- (void)hideToolsBar:(UITapGestureRecognizer *)recognizer{
     
     for (MASConstraint *constraint in self.antimationConstraints) {
         constraint.offset = 8;
@@ -228,9 +228,6 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     }];
 }
 
-#pragma mark - BottomBarView
-
-#pragma mark - AddCardView 
 
 - (void)showAddCardView{
     
@@ -248,20 +245,20 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
         self.addCardView.frame = addCardViewFrame0;
     } completion:^(BOOL finished) {
         //rac -- notification
-        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kRaiseAddCardViewNotification object:nil]
-         subscribeNext:^(NSNotification *notification) {
-             [self raiseAddCardView];
-         }];
+        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UNDRaiseAddCardViewNotification object:nil]
+                                                        subscribeNext:^(NSNotification *notification) {
+                                                            [self raiseAddCardView];
+                                                        }];
         
-        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kRaiseDatePickerNotification object:nil]
-         subscribeNext:^(NSNotification *notification) {
-             [self raiseDatePicker];
-         }];
+        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UNDRaiseDatePickerNotification object:nil]
+                                                        subscribeNext:^(NSNotification *notification) {
+                                                            [self raiseDatePicker];
+                                                        }];
         
-        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kAddImageNotification object:nil]
-         subscribeNext:^(id x) {
-             //add image action
-         }];
+        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UNDAddImageNotification object:nil]
+                                                        subscribeNext:^(id x) {
+                                                                //add image action
+                                                        }];
         
         //rac
         [[self.addCardView cancelSignal] subscribeNext:^(id x) {
@@ -271,7 +268,6 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
         [[self.addCardView rac_doneSignal] subscribeNext:^(id x) {
             [self addCardModelResult];
         }];
-        
         
         //init addCardViewModel
         self.addCardViewModel = [[UNDAddCardViewModel alloc]init];
@@ -299,6 +295,7 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     }];
 }
 
+
 - (void)dismissAddCardView{
     
     [self.addCardView dismissKeyboard];
@@ -316,7 +313,6 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     }];
 }
 
-#pragma mark - Date Picker
 
 - (void)raiseDatePicker{
     
@@ -358,12 +354,6 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     }
 }
 
-- (NSString *)dateToDateStr:(NSDate *)date{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    dateFormatter.dateStyle = kCFDateFormatterMediumStyle;
-    NSString *dateStr = [dateFormatter stringFromDate:date];
-    return dateStr;
-}
 
 - (void)dismissDatePicker{
     if (self.datePicker != nil) {
@@ -377,8 +367,6 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
         }];
     }
 }
-
-#pragma mark - AddCardViewBackgroundView
 
 - (void)showAddCardViewBackgroundView{
     //Blur Effect
@@ -421,11 +409,10 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
         }
         
         [weakSelf.collectionView reloadData];
-        [_topBar refreshIndex];
     }];
 }
 
-#pragma mark - else
+#pragma mark - Private
 
 - (void)addCardModelResult{
     UNDAddCardModelResult result = [self.addCardViewModel addCardModel];
@@ -453,6 +440,13 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     }
 }
 
+- (NSString *)dateToDateStr:(NSDate *)date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    dateFormatter.dateStyle = kCFDateFormatterMediumStyle;
+    NSString *dateStr = [dateFormatter stringFromDate:date];
+    return dateStr;
+}
+
 
 #pragma mark - UICollectionViewDelegate & DataSource
 
@@ -476,5 +470,6 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     UNDCard *indexModel = self.collectionViewModel.cellViewModels[index].model;
     self.collectionViewModel.currentModel = indexModel;
 }
+
 
 @end

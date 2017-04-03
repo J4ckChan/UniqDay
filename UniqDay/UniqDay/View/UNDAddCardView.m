@@ -11,11 +11,11 @@
 
 
 typedef enum : NSUInteger {
-    AddCardTableViewTitleCell,
-    AddCardTableViewDateCell,
-    AddCardTableViewImageCell,
-    AddCardTableViewRowNum,
-}AddCardTableCell;
+    UNDAddCardTableViewTitleCell,
+    UNDAddCardTableViewDateCell,
+    UNDAddCardTableViewImageCell,
+    UNDAddCardTableViewRowNum,
+}UNDAddCardTableCell;
 
 @interface UNDAddCardView ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -26,9 +26,9 @@ typedef enum : NSUInteger {
 
 @implementation UNDAddCardView
 
-static NSString *reuseIdetifierForTitle = @"Title";
-static NSString *reuseIdetifierForDate  = @"Date";
-static NSString *reuseIdetifierForImage  = @"Image";
+static NSString * const UNDReuseIdetifierForTitle = @"UNDReuseIdetifierForTitle";
+static NSString * const UNDReuseIdetifierForDate  = @"UNDReuseIdetifierForDate";
+static NSString * const UNDReuseIdetifierForImage = @"UNDReuseIdetifierForImage";
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -79,9 +79,9 @@ static NSString *reuseIdetifierForImage  = @"Image";
             make.height.equalTo(btnHeightNum);
         }];
         
-        [self.tableView registerClass:[UNDTitleTableViewCell class] forCellReuseIdentifier:reuseIdetifierForTitle];
-        [self.tableView registerClass:[UNDDateTableViewCell class] forCellReuseIdentifier:reuseIdetifierForDate];
-        [self.tableView registerClass:[UNDImageTableViewCell class] forCellReuseIdentifier:reuseIdetifierForImage];
+        [self.tableView registerClass:[UNDTitleTableViewCell class] forCellReuseIdentifier:UNDReuseIdetifierForTitle];
+        [self.tableView registerClass:[UNDDateTableViewCell class] forCellReuseIdentifier:UNDReuseIdetifierForDate];
+        [self.tableView registerClass:[UNDImageTableViewCell class] forCellReuseIdentifier:UNDReuseIdetifierForImage];
         
     }
     return self;
@@ -90,11 +90,11 @@ static NSString *reuseIdetifierForImage  = @"Image";
 #pragma mark - tableview delegate & datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return AddCardTableViewRowNum;
+    return UNDAddCardTableViewRowNum;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == AddCardTableViewImageCell) {
+    if (indexPath.row == UNDAddCardTableViewImageCell) {
         return 78;
     }else{
         return 60;
@@ -104,12 +104,15 @@ static NSString *reuseIdetifierForImage  = @"Image";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell *cell;
-    if (indexPath.row == AddCardTableViewTitleCell) {
-        cell = (UNDTitleTableViewCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdetifierForTitle forIndexPath:indexPath];
-    }else if (indexPath.row == AddCardTableViewDateCell){
-        cell = (UNDDateTableViewCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdetifierForDate forIndexPath:indexPath];
-    }else if (indexPath.row == AddCardTableViewImageCell){
-        cell = (UNDImageTableViewCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdetifierForImage forIndexPath:indexPath];
+    if (indexPath.row == UNDAddCardTableViewTitleCell) {
+        cell = (UNDTitleTableViewCell*)[tableView dequeueReusableCellWithIdentifier:UNDReuseIdetifierForTitle
+                                                                       forIndexPath:indexPath];
+    }else if (indexPath.row == UNDAddCardTableViewDateCell){
+        cell = (UNDDateTableViewCell*)[tableView dequeueReusableCellWithIdentifier:UNDReuseIdetifierForDate
+                                                                      forIndexPath:indexPath];
+    }else if (indexPath.row == UNDAddCardTableViewImageCell){
+        cell = (UNDImageTableViewCell*)[tableView dequeueReusableCellWithIdentifier:UNDReuseIdetifierForImage
+                                                                       forIndexPath:indexPath];
     }
     return  cell;
 }
@@ -134,16 +137,16 @@ static NSString *reuseIdetifierForImage  = @"Image";
 }
 
 - (void)clearData{
-    for (NSUInteger i = 0; i < AddCardTableViewRowNum ; i++) {
-        if (i == AddCardTableViewTitleCell) {
+    for (NSUInteger i = 0; i < UNDAddCardTableViewRowNum ; i++) {
+        if (i == UNDAddCardTableViewTitleCell) {
             NSIndexPath *indePath = [NSIndexPath indexPathForRow:0 inSection:0];
             UNDTitleTableViewCell *cell = [_tableView cellForRowAtIndexPath:indePath];
             [cell resetTitle];
-        }else if (i == AddCardTableViewDateCell){
+        }else if (i == UNDAddCardTableViewDateCell){
             NSIndexPath *indePath = [NSIndexPath indexPathForRow:1 inSection:0];
             UNDDateTableViewCell *cell = [_tableView cellForRowAtIndexPath:indePath];
             [cell resetDate];
-        }else if (i == AddCardTableViewImageCell){
+        }else if (i == UNDAddCardTableViewImageCell){
             NSIndexPath *indePath = [NSIndexPath indexPathForRow:2 inSection:0];
             UNDImageTableViewCell *cell = [_tableView cellForRowAtIndexPath:indePath];
             [cell resetAllImageView:cell.imageArray];

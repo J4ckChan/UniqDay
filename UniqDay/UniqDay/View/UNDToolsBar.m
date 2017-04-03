@@ -11,29 +11,27 @@
 
 @implementation UNDToolsBar
 
-@synthesize editBtn,annivBtn,shareBtn,deleteBtn;
-
 - (instancetype)init{
     self = [super init];
     if (self) {
         
-        self.editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.editBtn setImage:[UIImage imageNamed:@"editBtn"] forState:UIControlStateNormal];
-        [self addSubview:self.editBtn];
+        _editBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_editBtn setImage:[UIImage imageNamed:@"editBtn"] forState:UIControlStateNormal];
+        [self addSubview:_editBtn];
         
-        self.annivBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.annivBtn setImage:[UIImage imageNamed:@"annivBtn"] forState:UIControlStateNormal];
-        [self addSubview:self.annivBtn];
+        _annivBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_annivBtn setImage:[UIImage imageNamed:@"annivBtn"] forState:UIControlStateNormal];
+        [self addSubview:_annivBtn];
         
-        self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.shareBtn setImage:[UIImage imageNamed:@"shareBtn"] forState:UIControlStateNormal];
-        [self addSubview:self.shareBtn];
+        _shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_shareBtn setImage:[UIImage imageNamed:@"shareBtn"] forState:UIControlStateNormal];
+        [self addSubview:_shareBtn];
         
-        self.deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.deleteBtn setImage:[UIImage imageNamed:@"deleteBtn"] forState:UIControlStateNormal];
-        [self addSubview:self.deleteBtn];
+        _deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_deleteBtn setImage:[UIImage imageNamed:@"deleteBtn"] forState:UIControlStateNormal];
+        [self addSubview:_deleteBtn];
         
-        NSArray *btnArray = @[self.deleteBtn,self.shareBtn,self.annivBtn,self.editBtn];
+        NSArray *btnArray = @[_deleteBtn,_shareBtn,_annivBtn,_editBtn];
         CGFloat width = [UIScreen mainScreen].bounds.size.width - 32;
         CGFloat space = - (width/8);
         

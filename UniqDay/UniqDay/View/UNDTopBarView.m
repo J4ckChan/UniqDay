@@ -17,18 +17,18 @@
     self = [super init];
     if (self) {
         
-        _viewModel = [[UNDTopBarViewModel alloc]init];
-        
-        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _viewModel            = [[UNDTopBarViewModel alloc]init];
+
+        _moreBtn              = [UIButton buttonWithType:UIButtonTypeCustom];
         [_moreBtn setImage:[UIImage imageNamed:@"moreBtn"] forState:UIControlStateNormal];
         [self addSubview:_moreBtn];
-        
-        _allBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+
+        _allBtn               = [UIButton buttonWithType:UIButtonTypeCustom];
         [_allBtn setImage:[UIImage imageNamed:@"allBtn"] forState:UIControlStateNormal];
         [self addSubview:_allBtn];
-        
-        _indexLabel = [[UILabel alloc]init];
-        _indexLabel.text = _viewModel.indexStr;
+
+        _indexLabel           = [[UILabel alloc]init];
+        _indexLabel.text      = _viewModel.indexStr;
         RAC(_indexLabel,text) = RACObserve(_viewModel, indexStr);
         _indexLabel.textColor = [UIColor whiteColor];
         [self addSubview:_indexLabel];
@@ -52,12 +52,5 @@
     }
     return self;
 }
-
-- (void)refreshIndex{
-//    [_viewModel refreshIndex];
-//    _indexLabel.text = _viewModel.indexStr;
-}
-
-
 
 @end

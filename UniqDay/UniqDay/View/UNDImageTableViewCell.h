@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString *kAddImageNotification;
+extern NSString *const UNDAddImageNotification;
 
 @interface UNDImageTableViewCell : UITableViewCell
 

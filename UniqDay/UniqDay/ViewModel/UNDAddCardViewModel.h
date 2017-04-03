@@ -21,13 +21,12 @@ typedef enum : NSUInteger {
 
 @interface UNDAddCardViewModel : RVMViewModel
 
-@property (nonatomic,strong) NSString *title;
+@property (nonatomic,copy) NSString *title;
 @property (nonatomic,strong) NSDate *date;
 @property (nonatomic,strong) UIImage *image;
-
-- (UNDAddCardModelResult)addCardModel;
-
 @property (nonatomic,strong) RACCommand *rac_addCardModelCommand;
 @property (nonatomic,copy) NSString *statusMessage;
+
+- (UNDAddCardModelResult)addCardModel;
 
 @end

@@ -15,7 +15,7 @@
 
 @end
 
-NSString *kRaiseAddCardViewNotification = @"RaiseAddCardViewNotification";
+NSString *const UNDRaiseAddCardViewNotification = @"UNDRaiseAddCardViewNotification";
 
 @implementation UNDTitleTableViewCell
 
@@ -53,7 +53,7 @@ NSString *kRaiseAddCardViewNotification = @"RaiseAddCardViewNotification";
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRaiseAddCardViewNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UNDRaiseAddCardViewNotification object:nil];
 }
 
 - (void)resetTitle{

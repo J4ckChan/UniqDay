@@ -23,8 +23,6 @@
 
 @implementation UNDAddCardViewModel
 
-@synthesize title,date,image;
-
 - (instancetype)init{
     self = [super init];
     if (self) {

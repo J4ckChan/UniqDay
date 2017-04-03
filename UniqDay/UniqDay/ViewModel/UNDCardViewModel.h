@@ -12,9 +12,9 @@
 
 @interface UNDCardViewModel : RVMViewModel
 
-@property (nonatomic,strong) NSString *title;
-@property (nonatomic,strong) NSString *dateStr;
-@property (nonatomic,strong) NSString *dayCountStr;
+@property (nonatomic,copy) NSString *title;
+@property (nonatomic,copy) NSString *dateStr;
+@property (nonatomic,copy) NSString *dayCountStr;
 @property (nonatomic,strong) UIImage *image;
 
 @property (nonatomic,strong) UNDCard *model;
