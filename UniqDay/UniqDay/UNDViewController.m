@@ -16,9 +16,9 @@
 #import "UNDCardView.h"
 #import "UNDAddCardView.h"
 #import "UNDTopBarView.h"
-#import "UNDToolsBar.h"
 #import "UNDBottomBarView.h"
 #import "UNDCardViewCell.h"
+#import "UNDToolsBarView.h"
 
 //ViewModel
 #import "UNDAddCardViewModel.h"
@@ -34,13 +34,13 @@
 @interface UNDViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic,strong) UNDTopBarView *topBar;
-@property (nonatomic,strong) UNDToolsBar *toolsBar;
 @property (nonatomic,strong) UIView *toolsBarBgView;
 @property (nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic,strong) UNDBottomBarView *bottomBar;
 @property (nonatomic,strong) UNDAddCardView *addCardView;
 @property (nonatomic,strong) UIDatePicker *datePicker;
 @property (nonatomic,strong) UIVisualEffectView *addCardBgView;
+@property (nonatomic,strong) UNDToolsBarView *toolsBarView;
 
 //ViewModel
 @property (nonatomic,strong) UNDAddCardViewModel *addCardViewModel;
@@ -61,7 +61,7 @@
     int refreshScrollViewTag;
 }
 
-@synthesize addCardView,datePicker,addCardViewModel,toolsBar;
+@synthesize addCardView,datePicker,addCardViewModel;
 
 static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
 
@@ -167,13 +167,11 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
 
 - (void)showToolBar{
     
-    self.toolsBarBgView                 = [[UIView alloc]init];
-    self.toolsBarBgView.backgroundColor = [UIColor clearColor];
-    UITapGestureRecognizer *tap         = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideToolsBar:)];
-    [self.toolsBarBgView addGestureRecognizer:tap];
-    [self.view addSubview:self.toolsBarBgView];
-    [self.toolsBarBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+    _toolsBarView = [[UNDToolsBarView alloc]initWithFrame:self.view.bounds];
+    [self.view addSubview:_toolsBarView];
+    
+    [_toolsBarView.tapToHidden.rac_gestureSignal subscribeNext:^(id x) {
+        [self hideToolsBar];
     }];
 
     self.topBar.alpha         = 0.2;
@@ -187,41 +185,27 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     [UIView animateWithDuration:0.3 animations:^{
         [self.view layoutIfNeeded];
     }];
-
-    self.toolsBar = [[UNDToolsBar alloc]init];
-    [self.toolsBarBgView addSubview:toolsBar];
-
-    [self.toolsBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topBar.mas_bottom);
-        make.width.equalTo(self.toolsBarBgView);
-        make.height.equalTo(@100);
-    }];
     
     self.toolsBarViewModel = [[UNDToolsBarViewModel alloc]init];
     
-    self.toolsBar.deleteBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+    _toolsBarView.deleteBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
         [self.toolsBarViewModel deleteCurrentCardModel:self.collectionViewModel.currentModel];
-        [self.collectionView reloadData];
+        [self hideToolsBar];
         return [RACSignal empty];
-    }];    
+    }];
+ 
 }
 
-- (void)hideToolsBar:(UITapGestureRecognizer *)recognizer{
+- (void)hideToolsBar{
     
     for (MASConstraint *constraint in self.antimationConstraints) {
         constraint.offset = 8;
     }
     
     [UIView animateWithDuration:0.3 animations:^{
-        self.toolsBar.frame = CGRectMake(0, 60, _viewWidth, 0);
-        [self.toolsBar hideButtons];
-        [self.view layoutSubviews];
+        [_toolsBarView removeFromSuperview];
+        [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
-        [self.toolsBar removeButtons];
-        [self.toolsBar removeFromSuperview];
-        self.toolsBar = nil;
-        [self.toolsBarBgView removeFromSuperview];
-        self.toolsBarBgView = nil;
         self.topBar.alpha = 1;
         self.bottomBar.alpha = 1;
         self.collectionView.alpha = 1;

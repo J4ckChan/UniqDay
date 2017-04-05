@@ -28,9 +28,9 @@
 		3DC15D801E7D6FA600B1789F /* UNDCollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC15D7F1E7D6FA600B1789F /* UNDCollectionViewModel.m */; };
 		3DC509981E5C70A800282E46 /* UNDBottomBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC509971E5C70A800282E46 /* UNDBottomBarView.m */; };
 		3DC5099B1E5C8B0B00282E46 /* UNDTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC5099A1E5C8B0B00282E46 /* UNDTopBarView.m */; };
-		3DC5099E1E5E0ADA00282E46 /* UNDToolsBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC5099D1E5E0ADA00282E46 /* UNDToolsBar.m */; };
 		3DD02D7B1E4A089500414B51 /* UNDImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DD02D7A1E4A089500414B51 /* UNDImageTableViewCell.m */; };
 		3DEB7B2B1E2538F00067311D /* UNDAddCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB7B2A1E2538F00067311D /* UNDAddCardView.m */; };
+		3DEE5C0E1E939CE2008CA95E /* UNDToolsBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEE5C0D1E939CE2008CA95E /* UNDToolsBarView.m */; };
 		3DFD38D71E4C942700945F08 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFD38D61E4C942700945F08 /* Realm.framework */; };
 		3DFD38DA1E4CBA8C00945F08 /* UNDCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD38D91E4CBA8C00945F08 /* UNDCard.m */; };
 		3DFD38DD1E4F8B4F00945F08 /* UNDAddCardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD38DC1E4F8B4F00945F08 /* UNDAddCardViewModel.m */; };
@@ -96,12 +96,12 @@
 		3DC509971E5C70A800282E46 /* UNDBottomBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDBottomBarView.m; path = View/UNDBottomBarView.m; sourceTree = "<group>"; };
 		3DC509991E5C8B0B00282E46 /* UNDTopBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDTopBarView.h; path = View/UNDTopBarView.h; sourceTree = "<group>"; };
 		3DC5099A1E5C8B0B00282E46 /* UNDTopBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDTopBarView.m; path = View/UNDTopBarView.m; sourceTree = "<group>"; };
-		3DC5099C1E5E0ADA00282E46 /* UNDToolsBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDToolsBar.h; path = View/UNDToolsBar.h; sourceTree = "<group>"; };
-		3DC5099D1E5E0ADA00282E46 /* UNDToolsBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDToolsBar.m; path = View/UNDToolsBar.m; sourceTree = "<group>"; };
 		3DD02D791E4A089500414B51 /* UNDImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDImageTableViewCell.h; path = View/UNDImageTableViewCell.h; sourceTree = "<group>"; };
 		3DD02D7A1E4A089500414B51 /* UNDImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDImageTableViewCell.m; path = View/UNDImageTableViewCell.m; sourceTree = "<group>"; };
 		3DEB7B291E2538EF0067311D /* UNDAddCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDAddCardView.h; path = View/UNDAddCardView.h; sourceTree = "<group>"; };
 		3DEB7B2A1E2538F00067311D /* UNDAddCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDAddCardView.m; path = View/UNDAddCardView.m; sourceTree = "<group>"; };
+		3DEE5C0C1E939CE2008CA95E /* UNDToolsBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDToolsBarView.h; path = View/UNDToolsBarView.h; sourceTree = "<group>"; };
+		3DEE5C0D1E939CE2008CA95E /* UNDToolsBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDToolsBarView.m; path = View/UNDToolsBarView.m; sourceTree = "<group>"; };
 		3DFD38D61E4C942700945F08 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "Pods/../build/Debug-iphoneos/Realm/Realm.framework"; sourceTree = "<group>"; };
 		3DFD38D81E4CBA8C00945F08 /* UNDCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDCard.h; path = Model/UNDCard.h; sourceTree = "<group>"; };
 		3DFD38D91E4CBA8C00945F08 /* UNDCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDCard.m; path = Model/UNDCard.m; sourceTree = "<group>"; };
@@ -270,8 +270,8 @@
 				3DC15D791E7B0E8400B1789F /* UNDCardView.m */,
 				3DC509961E5C70A800282E46 /* UNDBottomBarView.h */,
 				3DC509971E5C70A800282E46 /* UNDBottomBarView.m */,
-				3DC5099C1E5E0ADA00282E46 /* UNDToolsBar.h */,
-				3DC5099D1E5E0ADA00282E46 /* UNDToolsBar.m */,
+				3DEE5C0C1E939CE2008CA95E /* UNDToolsBarView.h */,
+				3DEE5C0D1E939CE2008CA95E /* UNDToolsBarView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -489,7 +489,6 @@
 				3DC15D7A1E7B0E8400B1789F /* UNDCardView.m in Sources */,
 				3DC15D7D1E7B0E9B00B1789F /* UNDCardViewCell.m in Sources */,
 				3D3634B61DF71965001E3A6E /* AppDelegate.m in Sources */,
-				3DC5099E1E5E0ADA00282E46 /* UNDToolsBar.m in Sources */,
 				3DC15D801E7D6FA600B1789F /* UNDCollectionViewModel.m in Sources */,
 				3DD02D7B1E4A089500414B51 /* UNDImageTableViewCell.m in Sources */,
 				3DC5099B1E5C8B0B00282E46 /* UNDTopBarView.m in Sources */,
@@ -503,6 +502,7 @@
 				3D3634B31DF71965001E3A6E /* main.m in Sources */,
 				3DB1C03B1E8034E90062442A /* UNDTopBarViewModel.m in Sources */,
 				3DFD38DA1E4CBA8C00945F08 /* UNDCard.m in Sources */,
+				3DEE5C0E1E939CE2008CA95E /* UNDToolsBarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
