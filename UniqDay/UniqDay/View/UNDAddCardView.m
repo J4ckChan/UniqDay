@@ -9,6 +9,9 @@
 #import "UNDAddCardView.h"
 #import <Masonry/Masonry.h>
 
+#import "UNDAddCardViewModel.h"
+#import "UNDCard.h"
+
 
 typedef enum : NSUInteger {
     UNDAddCardTableViewTitleCell,
@@ -17,77 +20,99 @@ typedef enum : NSUInteger {
     UNDAddCardTableViewRowNum,
 }UNDAddCardTableCell;
 
-@interface UNDAddCardView ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic,strong) UIButton *doneBtn;
-@property (nonatomic,strong) UIButton *cancelBtn;
+@interface UNDAddCardView ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
-@implementation UNDAddCardView
+@implementation UNDAddCardView{
+    UNDAddCardViewStatus status;
+}
 
 static NSString * const UNDReuseIdetifierForTitle = @"UNDReuseIdetifierForTitle";
 static NSString * const UNDReuseIdetifierForDate  = @"UNDReuseIdetifierForDate";
 static NSString * const UNDReuseIdetifierForImage = @"UNDReuseIdetifierForImage";
 
-- (instancetype)initWithFrame:(CGRect)frame{
+
+#pragma mark - View Life Cycle
+
+- (instancetype)initWithFrame:(CGRect)frame model:(UNDCard *)model{
     self = [super initWithFrame:frame];
     if (self) {
-        
-        self.clipsToBounds       = YES;
-        self.layer.cornerRadius  = 8;
-
-        _tableView               = [[UITableView alloc]init];
-        _tableView.delegate      = self;
-        _tableView.dataSource    = self;
-        _tableView.scrollEnabled = NO;
-        _cancelBtn               = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_cancelBtn setTitle:NSLocalizedString(@"CANCEL", nil) forState:UIControlStateNormal];
-        [_cancelBtn setBackgroundColor:[UIColor lightGrayColor]];
-        _doneBtn                 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_doneBtn setTitle:NSLocalizedString(@"DONE", nil) forState:UIControlStateNormal];
-        [_doneBtn setBackgroundColor:[UIColor brownColor]];
-        
-        [self addSubview:_tableView];
-        [self addSubview:_cancelBtn];
-        [self addSubview:_doneBtn];
-        
-        CGFloat tableViewHeight = 196;
-        NSNumber *tablViewHeightNum = [NSNumber numberWithFloat:tableViewHeight];
-        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.mas_top);
-            make.left.equalTo(self.mas_left);
-            make.right.equalTo(self.mas_right);
-            make.height.equalTo(tablViewHeightNum);
-        }];
-        
-        CGFloat btnHeight      = self.frame.size.height - tableViewHeight;
-        NSNumber *btnHeightNum = [NSNumber numberWithFloat:btnHeight];
-        CGFloat btnWidth       = self.frame.size.width/2;
-        NSNumber *btnWidthNum  = [NSNumber numberWithFloat:btnWidth];
-        [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left);
-            make.top.equalTo(_tableView.mas_bottom);
-            make.width.equalTo(btnWidthNum);
-            make.height.equalTo(btnHeightNum);
-        }];
-        
-        [_doneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.mas_right);
-            make.top.equalTo(_tableView.mas_bottom);
-            make.width.equalTo(btnWidthNum);
-            make.height.equalTo(btnHeightNum);
-        }];
-        
-        [self.tableView registerClass:[UNDTitleTableViewCell class] forCellReuseIdentifier:UNDReuseIdetifierForTitle];
-        [self.tableView registerClass:[UNDDateTableViewCell class] forCellReuseIdentifier:UNDReuseIdetifierForDate];
-        [self.tableView registerClass:[UNDImageTableViewCell class] forCellReuseIdentifier:UNDReuseIdetifierForImage];
-        
+        [self addCardViewLayoutSubiviews];
+        if (model) {
+            _viewModel = [[UNDAddCardViewModel alloc]initWithModel:model];
+            status = UNDModifyCardStatus;
+        }
     }
     return self;
 }
 
-#pragma mark - tableview delegate & datasource
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self addCardViewLayoutSubiviews];
+        _viewModel = [[UNDAddCardViewModel alloc]init];
+        status = UNDAddCardStatus;
+    }
+    return self;
+}
+
+- (void)addCardViewLayoutSubiviews{
+    self.clipsToBounds       = YES;
+    self.layer.cornerRadius  = 8;
+    
+    _tableView               = [[UITableView alloc]init];
+    _tableView.delegate      = self;
+    _tableView.dataSource    = self;
+    _tableView.scrollEnabled = NO;
+    _cancelBtn               = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_cancelBtn setTitle:NSLocalizedString(@"CANCEL", nil) forState:UIControlStateNormal];
+    [_cancelBtn setBackgroundColor:[UIColor lightGrayColor]];
+    _doneBtn                 = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_doneBtn setTitle:NSLocalizedString(@"DONE", nil) forState:UIControlStateNormal];
+    [_doneBtn setBackgroundColor:[UIColor brownColor]];
+    
+    [self addSubview:_tableView];
+    [self addSubview:_cancelBtn];
+    [self addSubview:_doneBtn];
+    
+    CGFloat tableViewHeight = 196;
+    NSNumber *tablViewHeightNum = [NSNumber numberWithFloat:tableViewHeight];
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_top);
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_right);
+        make.height.equalTo(tablViewHeightNum);
+    }];
+    
+    CGFloat btnHeight      = self.frame.size.height - tableViewHeight;
+    NSNumber *btnHeightNum = [NSNumber numberWithFloat:btnHeight];
+    CGFloat btnWidth       = self.frame.size.width/2;
+    NSNumber *btnWidthNum  = [NSNumber numberWithFloat:btnWidth];
+    
+    [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left);
+        make.top.equalTo(_tableView.mas_bottom);
+        make.width.equalTo(btnWidthNum);
+        make.height.equalTo(btnHeightNum);
+    }];
+    
+    [_doneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.mas_right);
+        make.top.equalTo(_tableView.mas_bottom);
+        make.width.equalTo(btnWidthNum);
+        make.height.equalTo(btnHeightNum);
+    }];
+    
+    [self.tableView registerClass:[UNDTitleTableViewCell class] forCellReuseIdentifier:UNDReuseIdetifierForTitle];
+    [self.tableView registerClass:[UNDDateTableViewCell class] forCellReuseIdentifier:UNDReuseIdetifierForDate];
+    [self.tableView registerClass:[UNDImageTableViewCell class] forCellReuseIdentifier:UNDReuseIdetifierForImage];
+}
+
+
+#pragma mark - Tableview Delegate & Datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return UNDAddCardTableViewRowNum;
@@ -103,29 +128,38 @@ static NSString * const UNDReuseIdetifierForImage = @"UNDReuseIdetifierForImage"
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell;
     if (indexPath.row == UNDAddCardTableViewTitleCell) {
-        cell = (UNDTitleTableViewCell*)[tableView dequeueReusableCellWithIdentifier:UNDReuseIdetifierForTitle
+        UNDTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:UNDReuseIdetifierForTitle
                                                                        forIndexPath:indexPath];
+        switch (status) {
+            case UNDModifyCardStatus:
+                cell.titleTextField.text = _viewModel.model.title;
+                break;
+            case UNDAddCardStatus:
+                break;
+        }
+        
+        RAC(_viewModel,title) = cell.titleTextField.rac_textSignal;
+        
+        return cell;
     }else if (indexPath.row == UNDAddCardTableViewDateCell){
-        cell = (UNDDateTableViewCell*)[tableView dequeueReusableCellWithIdentifier:UNDReuseIdetifierForDate
+        UNDDateTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:UNDReuseIdetifierForDate
+                                                                     forIndexPath:indexPath];
+        switch (status) {
+            case UNDModifyCardStatus:
+                [cell.dateBtn setTitle:[self dateToDateStr:_viewModel.model.date] forState:UIControlStateNormal];
+                break;
+            case UNDAddCardStatus:
+                break;
+        }
+        
+        return cell;
+    }else{
+        UNDImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:UNDReuseIdetifierForImage
                                                                       forIndexPath:indexPath];
-    }else if (indexPath.row == UNDAddCardTableViewImageCell){
-        cell = (UNDImageTableViewCell*)[tableView dequeueReusableCellWithIdentifier:UNDReuseIdetifierForImage
-                                                                       forIndexPath:indexPath];
+        RAC(_viewModel,image) = RACObserve(cell,image);
+        return cell;
     }
-    return  cell;
-}
-
-
-#pragma mark - rac signal
-
-- (RACSignal *)cancelSignal{
-    return [self.cancelBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
-}
-
-- (RACSignal *)rac_doneSignal{
-    return [self.doneBtn rac_signalForControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark -
@@ -154,17 +188,11 @@ static NSString * const UNDReuseIdetifierForImage = @"UNDReuseIdetifierForImage"
     }
 }
 
-- (RACSignal *)rac_titleSignal{
-    NSIndexPath *indePath = [NSIndexPath indexPathForRow:0 inSection:0];
-    UNDTitleTableViewCell *cell = [_tableView cellForRowAtIndexPath:indePath];
-    return cell.titleTextField.rac_textSignal;
+- (NSString *)dateToDateStr:(NSDate *)date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    dateFormatter.dateStyle = kCFDateFormatterMediumStyle;
+    NSString *dateStr = [dateFormatter stringFromDate:date];
+    return dateStr;
 }
-
-- (RACSignal *)rac_imageSignal{
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
-    UNDImageTableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
-    return RACObserve(cell, image);
-}
-
 
 @end

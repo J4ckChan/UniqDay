@@ -17,7 +17,7 @@ typedef enum : NSUInteger {
     UNDAddCardModelSuccess,
 } UNDAddCardModelResult;
 
-@class RACCommand;
+@class RACCommand,UNDCard;
 
 @interface UNDAddCardViewModel : RVMViewModel
 
@@ -26,7 +26,10 @@ typedef enum : NSUInteger {
 @property (nonatomic,strong) UIImage *image;
 @property (nonatomic,strong) RACCommand *rac_addCardModelCommand;
 @property (nonatomic,copy) NSString *statusMessage;
+@property (nonatomic,strong) UNDCard *model;
 
+- (instancetype)initWithModel:(UNDCard *)model;
 - (UNDAddCardModelResult)addCardModel;
+- (UNDAddCardModelResult)modifyCardMode:(UNDCard *)model;
 
 @end

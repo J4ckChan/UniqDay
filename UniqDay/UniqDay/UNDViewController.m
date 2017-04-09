@@ -43,7 +43,6 @@
 @property (nonatomic,strong) UNDToolsBarView *toolsBarView;
 
 //ViewModel
-@property (nonatomic,strong) UNDAddCardViewModel *addCardViewModel;
 @property (nonatomic,strong) UNDCollectionViewModel *collectionViewModel;
 @property (nonatomic,strong) UNDToolsBarViewModel *toolsBarViewModel;
 
@@ -59,9 +58,10 @@
     CGFloat _viewWidth;
     CGFloat _viewHeight;
     int refreshScrollViewTag;
+    UNDAddCardViewStatus status;
 }
 
-@synthesize addCardView,datePicker,addCardViewModel;
+@synthesize addCardView,datePicker;
 
 static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
 
@@ -102,7 +102,7 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     }];
     
     self.topBar.moreBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
-        [self showToolBar];
+        [self presentToolBarView];
         return [RACSignal empty];
     }];
 }
@@ -146,7 +146,7 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     }];
 
     self.bottomBar.addBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
-        [self showAddCardView];
+        [self addCard];
         return [RACSignal empty];
     }];
     
@@ -165,13 +165,13 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
 
 #pragma mark - IBActions
 
-- (void)showToolBar{
+- (void)presentToolBarView{
     
     _toolsBarView = [[UNDToolsBarView alloc]initWithFrame:self.view.bounds];
     [self.view addSubview:_toolsBarView];
     
     [_toolsBarView.tapToHidden.rac_gestureSignal subscribeNext:^(id x) {
-        [self hideToolsBar];
+        [self dismissToolsBarView];
     }];
 
     self.topBar.alpha         = 0.2;
@@ -190,13 +190,17 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     
     _toolsBarView.deleteBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
         [self.toolsBarViewModel deleteCurrentCardModel:self.collectionViewModel.currentModel];
-        [self hideToolsBar];
+        [self dismissToolsBarView];
         return [RACSignal empty];
     }];
- 
+    
+    _toolsBarView.editBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+        [self modifyCard];
+        return [RACSignal empty];
+    }];
 }
 
-- (void)hideToolsBar{
+- (void)dismissToolsBarView{
     
     for (MASConstraint *constraint in self.antimationConstraints) {
         constraint.offset = 8;
@@ -213,55 +217,15 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
 }
 
 
-- (void)showAddCardView{
-    
-    [self showAddCardViewBackgroundView];
-    
-    CGRect addCardViewFrame0 = CGRectMake(8, _viewHeight - 264, _viewWidth - 16, 256);
-    CGRect addCardViewFrame1 = CGRectMake(8, _viewHeight, _viewWidth - 16, 256);
-    
-    if (self.addCardView == nil) {
-        self.addCardView = [[UNDAddCardView alloc]initWithFrame:addCardViewFrame1];
-        [self.view addSubview:self.addCardView];
-    }
-    
-    [UIView animateWithDuration:0.2 animations:^{
-        self.addCardView.frame = addCardViewFrame0;
-    } completion:^(BOOL finished) {
-        //rac -- notification
-        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UNDRaiseAddCardViewNotification object:nil]
-                                                        subscribeNext:^(NSNotification *notification) {
-                                                            [self raiseAddCardView];
-                                                        }];
-        
-        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UNDRaiseDatePickerNotification object:nil]
-                                                        subscribeNext:^(NSNotification *notification) {
-                                                            [self raiseDatePicker];
-                                                        }];
-        
-        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UNDAddImageNotification object:nil]
-                                                        subscribeNext:^(id x) {
-                                                                //add image action
-                                                        }];
-        
-        //rac
-        [[self.addCardView cancelSignal] subscribeNext:^(id x) {
-            [self dismissAddCardView];
-        }];
-        
-        [[self.addCardView rac_doneSignal] subscribeNext:^(id x) {
-            [self addCardModelResult];
-        }];
-        
-        //init addCardViewModel
-        self.addCardViewModel = [[UNDAddCardViewModel alloc]init];
-        self.addCardViewModel.title = nil;
-        self.addCardViewModel.date  = nil;
-        self.addCardViewModel.image = nil;
 
-        RAC(self.addCardViewModel,title) = self.addCardView.rac_titleSignal;
-        RAC(self.addCardViewModel,image) = self.addCardView.rac_imageSignal;
-    }];
+- (void)addCard{
+    status = UNDAddCardStatus;
+    [self presentAddCardView];
+}
+
+-(void)modifyCard{
+    status = UNDModifyCardStatus;
+    [self presentAddCardView];
 }
 
 
@@ -298,7 +262,7 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
 }
 
 
-- (void)raiseDatePicker{
+- (void)presentDatePicker{
     
     [self.addCardView dismissKeyboard];
     
@@ -327,13 +291,13 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
         UNDDateTableViewCell *cell = [self.addCardView.tableView cellForRowAtIndexPath:indePath];
         [cell.dateBtn setTitle:[self dateToDateStr:[NSDate date]] forState:UIControlStateNormal];
          [cell.dateBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        self.addCardViewModel.date = self.datePicker.date;
+        self.addCardView.viewModel.date = self.datePicker.date;
 
         [[self.datePicker rac_newDateChannelWithNilValue:[NSDate date]]
          subscribeNext:^(NSDate *date) {
              NSString *dateStr = [self dateToDateStr:date];
              [cell.dateBtn setTitle:dateStr forState:UIControlStateNormal];
-             self.addCardViewModel.date = date;
+             self.addCardView.viewModel.date = date;
          }];
     }
 }
@@ -352,7 +316,7 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     }
 }
 
-- (void)showAddCardViewBackgroundView{
+- (void)presentAddCardViewBackgroundView{
     //Blur Effect
     if (self.addCardBgView == nil) {
         UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
@@ -398,8 +362,80 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
 
 #pragma mark - Private
 
-- (void)addCardModelResult{
-    UNDAddCardModelResult result = [self.addCardViewModel addCardModel];
+- (void)presentAddCardView{
+    
+    [self presentAddCardViewBackgroundView];
+    
+    CGRect addCardViewFrame0 = CGRectMake(8, _viewHeight - 264, _viewWidth - 16, 256);
+    CGRect addCardViewFrame1 = CGRectMake(8, _viewHeight, _viewWidth - 16, 256);
+    
+    if (self.addCardView == nil) {
+        switch (status) {
+            case UNDAddCardStatus:
+                self.addCardView = [[UNDAddCardView alloc]initWithFrame:addCardViewFrame1];
+                break;
+            case UNDModifyCardStatus:
+                self.addCardView = [[UNDAddCardView alloc]initWithFrame:addCardViewFrame1
+                                                                  model:self.collectionViewModel.currentModel];
+                break;
+        }
+        
+        [self.view addSubview:self.addCardView];
+    }
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.addCardView.frame = addCardViewFrame0;
+    } completion:^(BOOL finished) {
+        //rac -- notification
+        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UNDRaiseAddCardViewNotification object:nil]
+                                                        subscribeNext:^(NSNotification *notification) {
+                                                            [self raiseAddCardView];
+                                                        }];
+        
+        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UNDRaiseDatePickerNotification object:nil]
+                                                        subscribeNext:^(NSNotification *notification) {
+                                                            [self presentDatePicker];
+                                                        }];
+        
+        [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UNDAddImageNotification object:nil]
+                                                        subscribeNext:^(id x) {
+                                                            //add image action
+                                                        }];
+        
+        self.addCardView.cancelBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+            [self dismissAddCardView];
+            switch (status) {
+                case UNDModifyCardStatus:
+                    [self dismissToolsBarView];
+                    break;
+                    
+                default:
+                    break;
+            }
+            return [RACSignal empty];
+        }];
+        
+        self.addCardView.doneBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+            [self storeCardModelResult];
+            return [RACSignal empty];
+        }];
+
+    }];
+}
+
+- (void)storeCardModelResult{
+    
+    UNDAddCardModelResult result;
+    switch (status) {
+        case UNDAddCardStatus:
+            result = [self.addCardView.viewModel addCardModel];
+            break;
+            
+        case UNDModifyCardStatus:
+            result = [self.addCardView.viewModel modifyCardMode:self.collectionViewModel.currentModel];
+            break;
+    }
+    
     NSString *message;
     switch (result) {
         case UNDAddCardModelTitleFailure:

@@ -14,14 +14,22 @@
 //rac
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+typedef enum : NSUInteger {
+    UNDAddCardStatus,
+    UNDModifyCardStatus,
+} UNDAddCardViewStatus;
+
+@class UNDCard,UNDAddCardViewModel;
+
 @interface UNDAddCardView : UIView
 
 @property (nonatomic,strong) UITableView *tableView;
 
-- (RACSignal *)rac_titleSignal;
-- (RACSignal *)rac_imageSignal;
-- (RACSignal *)cancelSignal;
-- (RACSignal *)rac_doneSignal;
+@property (nonatomic,strong) UIButton *doneBtn;
+@property (nonatomic,strong) UIButton *cancelBtn;
+@property (nonatomic,strong) UNDAddCardViewModel *viewModel;
+
+- (instancetype)initWithFrame:(CGRect)frame model:(UNDCard *)model;
 - (void)clearData;
 - (void)dismissKeyboard;
 

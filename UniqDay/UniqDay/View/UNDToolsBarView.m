@@ -57,18 +57,13 @@
             btn.hidden = YES;
         }
         
-        
-        [self addButtonsAndAnimations];
+        [self addAnimationsToButtons];
     }
     return self;
 }
 
-- (void)addButtonsAndAnimations{
-    
-    for (UIButton *button in btnArray) {
-        button.hidden = NO;
-    }
-    
+- (void)addAnimationsToButtons{
+
     CABasicAnimation *dropAnimation = [CABasicAnimation animationWithKeyPath:@"position.y"];
     dropAnimation.fromValue = @(lastBtn.center.y);
     dropAnimation.toValue = @110;
@@ -78,6 +73,7 @@
     
     for (int j = 0; j < 4; j++) {
         UIButton *btn = btnArray[j];
+        btn.hidden = NO;
         dropAnimation.beginTime = CACurrentMediaTime() + j * 0.15;
         [btn.layer addAnimation:dropAnimation forKey:nil];
     }
