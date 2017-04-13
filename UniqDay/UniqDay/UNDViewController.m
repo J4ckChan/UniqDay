@@ -8,6 +8,7 @@
 
 //controller
 #import "UNDViewController.h"
+#import "UNDShareCardViewController.h"
 
 //models
 #import "UNDCard.h"
@@ -196,6 +197,14 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     
     _toolsBarView.editBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
         [self modifyCard];
+        return [RACSignal empty];
+    }];
+    
+    _toolsBarView.shareBtn.rac_command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+        UNDShareCardViewController *shareCardVC = [[UNDShareCardViewController alloc]initWithModel:self.collectionViewModel.currentModel];
+        [self presentViewController:shareCardVC animated:YES completion:^{
+            [self dismissToolsBarView];
+        }];
         return [RACSignal empty];
     }];
 }
@@ -490,6 +499,5 @@ static NSString *reuseIdentifier = @"CollectionViewCellIdentifier";
     UNDCard *indexModel = self.collectionViewModel.cellViewModels[index].model;
     self.collectionViewModel.currentModel = indexModel;
 }
-
 
 @end
