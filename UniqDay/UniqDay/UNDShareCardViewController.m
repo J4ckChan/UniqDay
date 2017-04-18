@@ -10,6 +10,8 @@
 
 #import "UNDCard.h"
 
+#import "UNDBlurAlertView.h"
+
 #import <Masonry/Masonry.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
@@ -181,7 +183,10 @@
     if (error) {
         
     } else {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        UNDBlurAlertView *alertView = [[UNDBlurAlertView alloc]initWithMessage:@"Save To Photos!"];
+        [alertView showAlertOnView:self.view completion:^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
     }
 }
 
