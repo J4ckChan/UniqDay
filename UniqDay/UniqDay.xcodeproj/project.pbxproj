@@ -10,6 +10,8 @@
 		3D0B45A81DF8875200E29F5A /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0B45A71DF8875200E29F5A /* ReactiveCocoa.framework */; };
 		3D0B45AA1DF8877100E29F5A /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0B45A91DF8877100E29F5A /* Masonry.framework */; };
 		3D139C8C1E399259006DDC23 /* UNDDateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D139C8B1E399259006DDC23 /* UNDDateTableViewCell.m */; };
+		3D1893F91EBB86A4000A45A9 /* UNDCardViewSideA.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1893F81EBB86A4000A45A9 /* UNDCardViewSideA.m */; };
+		3D1893FC1EBB8B1E000A45A9 /* UNDCardViewSideB.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1893FB1EBB8B1E000A45A9 /* UNDCardViewSideB.m */; };
 		3D201C591E12D6580067BFF5 /* UNDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D201C581E12D6580067BFF5 /* UNDViewController.m */; };
 		3D201C671E12DA430067BFF5 /* ReactiveViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D201C661E12DA430067BFF5 /* ReactiveViewModel.framework */; };
 		3D3634B31DF71965001E3A6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3634B21DF71965001E3A6E /* main.m */; };
@@ -62,6 +64,10 @@
 		3D0B45A91DF8877100E29F5A /* Masonry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Masonry.framework; path = "../../../../Library/Developer/Xcode/DerivedData/UniqDay-bdjzuvwjhehnhmfzjreoviwkmtwp/Build/Products/Debug-iphonesimulator/Masonry/Masonry.framework"; sourceTree = "<group>"; };
 		3D139C8A1E399259006DDC23 /* UNDDateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDDateTableViewCell.h; path = View/UNDDateTableViewCell.h; sourceTree = "<group>"; };
 		3D139C8B1E399259006DDC23 /* UNDDateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDDateTableViewCell.m; path = View/UNDDateTableViewCell.m; sourceTree = "<group>"; };
+		3D1893F71EBB86A4000A45A9 /* UNDCardViewSideA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDCardViewSideA.h; path = View/UNDCardViewSideA.h; sourceTree = "<group>"; };
+		3D1893F81EBB86A4000A45A9 /* UNDCardViewSideA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDCardViewSideA.m; path = View/UNDCardViewSideA.m; sourceTree = "<group>"; };
+		3D1893FA1EBB8B1E000A45A9 /* UNDCardViewSideB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNDCardViewSideB.h; path = View/UNDCardViewSideB.h; sourceTree = "<group>"; };
+		3D1893FB1EBB8B1E000A45A9 /* UNDCardViewSideB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNDCardViewSideB.m; path = View/UNDCardViewSideB.m; sourceTree = "<group>"; };
 		3D201C571E12D6580067BFF5 /* UNDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNDViewController.h; sourceTree = "<group>"; };
 		3D201C581E12D6580067BFF5 /* UNDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNDViewController.m; sourceTree = "<group>"; };
 		3D201C641E12D9180067BFF5 /* UniqDay.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UniqDay.xcdatamodel; sourceTree = "<group>"; };
@@ -274,6 +280,10 @@
 				3DC5099A1E5C8B0B00282E46 /* UNDTopBarView.m */,
 				3DC15D7B1E7B0E9B00B1789F /* UNDCardViewCell.h */,
 				3DC15D7C1E7B0E9B00B1789F /* UNDCardViewCell.m */,
+				3D1893F71EBB86A4000A45A9 /* UNDCardViewSideA.h */,
+				3D1893F81EBB86A4000A45A9 /* UNDCardViewSideA.m */,
+				3D1893FA1EBB8B1E000A45A9 /* UNDCardViewSideB.h */,
+				3D1893FB1EBB8B1E000A45A9 /* UNDCardViewSideB.m */,
 				3DC15D781E7B0E8400B1789F /* UNDCardView.h */,
 				3DC15D791E7B0E8400B1789F /* UNDCardView.m */,
 				3DC509961E5C70A800282E46 /* UNDBottomBarView.h */,
@@ -507,6 +517,7 @@
 				3D139C8C1E399259006DDC23 /* UNDDateTableViewCell.m in Sources */,
 				3DBB567C1E6DC5C90028E334 /* UNDToolsBarViewModel.m in Sources */,
 				3DEB7B2B1E2538F00067311D /* UNDAddCardView.m in Sources */,
+				3D1893FC1EBB8B1E000A45A9 /* UNDCardViewSideB.m in Sources */,
 				3D201C591E12D6580067BFF5 /* UNDViewController.m in Sources */,
 				3DB463E71E56020F003D58F3 /* UNDCardViewModel.m in Sources */,
 				3DBB01A21E33939800963E74 /* UNDTitleTableViewCell.m in Sources */,
@@ -514,6 +525,7 @@
 				3D3634B31DF71965001E3A6E /* main.m in Sources */,
 				3DB1C03B1E8034E90062442A /* UNDTopBarViewModel.m in Sources */,
 				3DFD38DA1E4CBA8C00945F08 /* UNDCard.m in Sources */,
+				3D1893F91EBB86A4000A45A9 /* UNDCardViewSideA.m in Sources */,
 				3DEE5C0E1E939CE2008CA95E /* UNDToolsBarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
