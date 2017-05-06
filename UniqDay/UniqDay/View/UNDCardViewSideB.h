@@ -10,4 +10,6 @@
 
 @interface UNDCardViewSideB : UIView
 
+@property (nonatomic,strong) NSDate *date;
+
 @end
