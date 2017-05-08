@@ -16,7 +16,7 @@
 @property (nonatomic,copy) NSString *dateStr;
 @property (nonatomic,copy) NSString *dayCountStr;
 @property (nonatomic,strong) UIImage *image;
-
+@property (nonatomic,strong) NSDate *date;
 @property (nonatomic,strong) UNDCard *model;
 
 - (instancetype)initWithModel:(UNDCard*)model;

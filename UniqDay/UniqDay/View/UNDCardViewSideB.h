@@ -12,4 +12,6 @@
 
 @property (nonatomic,strong) NSDate *date;
 
+- (instancetype)initWithFrame:(CGRect)frame date:(NSDate *)date;
+
 @end

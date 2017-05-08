@@ -59,9 +59,10 @@
     _viewModel = viewModel;
     UNDCardViewSideA *sideA = [[UNDCardViewSideA alloc]initWithFrame:self.contentView.bounds];
     [sideA configureSelf:_viewModel];
-    UNDCardViewSideB *sideB = [[UNDCardViewSideB alloc]initWithFrame:self.contentView.bounds];
+    UNDCardViewSideB *sideB = [[UNDCardViewSideB alloc]initWithFrame:self.contentView.bounds date:_viewModel.date];
     self.frontView = sideA;
     self.backView = sideB;
+    
 }
 
 #pragma mark - Animation

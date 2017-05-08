@@ -8,16 +8,18 @@
 
 #import "UNDCardViewSideB.h"
 #import <Masonry/Masonry.h>
+#import "UNDCardViewSideBCell.h"
 
 @interface UNDCardViewSideB ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView *tableView;
+@property (nonatomic,copy) NSArray *annviersayDateArray;
 
 @end
 
 @implementation UNDCardViewSideB
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame date:(NSDate *)date
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -25,10 +27,38 @@
         _tableView = [[UITableView alloc]initWithFrame:frame];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"test"];
+        [_tableView registerClass:[UNDCardViewSideBCell class] forCellReuseIdentifier:@"test"];
         [self addSubview:_tableView];
+        _date = date;
+        [self initAnnviersayDateArrayWithDate:date];
     }
     return self;
+}
+
+#pragma mark - Private Method
+
+- (void)initAnnviersayDateArrayWithDate:(NSDate *)date{
+    double day[13] = {-100,-50,-10,0,100,200,300,365,400,500,600,700,730};
+    NSMutableArray *tempArray = [[NSMutableArray alloc]init];
+    for (int i = 0; i < 13; i++) {
+        double daySec = day[i] * 24 * 3600;
+        NSDate *dateTemp = [NSDate dateWithTimeInterval:daySec sinceDate:date];
+        [tempArray addObject:dateTemp];
+    }
+    
+    NSString *dateStr = [self dateStrFormatMMMMDDYYYY:tempArray[0]];
+    NSLog(@"%@",dateStr);
+    _annviersayDateArray = [tempArray copy];
+}
+
+- (NSString *)dateStrFormatMMMMDDYYYY:(NSDate *)date{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    [dateFormatter setDateFormat:@"MMMM,dd,yyyy"];
+    NSString *dateStr = [dateFormatter stringFromDate:date];
+    
+    return dateStr;
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -60,9 +90,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"test" forIndexPath:indexPath];
-    cell.textLabel.text = @"hello world";
+    UNDCardViewSideBCell *cell = [tableView dequeueReusableCellWithIdentifier:@"test" forIndexPath:indexPath];
+
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
 }
 
 @end
