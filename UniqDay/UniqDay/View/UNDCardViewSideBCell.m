@@ -8,6 +8,7 @@
 
 #import "UNDCardViewSideBCell.h"
 #import <Masonry/Masonry.h>
+#import "UNDCardViewSideBCellViewModel.h"
 
 @interface UNDCardViewSideBCell ()
 
@@ -35,16 +36,15 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _flagImageView = [[UIImageView alloc]init];
-        _flagImageView.backgroundColor = [UIColor redColor];
         [self.contentView addSubview:_flagImageView];
         [_flagImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView).offset(16);
             make.centerY.equalTo(self.contentView);
-            make.size.mas_equalTo(CGSizeMake(22, 22));
+            make.size.mas_equalTo(CGSizeMake(16, 16));
         }];
         
         _dayLabel = [[UILabel alloc]init];
-        _dayLabel.text = @"100";
+        _dayLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
         [self.contentView addSubview:_dayLabel];
         [_dayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(_flagImageView.mas_right).offset(8);
@@ -53,7 +53,7 @@
         }];
         
         _dateLabel = [[UILabel alloc]init];
-        _dateLabel.text = @"January,25,2017";
+        _dateLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
         [self.contentView addSubview:_dateLabel];
         [_dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(_flagImageView.mas_right).offset(8);
@@ -62,7 +62,7 @@
         }];
         
         _dayCountLabel = [[UILabel alloc]init];
-        _dayCountLabel.text = @"D-20";
+        _dayCountLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightRegular];
         [self.contentView addSubview:_dayCountLabel];
         [_dayCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView).offset(-16);
@@ -73,7 +73,21 @@
 }
 
 - (void)setViewModel:(UNDCardViewSideBCellViewModel *)viewModel{
+    _viewModel = viewModel;
     
+    _dayLabel.text           = _viewModel.dayStr;
+    _dateLabel.text          = _viewModel.dateStr;
+    
+    if (_viewModel.flag == YES) {
+        _dayCountLabel.text      = _viewModel.dayCountStr;
+        _flagImageView.image     = [UIImage imageNamed:@"flag"];
+    }else{
+        _dayLabel.textColor      = [UIColor lightGrayColor];
+        _dateLabel.textColor     = [UIColor lightGrayColor];
+        _dayCountLabel.textColor = [UIColor lightGrayColor];
+        _flagImageView.image     = [UIImage imageNamed:@"draw"];
+    }
+
 }
 
 @end

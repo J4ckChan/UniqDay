@@ -9,15 +9,18 @@
 #import "UNDCardViewSideB.h"
 #import <Masonry/Masonry.h>
 #import "UNDCardViewSideBCell.h"
+#import "UNDCardViewSideBCellViewModel.h"
 
 @interface UNDCardViewSideB ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView *tableView;
-@property (nonatomic,copy) NSArray *annviersayDateArray;
+@property (nonatomic,copy) NSArray *dayArray;
 
 @end
 
 @implementation UNDCardViewSideB
+
+static NSString *const UNDCardViewSideBReuseIdentifier = @"UNDCardViewSideBReuseIdentifier";
 
 - (instancetype)initWithFrame:(CGRect)frame date:(NSDate *)date
 {
@@ -27,38 +30,13 @@
         _tableView = [[UITableView alloc]initWithFrame:frame];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        [_tableView registerClass:[UNDCardViewSideBCell class] forCellReuseIdentifier:@"test"];
+        [_tableView registerClass:[UNDCardViewSideBCell class] forCellReuseIdentifier:UNDCardViewSideBReuseIdentifier];
+        _tableView.showsVerticalScrollIndicator = NO;
         [self addSubview:_tableView];
         _date = date;
-        [self initAnnviersayDateArrayWithDate:date];
+        _dayArray = @[@(-100),@(-50),@(-10),@0,@100,@200,@300,@365,@400,@500,@600,@700,@730];
     }
     return self;
-}
-
-#pragma mark - Private Method
-
-- (void)initAnnviersayDateArrayWithDate:(NSDate *)date{
-    double day[13] = {-100,-50,-10,0,100,200,300,365,400,500,600,700,730};
-    NSMutableArray *tempArray = [[NSMutableArray alloc]init];
-    for (int i = 0; i < 13; i++) {
-        double daySec = day[i] * 24 * 3600;
-        NSDate *dateTemp = [NSDate dateWithTimeInterval:daySec sinceDate:date];
-        [tempArray addObject:dateTemp];
-    }
-    
-    NSString *dateStr = [self dateStrFormatMMMMDDYYYY:tempArray[0]];
-    NSLog(@"%@",dateStr);
-    _annviersayDateArray = [tempArray copy];
-}
-
-- (NSString *)dateStrFormatMMMMDDYYYY:(NSDate *)date{
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
-    [dateFormatter setDateFormat:@"MMMM,dd,yyyy"];
-    NSString *dateStr = [dateFormatter stringFromDate:date];
-    
-    return dateStr;
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -90,8 +68,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UNDCardViewSideBCell *cell = [tableView dequeueReusableCellWithIdentifier:@"test" forIndexPath:indexPath];
-
+    UNDCardViewSideBCell *cell = [tableView dequeueReusableCellWithIdentifier:UNDCardViewSideBReuseIdentifier forIndexPath:indexPath];
+    cell.viewModel = [[UNDCardViewSideBCellViewModel alloc]initWithDate:_date day:_dayArray[indexPath.row]];
     return cell;
 }
 

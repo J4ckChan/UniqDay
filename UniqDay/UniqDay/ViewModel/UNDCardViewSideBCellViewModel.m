@@ -17,16 +17,34 @@
 
 @implementation UNDCardViewSideBCellViewModel
 
-- (instancetype)initWithDict:(NSDictionary *)dict{
+- (instancetype)initWithDate:(NSDate *)date
+                         day:(NSNumber *)dayNum{
     self = [super init];
     if (self) {
-        _date            = dict[@"date"];
-        NSNumber *dayNum = dict[@"day"];
+        _date            = date;
         _dayDouble       = [dayNum doubleValue];
         
-        _dayStr = [NSString stringWithFormat:@"%f",_dayDouble];
-        _dateStr = [self dateStrFormatMMMMDDYYYY:_date];
-        _dayCountStr = @"D-00";
+        if (_dayDouble < 0) {
+            _dayStr = [NSString stringWithFormat:@"D%d",(int)_dayDouble];
+        }else if (_dayDouble == 0){
+            _dayStr = @"D-DAY";
+        }else{
+            _dayStr = [NSString stringWithFormat:@"%dTH",(int)_dayDouble];
+        }
+        
+        NSDate *dateTemp = [NSDate dateWithTimeInterval:_dayDouble*24*3600 sinceDate:_date];
+        _dateStr         = [self dateStrFormatMMMMDDYYYY:dateTemp];
+        NSDate *nowDate  = [NSDate date];
+        
+        if ([dateTemp compare:nowDate] == NSOrderedDescending) {
+            _flag = YES;
+            NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            NSDateComponents *components = [gregorian components:NSCalendarUnitDay fromDate:dateTemp toDate:nowDate options:NSCalendarWrapComponents];
+            _dayCountStr = [NSString stringWithFormat:@"D%ld",(long)components.day];
+        }else{
+            _flag = NO;
+        }
+    
     }
     return self;
 }

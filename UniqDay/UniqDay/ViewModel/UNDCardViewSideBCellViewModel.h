@@ -15,6 +15,7 @@
 @property (nonatomic,copy) NSString *dayCountStr;
 @property (nonatomic,assign) BOOL flag;
 
-- (instancetype)initWithDict:(NSDictionary *)dict;
+- (instancetype)initWithDate:(NSDate *)date
+                         day:(NSNumber *)dayNum;
 
 @end
